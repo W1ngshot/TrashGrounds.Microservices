@@ -24,7 +24,7 @@ public class UserDbContext : IdentityDbContext<AppUser, IdentityRole<Guid>, Guid
     {
         base.OnModelCreating(builder);
 
-        builder.ApplyConfigurationsFromAssembly(typeof(UserDbContext).Assembly);
+        //builder.ApplyConfigurationsFromAssembly(typeof(UserDbContext).Assembly);
         
         foreach (var entityTypeConfiguration in _configurations)
             entityTypeConfiguration.Configure(builder);

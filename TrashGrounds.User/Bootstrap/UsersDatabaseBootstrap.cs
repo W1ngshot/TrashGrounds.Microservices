@@ -16,7 +16,7 @@ public static class UsersDatabaseBootstrap
             options.UseNpgsql(configuration.GetConnectionString("Postgres")));
         
         //TODO переделать
-        //services.AddCustomEntitiesConfiguration();
+        services.AddCustomEntitiesConfiguration();
 
         return services;
     }
