@@ -4,8 +4,8 @@ using TrashGrounds.User.Database.Postgres.Interfaces;
 using TrashGrounds.User.Infrastructure.Exceptions;
 using TrashGrounds.User.Models.Main;
 using TrashGrounds.User.Models.Responses;
+using TrashGrounds.User.Services.Configs;
 using TrashGrounds.User.Services.Interfaces;
-using TrashGrounds.User.Services.SupportTypes;
 
 namespace TrashGrounds.User.Services;
 
@@ -34,7 +34,7 @@ public class AuthenticationService
         var refreshToken = _jwtTokenGenerator.GenerateRefreshToken();
         var roles = await _userManager.GetRolesAsync(identityUser);
         var token = _jwtTokenGenerator.GenerateUserToken(domainUser, roles,
-            DateTime.UtcNow.AddSeconds(AuthConfig.TokenLifetime));
+            DateTime.UtcNow.AddSeconds(TokensConfig.TokenLifetime));
 
         identityUser.AddRefreshToken(refreshToken);
 

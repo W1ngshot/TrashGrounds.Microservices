@@ -1,6 +1,6 @@
-﻿namespace TrashGrounds.User.Services.SupportTypes;
+﻿namespace TrashGrounds.User.Services.Configs;
 
-public static class AuthConfig
+public static class TokensConfig
 {
     public const int TokenLifetime = 10 * 60;
 

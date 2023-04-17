@@ -1,4 +1,5 @@
 ﻿using TrashGrounds.User.Infrastructure.Routing;
+using TrashGrounds.User.Infrastructure.ValidationSetup;
 using TrashGrounds.User.Services.Interfaces;
 
 namespace TrashGrounds.User.Features.User.ChangePassword;
@@ -16,6 +17,7 @@ public class ChangePasswordEndpoint : IEndpoint
                             userService.GetUserIdOrThrow(),
                             dto.OldPassword,
                             dto.NewPassword))))
-            .RequireAuthorization();
+            .RequireAuthorization()
+            .AddValidation(builder => builder.AddFor<ChangePasswordDto>());
     }
 }

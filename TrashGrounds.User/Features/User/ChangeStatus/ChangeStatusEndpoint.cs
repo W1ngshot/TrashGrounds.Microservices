@@ -1,4 +1,5 @@
 ﻿using TrashGrounds.User.Infrastructure.Routing;
+using TrashGrounds.User.Infrastructure.ValidationSetup;
 using TrashGrounds.User.Services.Interfaces;
 
 namespace TrashGrounds.User.Features.User.ChangeStatus;
@@ -13,6 +14,7 @@ public class ChangeStatusEndpoint : IEndpoint
                 async (ChangeStatusDto dto, IUserService userService, ChangeStatusEndpointHandler handler) =>
                     Results.Ok(await handler.Handle(
                         new ChangeStatusRequest(userService.GetUserIdOrThrow(), dto.NewStatus))))
-            .RequireAuthorization();
+            .RequireAuthorization()
+            .AddValidation(builder => builder.AddFor<ChangeStatusDto>());
     }
 }

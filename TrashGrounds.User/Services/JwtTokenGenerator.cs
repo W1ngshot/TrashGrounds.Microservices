@@ -5,8 +5,8 @@ using System.Text;
 using System.Text.Json;
 using Microsoft.IdentityModel.Tokens;
 using TrashGrounds.User.Models.Main;
+using TrashGrounds.User.Services.Configs;
 using TrashGrounds.User.Services.Interfaces;
-using TrashGrounds.User.Services.SupportTypes;
 
 namespace TrashGrounds.User.Services;
 
@@ -104,6 +104,6 @@ public class JwtTokenGenerator : IJwtTokenGenerator
         return new RefreshToken(
             Convert.ToBase64String(randomNumber),
             DateTime.UtcNow,
-            DateTime.UtcNow.AddSeconds(AuthConfig.RefreshTokenLifetime));
+            DateTime.UtcNow.AddSeconds(TokensConfig.RefreshTokenLifetime));
     }
 }

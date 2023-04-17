@@ -5,10 +5,12 @@ namespace TrashGrounds.User.Features.Auth.Login;
 
 public class LoginEndpoint : IEndpoint
 {
+    public record LoginDto(string Email, string Password);
+
     public void Map(IEndpointRouteBuilder endpoints)
     {
         endpoints.MapPost("/login", async (LoginRequest request, LoginEndpointHandler handler) => 
             Results.Ok(await handler.Handle(request)))
-            .AddValidation(validation => validation.AddFor<LoginRequest>());
+            .AddValidation(builder => builder.AddFor<LoginRequest>());
     }
 }

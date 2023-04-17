@@ -9,6 +9,6 @@ public class RegisterEndpoint : IEndpoint
     {
         endpoints.MapPost("/register", async (RegisterRequest request, RegisterEndpointHandler handler) =>
             Results.Ok(await handler.Handle(request)))
-            .AddValidation(validation => validation.AddFor<RegisterRequest>());
+            .AddValidation(builder => builder.AddFor<RegisterRequest>());
     }
 }

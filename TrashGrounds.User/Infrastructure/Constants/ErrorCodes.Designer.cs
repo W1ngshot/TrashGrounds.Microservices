@@ -34,8 +34,11 @@ namespace TrashGrounds.User.Infrastructure.Constants {
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
-                if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("TrashGrounds.User.Constants.ErrorCodes", typeof(ErrorCodes).Assembly);
+                if (object.ReferenceEquals(resourceMan, null))
+                {
+                    global::System.Resources.ResourceManager temp =
+                        new global::System.Resources.ResourceManager(
+                            "TrashGrounds.User.Infrastructure.Constants.ErrorCodes", typeof(ErrorCodes).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
