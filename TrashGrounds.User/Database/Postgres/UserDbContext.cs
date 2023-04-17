@@ -10,12 +10,12 @@ namespace TrashGrounds.User.Database.Postgres;
 public class UserDbContext : IdentityDbContext<AppUser, IdentityRole<Guid>, Guid>, IUserDbContext
 {
     private readonly IEnumerable<DependencyInjectedEntityConfiguration> _configurations;
+    
     public DbSet<AppUser> IdentityUsers { get; set; } = null!;
     public DbSet<DomainUser> DomainUsers { get; set; } = null!;
 
-    public UserDbContext(
-        DbContextOptions<UserDbContext> options, IEnumerable<DependencyInjectedEntityConfiguration> configurations
-    ) : base(options)
+    public UserDbContext(DbContextOptions<UserDbContext> options, 
+        IEnumerable<DependencyInjectedEntityConfiguration> configurations) : base(options)
     {
         _configurations = configurations;
     }
@@ -24,10 +24,8 @@ public class UserDbContext : IdentityDbContext<AppUser, IdentityRole<Guid>, Guid
     {
         base.OnModelCreating(builder);
 
-        //builder.ApplyConfigurationsFromAssembly(typeof(UserDbContext).Assembly);
-        
-        foreach (var entityTypeConfiguration in _configurations)
-            entityTypeConfiguration.Configure(builder);
+        foreach (var configuration in _configurations)
+            configuration.Configure(builder);
 
         builder.Entity<IdentityRole<Guid>>().HasData(new List<IdentityRole<Guid>>
         {

@@ -6,9 +6,8 @@ namespace TrashGrounds.User.Database.Postgres.Configurations;
 
 public class DomainUserConfiguration : BaseConfiguration<DomainUser>
 {
-    protected override void ConfigureChild(EntityTypeBuilder<DomainUser> typeBuilder)
+    public override void ConfigureChild(EntityTypeBuilder<DomainUser> typeBuilder)
     {
         typeBuilder.HasIndex(user => user.IdentityUserId);
     }
-    
 }

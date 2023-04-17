@@ -13,13 +13,11 @@ namespace TrashGrounds.User.Services;
 public class JwtTokenGenerator : IJwtTokenGenerator
 {
     private readonly JwtSecurityTokenHandler _jwtSecurityTokenHandler;
-    private readonly IHttpContextAccessor _contextAccessor;
     private readonly IConfiguration _configuration;
     private readonly TokenValidationParameters _defaultValidationParameters;
     
-    public JwtTokenGenerator(IHttpContextAccessor contextAccessor, IConfiguration configuration)
+    public JwtTokenGenerator(IConfiguration configuration)
     {
-        _contextAccessor = contextAccessor;
         _configuration = configuration;
         _jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
         //TODO вынести параметры валидации
@@ -31,6 +29,13 @@ public class JwtTokenGenerator : IJwtTokenGenerator
             ValidateAudience = false
         };
     }
+    
+    public string GenerateUserToken(DomainUser user, IEnumerable<string> roles, DateTime expiration) 
+        => GenerateFromClaims(new[]
+        {
+            new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+            new Claim(ClaimTypes.Role, roles.First())
+        }, expiration);
 
     public string GenerateFromClaims(IEnumerable<Claim> claims, DateTime expiresAt)
     {
@@ -96,17 +101,9 @@ public class JwtTokenGenerator : IJwtTokenGenerator
         using var rng = RandomNumberGenerator.Create();
         rng.GetBytes(randomNumber);
 
-        var ip = _contextAccessor.HttpContext?.Connection.RemoteIpAddress?.ToString()
-                 ?? "localhost";
-        
-        var useragent = _contextAccessor.HttpContext?.Request.Headers["User-Agent"].ToString()
-                        ?? "unknown";
-
         return new RefreshToken(
             Convert.ToBase64String(randomNumber),
             DateTime.UtcNow,
-            DateTime.UtcNow.AddSeconds(AuthConfig.RefreshTokenLifetime),
-            ip,
-            useragent);
+            DateTime.UtcNow.AddSeconds(AuthConfig.RefreshTokenLifetime));
     }
 }

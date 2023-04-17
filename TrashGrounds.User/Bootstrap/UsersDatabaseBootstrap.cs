@@ -14,9 +14,8 @@ public static class UsersDatabaseBootstrap
             .AddEntityFrameworkStores<UserDbContext>();
         services.AddDbContext<IUserDbContext,UserDbContext>(options =>
             options.UseNpgsql(configuration.GetConnectionString("Postgres")));
-        
-        //TODO переделать
-        services.AddCustomEntitiesConfiguration();
+
+        services.AddDatabaseConfigurations();
 
         return services;
     }

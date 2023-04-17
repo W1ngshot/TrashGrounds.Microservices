@@ -10,5 +10,6 @@ public static class HelperServicesBootstrap
             .AddAutoMapper(typeof(Program).Assembly)
             .AddScoped<IJwtTokenGenerator, JwtTokenGenerator>()
             .AddScoped<IDateTimeProvider, DateTimeProvider>()
-            .AddScoped<AuthenticationService>();
+            .AddScoped<AuthenticationService>()
+            .AddScoped<IUserService, UserService>();
 }

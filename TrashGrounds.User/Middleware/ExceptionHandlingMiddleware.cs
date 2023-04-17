@@ -3,8 +3,8 @@ using System.Reflection;
 using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
-using TrashGrounds.User.Exceptions;
-using TrashGrounds.User.Exceptions.Utlils;
+using TrashGrounds.User.Infrastructure.Exceptions;
+using TrashGrounds.User.Infrastructure.Exceptions.Utlils;
 
 namespace TrashGrounds.User.Middleware;
 
@@ -40,9 +40,6 @@ public class ExceptionHandlingMiddleware
         try
         {
             await _next(context);
-        }
-        catch (OutOfMemoryException ex)
-        {
         }
         catch (UnauthorizedAccessException ex)
         {

@@ -12,10 +12,10 @@ public abstract class BaseConfiguration<TEntity> : DependencyInjectedEntityConfi
         ConfigureBase(builder);
         ConfigureChild(builder);
     }
+    
+    public abstract void ConfigureChild(EntityTypeBuilder<TEntity> typeBuilder);
 
-    protected abstract void ConfigureChild(EntityTypeBuilder<TEntity> typeBuilder);
-
-    private static void ConfigureBase(EntityTypeBuilder<TEntity> typeBuilder)
+    public static void ConfigureBase(EntityTypeBuilder<TEntity> typeBuilder)
     {
         typeBuilder.HasKey(x => x.Id);
 

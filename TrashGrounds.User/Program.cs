@@ -1,6 +1,6 @@
 using TrashGrounds.User.Bootstrap;
+using TrashGrounds.User.Infrastructure.Routing;
 using TrashGrounds.User.Middleware;
-using TrashGrounds.User.Routing;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,7 +15,7 @@ builder.Services
     .AddJwtAuthentication(builder.Configuration)
     .AddCustomSwagger(builder.Configuration)
     .AddAuthorizationWithPolicy()
-    .AddCustomEndpointHandlersConfiguration();
+    .AddCustomEndpointHandlers();
 
 builder.Services
     .AddHelperServices()

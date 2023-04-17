@@ -2,10 +2,10 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using TrashGrounds.User.Database.Postgres;
-using TrashGrounds.User.Exceptions;
+using TrashGrounds.User.Infrastructure.Exceptions;
+using TrashGrounds.User.Infrastructure.Routing;
 using TrashGrounds.User.Models.Main;
 using TrashGrounds.User.Models.Responses;
-using TrashGrounds.User.Routing;
 using TrashGrounds.User.Services;
 using TrashGrounds.User.Services.Interfaces;
 

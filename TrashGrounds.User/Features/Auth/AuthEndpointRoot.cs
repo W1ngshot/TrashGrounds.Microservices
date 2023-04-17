@@ -2,7 +2,7 @@
 using TrashGrounds.User.Features.Auth.Login;
 using TrashGrounds.User.Features.Auth.RefreshToken;
 using TrashGrounds.User.Features.Auth.Register;
-using TrashGrounds.User.Routing;
+using TrashGrounds.User.Infrastructure.Routing;
 
 namespace TrashGrounds.User.Features.Auth;
 

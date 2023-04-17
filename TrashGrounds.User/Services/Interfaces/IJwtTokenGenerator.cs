@@ -6,6 +6,8 @@ namespace TrashGrounds.User.Services.Interfaces;
 
 public interface IJwtTokenGenerator
 {
+    public string GenerateUserToken(DomainUser user, IEnumerable<string> roles, DateTime expiration);
+    
     string GenerateFromClaims(IEnumerable<Claim> claims, DateTime expiresAt);
     
     string GenerateToken<T>(T data, DateTime expiresAt);

@@ -1,23 +1,23 @@
 ﻿using TrashGrounds.User.Database.Postgres.Interfaces;
-using TrashGrounds.User.Exceptions;
+using TrashGrounds.User.Infrastructure.Exceptions;
+using TrashGrounds.User.Infrastructure.Routing;
 using TrashGrounds.User.Models.Responses;
-using TrashGrounds.User.Routing;
 
 namespace TrashGrounds.User.Features.Auth.Login;
 
-public class LoginEndpointHandler : IEndpointHandler<AuthorizationRequest, AuthorizationResponse>
+public class LoginEndpointHandler : IEndpointHandler<LoginRequest, AuthorizationResponse>
 {
-    private readonly IUserDbContext _dbContext;
+    private readonly IUserDbContext _context;
     private readonly Services.AuthenticationService _authService;
-    public LoginEndpointHandler(IUserDbContext dbContext, Services.AuthenticationService authService)
+    public LoginEndpointHandler(IUserDbContext context, Services.AuthenticationService authService)
     {
-        _dbContext = dbContext;
+        _context = context;
         _authService = authService;
     }
 
-    public async Task<AuthorizationResponse> Handle(AuthorizationRequest request)
+    public async Task<AuthorizationResponse> Handle(LoginRequest request)
     {
-        //TODO сделать авторизацию по почте или логину
+        //TODO сделать авторизацию по почте или логину, а не только логину
         var result = AuthorizationResponse.FromAuthenticationResult(
             await _authService.ProcessPasswordLogin(
                 request.Email
@@ -25,7 +25,7 @@ public class LoginEndpointHandler : IEndpointHandler<AuthorizationRequest, Autho
                 request.Password
                 ?? throw new ValidationFailedException(nameof(request.Password), "PASSWORD_IS_NULL")));
 
-        await _dbContext.SaveEntitiesAsync();
+        await _context.SaveEntitiesAsync();
         return result;
     }
 }

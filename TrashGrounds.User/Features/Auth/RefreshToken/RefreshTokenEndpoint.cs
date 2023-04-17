@@ -1,4 +1,4 @@
-﻿using TrashGrounds.User.Routing;
+﻿using TrashGrounds.User.Infrastructure.Routing;
 
 namespace TrashGrounds.User.Features.Auth.RefreshToken;
 

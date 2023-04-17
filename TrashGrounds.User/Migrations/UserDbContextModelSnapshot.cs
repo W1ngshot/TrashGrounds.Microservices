@@ -51,19 +51,19 @@ namespace TrashGrounds.User.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("ce3ce5bd-d920-4267-94a6-43fdf9fc5cde"),
+                            Id = new Guid("a462b26d-9e45-40af-b6a6-f5677058f42b"),
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = new Guid("31784490-0dc5-4be4-9da0-71c062270caa"),
+                            Id = new Guid("7acbbce7-ec2a-4898-945a-c0d203561339"),
                             Name = "Moderator",
                             NormalizedName = "MODERATOR"
                         },
                         new
                         {
-                            Id = new Guid("286f612b-e011-4740-8672-53cf6b687945"),
+                            Id = new Guid("a9a6cc61-c9e3-4590-bc8f-cea22d60b438"),
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -251,9 +251,6 @@ namespace TrashGrounds.User.Migrations
                     b.Property<string>("AvatarLink")
                         .HasColumnType("text");
 
-                    b.Property<string>("Description")
-                        .HasColumnType("text");
-
                     b.Property<Guid>("IdentityUserId")
                         .HasColumnType("uuid");
 
@@ -263,6 +260,9 @@ namespace TrashGrounds.User.Migrations
 
                     b.Property<DateTime>("RegistrationDate")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 

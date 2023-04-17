@@ -10,10 +10,9 @@ public class DomainUser : BaseEntity
     
     public string? AvatarLink { get; set; }
     
-    public string? Description { get; set; }
+    public string? Status { get; set; }
 
     public required Guid IdentityUserId { get; set; }
 
+    //TODO network links ?
 }
-
-

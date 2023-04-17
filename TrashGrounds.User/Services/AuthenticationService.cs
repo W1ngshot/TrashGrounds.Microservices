@@ -1,10 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using TrashGrounds.User.Database.Postgres.Interfaces;
-using TrashGrounds.User.Exceptions;
+using TrashGrounds.User.Infrastructure.Exceptions;
 using TrashGrounds.User.Models.Main;
 using TrashGrounds.User.Models.Responses;
-using TrashGrounds.User.Services.Extensions;
 using TrashGrounds.User.Services.Interfaces;
 using TrashGrounds.User.Services.SupportTypes;
 
@@ -18,7 +17,10 @@ public class AuthenticationService
     private readonly UserManager<AppUser> _userManager;
 
 
-    public AuthenticationService(IJwtTokenGenerator jwtTokenGenerator, SignInManager<AppUser> signInManager, UserManager<AppUser> userManager, IUserDbContext dbContext)
+    public AuthenticationService(IJwtTokenGenerator jwtTokenGenerator,
+        SignInManager<AppUser> signInManager,
+        UserManager<AppUser> userManager,
+        IUserDbContext dbContext)
     {
         _dbContext = dbContext;
         _jwtTokenGenerator = jwtTokenGenerator;
