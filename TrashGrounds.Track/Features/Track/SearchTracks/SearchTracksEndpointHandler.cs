@@ -2,9 +2,9 @@
 
 namespace TrashGrounds.Track.Features.Track.SearchTracks;
 
-public class SearchTracksEndpointHandler : IEndpointHandler<SearchTracksRequest, IEnumerable<Models.Main.Track>>
+public class SearchTracksEndpointHandler : IEndpointHandler<SearchTracksRequest, IEnumerable<Models.Main.MusicTrack>>
 {
-    public Task<IEnumerable<Models.Main.Track>> Handle(SearchTracksRequest request)
+    public Task<IEnumerable<Models.Main.MusicTrack>> Handle(SearchTracksRequest request)
     {
         throw new NotImplementedException();
     }

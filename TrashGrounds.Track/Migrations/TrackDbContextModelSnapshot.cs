@@ -22,7 +22,7 @@ namespace TrashGrounds.Track.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("GenreTrack", b =>
+            modelBuilder.Entity("GenreMusicTrack", b =>
                 {
                     b.Property<Guid>("GenresId")
                         .HasColumnType("uuid");
@@ -34,7 +34,7 @@ namespace TrashGrounds.Track.Migrations
 
                     b.HasIndex("TracksId");
 
-                    b.ToTable("GenreTrack");
+                    b.ToTable("GenreMusicTrack");
                 });
 
             modelBuilder.Entity("TrashGrounds.Track.Models.Main.Genre", b =>
@@ -50,9 +50,26 @@ namespace TrashGrounds.Track.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Genres");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("262e33dc-763e-4237-b8cb-c612986ff892"),
+                            Name = "Русский рэп"
+                        },
+                        new
+                        {
+                            Id = new Guid("d9683c50-cb9a-4b8f-b79b-1655f79b1c42"),
+                            Name = "Что-то странное"
+                        },
+                        new
+                        {
+                            Id = new Guid("40f2239e-f12a-40d4-95b2-f2c650b1d983"),
+                            Name = "Мэшап"
+                        });
                 });
 
-            modelBuilder.Entity("TrashGrounds.Track.Models.Main.Track", b =>
+            modelBuilder.Entity("TrashGrounds.Track.Models.Main.MusicTrack", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -65,7 +82,9 @@ namespace TrashGrounds.Track.Migrations
                         .HasColumnType("boolean");
 
                     b.Property<int>("ListensCount")
-                        .HasColumnType("integer");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasDefaultValue(0);
 
                     b.Property<string>("MusicLink")
                         .IsRequired()
@@ -86,10 +105,12 @@ namespace TrashGrounds.Track.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Tracks");
+                    b.HasIndex("UserId");
+
+                    b.ToTable("MusicTracks");
                 });
 
-            modelBuilder.Entity("GenreTrack", b =>
+            modelBuilder.Entity("GenreMusicTrack", b =>
                 {
                     b.HasOne("TrashGrounds.Track.Models.Main.Genre", null)
                         .WithMany()
@@ -97,7 +118,7 @@ namespace TrashGrounds.Track.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("TrashGrounds.Track.Models.Main.Track", null)
+                    b.HasOne("TrashGrounds.Track.Models.Main.MusicTrack", null)
                         .WithMany()
                         .HasForeignKey("TracksId")
                         .OnDelete(DeleteBehavior.Cascade)

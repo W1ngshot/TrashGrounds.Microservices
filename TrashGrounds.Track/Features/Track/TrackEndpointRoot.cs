@@ -1,8 +1,6 @@
 ﻿using TrashGrounds.Track.Features.Track.AddTrack;
 using TrashGrounds.Track.Features.Track.GetTrack;
-using TrashGrounds.Track.Features.Track.GetTrackByCategory;
 using TrashGrounds.Track.Features.Track.GetTracksFromUser;
-using TrashGrounds.Track.Features.Track.SearchTracks;
 using TrashGrounds.Track.Features.Track.UpdateTrack;
 using TrashGrounds.Track.Infrastructure.Routing;
 
@@ -16,9 +14,10 @@ public class TrackEndpointRoot : IEndpointRoot
             .WithTags("Треки")
             .AddEndpoint<AddTrackEndpoint>()
             .AddEndpoint<GetTrackEndpoint>()
-            .AddEndpoint<GetTrackByCategoryEndpoint>()
+            // .AddEndpoint<GetTrackByCategoryEndpoint>()
             .AddEndpoint<GetTracksFromUserEndpoint>()
-            .AddEndpoint<SearchTracksEndpoint>()
-            .AddEndpoint<UpdateTrackEndpoint>();
+            // .AddEndpoint<SearchTracksEndpoint>()
+            .AddEndpoint<UpdateTrackEndpoint>()
+            .AddEndpoint<CheckAuthEndpoint>();
     }
 }

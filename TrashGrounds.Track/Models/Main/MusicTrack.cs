@@ -2,7 +2,7 @@
 
 namespace TrashGrounds.Track.Models.Main;
 
-public class Track : BaseEntity
+public class MusicTrack : BaseEntity
 {
     public required string Title { get; set; }
     

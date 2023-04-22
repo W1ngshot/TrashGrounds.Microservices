@@ -8,8 +8,8 @@ public class TrackDbContext : DbContext
 {
     private readonly IEnumerable<DependencyInjectedEntityConfiguration> _configurations;
     
-    public DbSet<Models.Main.Track> Tracks { get; set; }
-    public DbSet<Genre> Genres { get; set; }
+    public required DbSet<MusicTrack> MusicTracks { get; set; }
+    public required DbSet<Genre> Genres { get; set; }
 
     public TrackDbContext(DbContextOptions<TrackDbContext> options, 
         IEnumerable<DependencyInjectedEntityConfiguration> configurations) : base(options)
@@ -23,5 +23,27 @@ public class TrackDbContext : DbContext
 
         foreach (var configuration in _configurations)
             configuration.Configure(builder);
+        
+        builder.Entity<Genre>().HasData(new List<Genre>
+        {
+            new()
+            {
+                Name = "Русский рэп",
+            },
+            new()
+            {
+                Name = "Что-то странное",
+            },
+            new()
+            {
+                Name = "Мэшап",
+            }
+        });
+    }
+    
+    public async Task<bool> SaveEntitiesAsync()
+    {
+        await base.SaveChangesAsync();
+        return true;
     }
 }

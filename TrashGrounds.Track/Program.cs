@@ -11,15 +11,19 @@ builder.Services
 
 builder.Services
     .AddEndpointsApiExplorer()
-    .AddSwaggerGen()
-    .AddCustomEndpointHandlers();
+    .AddJwtAuthentication(builder.Configuration)
+    .AddCustomSwagger(builder.Configuration)
+    .AddAuthorizationWithPolicy();
 
 builder.Services
-    .AddFluentValidation();
+    .AddHelperServices()
+    .AddFluentValidation()
+    .AddMediatR(configuration => configuration.RegisterServicesFromAssemblyContaining<Program>());
 
 var app = builder.Build();
 
 app.UseMiddleware<ExceptionHandlingMiddleware>();
+app.UseHttpsRedirection();
 
 if (app.Environment.IsDevelopment())
 {
@@ -27,10 +31,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
-
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseCustomEndpoints();

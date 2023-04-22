@@ -4,9 +4,9 @@ using TrashGrounds.Track.Database.Postgres.Configurations.Abstractions;
 
 namespace TrashGrounds.Track.Database.Postgres.Configurations;
 
-public class TrackConfiguration : DependencyInjectedEntityConfiguration<Models.Main.Track>
+public class MusicTrackConfiguration : DependencyInjectedEntityConfiguration<Models.Main.MusicTrack>
 {
-    public override void Configure(EntityTypeBuilder<Models.Main.Track> builder)
+    public override void Configure(EntityTypeBuilder<Models.Main.MusicTrack> builder)
     {
         builder.Property(track => track.Title)
             .IsRequired();

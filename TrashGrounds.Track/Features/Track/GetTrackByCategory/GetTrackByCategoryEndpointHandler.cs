@@ -2,9 +2,9 @@
 
 namespace TrashGrounds.Track.Features.Track.GetTrackByCategory;
 
-public class GetTrackByCategoryEndpointHandler : IEndpointHandler<GetTrackByCategoryRequest, Models.Main.Track>
+public class GetTrackByCategoryEndpointHandler : IEndpointHandler<GetTrackByCategoryRequest, Models.Main.MusicTrack>
 {
-    public Task<Models.Main.Track> Handle(GetTrackByCategoryRequest request)
+    public Task<Models.Main.MusicTrack> Handle(GetTrackByCategoryRequest request)
     {
         throw new NotImplementedException();
     }
