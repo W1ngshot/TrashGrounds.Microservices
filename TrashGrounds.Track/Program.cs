@@ -20,6 +20,10 @@ builder.Services
     .AddFluentValidation()
     .AddMediatR(configuration => configuration.RegisterServicesFromAssemblyContaining<Program>());
 
+builder.Services
+    .AddGrpcConfiguration()
+    .AddGrpcServices();
+
 var app = builder.Build();
 
 app.UseMiddleware<ExceptionHandlingMiddleware>();

@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using TrashGrounds.Track.Infrastructure.Routing;
+using TrashGrounds.Track.Infrastructure.ValidationSetup;
 using TrashGrounds.Track.Services.Interfaces;
 
 namespace TrashGrounds.Track.Features.Track.UpdateTrack;
@@ -27,7 +28,7 @@ public class UpdateTrackEndpoint : IEndpoint
                     dto.IsExplicit,
                     dto.PictureLink,
                     dto.Genres))))
-            .RequireAuthorization(); //TODO маппер
-        // TODO валидация
+            .RequireAuthorization()
+            .AddValidation(builder => builder.AddFor<UpdateTrackDto>()); //TODO маппер
     }
 }

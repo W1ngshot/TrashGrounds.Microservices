@@ -8,9 +8,8 @@ public class GetTracksFromUserEndpoint : IEndpoint
     public void Map(IEndpointRouteBuilder endpoints)
     {
         endpoints.MapGet("/from-user/{id:guid}", 
-            async (Guid id, int? tracksCount, Guid? excludeTrackId, IMediator mediator) =>
+            async (Guid id, int tracksCount, Guid? excludeTrackId, int? skip, IMediator mediator) =>
             Results.Ok(await mediator.Send(
-                tracksCount is null ? new GetTracksFromUserCommand(id, excludeTrackId) :
-                new GetTracksFromUserCommand(id, excludeTrackId, (int) tracksCount))));
+                new GetTracksFromUserCommand(id, excludeTrackId, tracksCount, skip ?? default))));
     }
 }

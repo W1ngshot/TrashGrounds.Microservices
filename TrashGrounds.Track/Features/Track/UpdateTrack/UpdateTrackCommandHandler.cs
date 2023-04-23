@@ -1,24 +1,29 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
 using TrashGrounds.Track.Database.Postgres;
+using TrashGrounds.Track.gRPC.Services;
+using TrashGrounds.Track.Infrastructure;
 using TrashGrounds.Track.Infrastructure.Exceptions;
-using TrashGrounds.Track.Models.Main;
+using TrashGrounds.Track.Models.Additional;
 
 namespace TrashGrounds.Track.Features.Track.UpdateTrack;
 
-public class UpdateTrackCommandHandler : IRequestHandler<UpdateTrackCommand, MusicTrack>
+public class UpdateTrackCommandHandler : IRequestHandler<UpdateTrackCommand, FullTrack>
 {
     private readonly TrackDbContext _context;
+    private readonly UserMicroserviceService _userMicroservice;
 
-    public UpdateTrackCommandHandler(TrackDbContext context)
+    public UpdateTrackCommandHandler(TrackDbContext context, UserMicroserviceService userMicroservice)
     {
         _context = context;
+        _userMicroservice = userMicroservice;
     }
 
-    public async Task<MusicTrack> Handle(UpdateTrackCommand request, CancellationToken cancellationToken)
+    public async Task<FullTrack> Handle(UpdateTrackCommand request, CancellationToken cancellationToken)
     {
-        var track = await _context.MusicTracks.FirstOrDefaultAsync(track => track.Id == request.TrackId,
-            cancellationToken) ?? throw new NotFoundException<MusicTrack>();
+        var track = await _context.MusicTracks
+            .Include(track => track.Genres)
+            .FirstOrNotFoundAsync(track => track.Id == request.TrackId, cancellationToken);
 
         if (track.UserId != request.UserId)
             throw new ForbiddenException("Can't change not your track");
@@ -38,7 +43,11 @@ public class UpdateTrackCommandHandler : IRequestHandler<UpdateTrackCommand, Mus
 
         await _context.SaveEntitiesAsync();
 
-        //TODO Получение пользователя, возможно оценки
-        return track;
+        return new FullTrack
+        {
+            Track = track,
+            UserInfo = await _userMicroservice.GetUserInfoAsync(track.UserId)
+            //TODO добавить оценку
+        };
     }
 }
