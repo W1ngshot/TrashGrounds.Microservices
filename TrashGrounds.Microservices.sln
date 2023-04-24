@@ -7,6 +7,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docker", "Docker", "{832456
 		Docker\docker-compose.yaml = Docker\docker-compose.yaml
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrashGrounds.Track", "TrashGrounds.Track\TrashGrounds.Track.csproj", "{ED169671-2372-42B4-893B-30D1EC4771C0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrashGrounds.Template", "TrashGrounds.Template\TrashGrounds.Template.csproj", "{90521C7D-987E-4E3F-9D01-89FA4282DC4A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,5 +21,13 @@ Global
 		{AB32BB52-50FD-4849-9928-D7039372AC13}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB32BB52-50FD-4849-9928-D7039372AC13}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AB32BB52-50FD-4849-9928-D7039372AC13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED169671-2372-42B4-893B-30D1EC4771C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED169671-2372-42B4-893B-30D1EC4771C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED169671-2372-42B4-893B-30D1EC4771C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED169671-2372-42B4-893B-30D1EC4771C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90521C7D-987E-4E3F-9D01-89FA4282DC4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90521C7D-987E-4E3F-9D01-89FA4282DC4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90521C7D-987E-4E3F-9D01-89FA4282DC4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90521C7D-987E-4E3F-9D01-89FA4282DC4A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

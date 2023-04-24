@@ -1,27 +1,28 @@
-using TrashGrounds.User.Bootstrap;
-using TrashGrounds.User.gRPC.Services;
-using TrashGrounds.User.Infrastructure.Routing;
-using TrashGrounds.User.Middleware;
+using TrashGrounds.Track.Bootstrap;
+using TrashGrounds.Track.Infrastructure.Routing;
+using TrashGrounds.Track.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Host.AddCustomLogging();
 
 builder.Services
-    .AddDatabaseWithIdentity(builder.Configuration)
-    .AddRedis(builder.Configuration)
-    .AddGrpc();
+    .AddDatabase(builder.Configuration);
 
 builder.Services
     .AddEndpointsApiExplorer()
     .AddJwtAuthentication(builder.Configuration)
     .AddCustomSwagger(builder.Configuration)
-    .AddAuthorizationWithPolicy()
-    .AddCustomEndpointHandlers();
+    .AddAuthorizationWithPolicy();
 
 builder.Services
     .AddHelperServices()
-    .AddFluentValidation();
+    .AddFluentValidation()
+    .AddMediatR(configuration => configuration.RegisterServicesFromAssemblyContaining<Program>());
+
+builder.Services
+    .AddGrpcConfiguration(builder.Configuration)
+    .AddGrpcServices();
 
 var app = builder.Build();
 
@@ -40,6 +41,5 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseCustomEndpoints();
-app.MapGrpcService<UserInfoGrpcService>();
 
 app.Run();

@@ -14,7 +14,7 @@ public class ChangePasswordDtoValidator : AbstractValidator<ChangePasswordEndpoi
 
         RuleFor(request => request.NewPassword)
             .NotEmpty()
-            .WithMessage(ValidationMessages.EmptyPassword)
+            .WithMessage(ValidationMessages.EmptyNewPassword)
             .MaximumLength(60)
             .WithMessage(ValidationMessages.TooLongPassword)
             .MinimumLength(PasswordConfig.MinimumLength)

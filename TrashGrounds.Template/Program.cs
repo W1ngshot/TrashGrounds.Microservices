@@ -1,32 +1,28 @@
-using TrashGrounds.User.Bootstrap;
-using TrashGrounds.User.gRPC.Services;
-using TrashGrounds.User.Infrastructure.Routing;
-using TrashGrounds.User.Middleware;
+using TrashGrounds.Template.Bootstrap;
+using TrashGrounds.Template.Infrastructure.Routing;
+using TrashGrounds.Template.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Host.AddCustomLogging();
 
 builder.Services
-    .AddDatabaseWithIdentity(builder.Configuration)
-    .AddRedis(builder.Configuration)
-    .AddGrpc();
+    .AddDatabase(builder.Configuration);
 
 builder.Services
     .AddEndpointsApiExplorer()
     .AddJwtAuthentication(builder.Configuration)
     .AddCustomSwagger(builder.Configuration)
-    .AddAuthorizationWithPolicy()
-    .AddCustomEndpointHandlers();
+    .AddAuthorizationWithPolicy();
 
 builder.Services
     .AddHelperServices()
-    .AddFluentValidation();
+    .AddFluentValidation()
+    .AddMediatR(configuration => configuration.RegisterServicesFromAssemblyContaining<Program>());
 
 var app = builder.Build();
 
 app.UseMiddleware<ExceptionHandlingMiddleware>();
-app.UseHttpsRedirection();
 
 if (app.Environment.IsDevelopment())
 {
@@ -34,12 +30,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseHttpsRedirection();
+
 app.UseRouting();
 
-app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseCustomEndpoints();
-app.MapGrpcService<UserInfoGrpcService>();
 
 app.Run();
