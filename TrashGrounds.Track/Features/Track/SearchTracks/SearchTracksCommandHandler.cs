@@ -5,25 +5,31 @@ using TrashGrounds.Track.gRPC.Services;
 using TrashGrounds.Track.Infrastructure;
 using TrashGrounds.Track.Models.Additional;
 
-namespace TrashGrounds.Track.Features.Track.GetTracksByCategory;
+namespace TrashGrounds.Track.Features.Track.SearchTracks;
 
-public class GetTracksByCategoryCommandHandler : IRequestHandler<GetTracksByCategoryCommand, IEnumerable<FullTrackInfo>>
+public class SearchTracksCommandHandler : IRequestHandler<SearchTracksCommand, IEnumerable<FullTrackInfo>>
 {
     private readonly TrackDbContext _context;
     private readonly UserMicroserviceService _userMicroservice;
 
-    public GetTracksByCategoryCommandHandler(TrackDbContext context, UserMicroserviceService userMicroservice)
+    public SearchTracksCommandHandler(TrackDbContext context, UserMicroserviceService userMicroservice)
     {
         _context = context;
         _userMicroservice = userMicroservice;
     }
 
-    public async Task<IEnumerable<FullTrackInfo>> Handle(GetTracksByCategoryCommand command, CancellationToken cancellationToken)
+    public async Task<IEnumerable<FullTrackInfo>> Handle(SearchTracksCommand command, CancellationToken cancellationToken)
     {
-        var tracks = _context.MusicTracks.AsNoTracking();
+        var tracks = _context.MusicTracks
+            .Include(track => track.Genres)
+            .Where(track =>
+                command.Query == null || track.Title.ToLower().Contains(command.Query.ToLower()));
 
+        //TODO добавить поиск по жанрам и переделать сортировку по категориям
+        
         var orderedTracks = command.Category switch
         {
+            null => tracks,
             Category.New => tracks.OrderByDescending(track => track.UploadDate),
             Category.MostStreaming => tracks.OrderByDescending(track => track.ListensCount),
             Category.Popular => tracks.OrderByDescending(track => track.ListensCount), //TODO Получение с сервиса оценок списка самых популярных треков

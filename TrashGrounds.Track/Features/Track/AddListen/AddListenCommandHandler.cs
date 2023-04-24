@@ -14,9 +14,9 @@ public class AddListenCommandHandler : IRequestHandler<AddListenCommand, Success
         _context = context;
     }
 
-    public async Task<SuccessResponse> Handle(AddListenCommand request, CancellationToken cancellationToken)
+    public async Task<SuccessResponse> Handle(AddListenCommand command, CancellationToken cancellationToken)
     {
-        var track = await _context.MusicTracks.FirstOrNotFoundAsync(track => track.Id == request.TrackId,
+        var track = await _context.MusicTracks.FirstOrNotFoundAsync(track => track.Id == command.TrackId,
             cancellationToken: cancellationToken);
 
         track.ListensCount++;

@@ -14,32 +14,46 @@ public class UserMicroserviceService
 
     public async Task<UserInformation?> GetUserInfoAsync(Guid id)
     {
-        var info = await _userClient.GetUserInfoAsync(new UserInfoRequest {Id = id.ToString()});
-
-        return info?.User is null
-            ? null
-            : new UserInformation
-            {
-                Id = Guid.Parse(info.User.Id),
-                Nickname = info.User.Nickname,
-                AvatarLink = info.User.AvatarLink,
-                RegistrationDate = info.User.RegistrationDate.ToDateTime()
-            };
+        try
+        {
+            var info = await _userClient.GetUserInfoAsync(new UserInfoRequest {Id = id.ToString()});
+            
+            return info?.User is null
+                ? null
+                : new UserInformation
+                {
+                    Id = Guid.Parse(info.User.Id),
+                    Nickname = info.User.Nickname,
+                    AvatarLink = info.User.AvatarLink,
+                    RegistrationDate = info.User.RegistrationDate.ToDateTime()
+                };
+        }
+        catch (Exception e)
+        {
+            return null;
+        }
     }
 
     public async Task<IEnumerable<UserInformation>?> GetUsersInfoAsync(IEnumerable<Guid> ids)
     {
-        var request = new UsersInfoRequest();
-        request.Ids.Add(ids.Select(guid => guid.ToString()));
-
-        var infos = await _userClient.GetUsersInfoAsync(request);
-
-        return infos?.Users?.Select(user => new UserInformation
+        try
         {
-            Id = Guid.Parse(user.Id),
-            Nickname = user.Nickname,
-            AvatarLink = user.AvatarLink,
-            RegistrationDate = user.RegistrationDate.ToDateTime()
-        });
+            var request = new UsersInfoRequest();
+            request.Ids.Add(ids.Select(guid => guid.ToString()));
+
+            var infos = await _userClient.GetUsersInfoAsync(request);
+
+            return infos?.Users?.Select(user => new UserInformation
+            {
+                Id = Guid.Parse(user.Id),
+                Nickname = user.Nickname,
+                AvatarLink = user.AvatarLink,
+                RegistrationDate = user.RegistrationDate.ToDateTime()
+            });
+        }
+        catch (Exception e)
+        {
+            return null;
+        }
     }
 }

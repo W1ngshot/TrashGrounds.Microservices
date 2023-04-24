@@ -23,24 +23,24 @@ public class AddTrackCommandHandler : IRequestHandler<AddTrackCommand, FullTrack
         _userMicroservice = userMicroservice;
     }
 
-    public async Task<FullTrack> Handle(AddTrackCommand request, CancellationToken cancellationToken)
+    public async Task<FullTrack> Handle(AddTrackCommand command, CancellationToken cancellationToken)
     {
         //TODO запрос на микросервис с файлами и получение ссылок
         //TODO маппинг
         var track = new MusicTrack
         {
-            Title = request.Title,
-            Description = request.Description,
-            IsExplicit = request.IsExplicit,
+            Title = command.Title,
+            Description = command.Description,
+            IsExplicit = command.IsExplicit,
             ListensCount = 0,
-            PictureLink = request.PictureLink,
-            MusicLink = request.MusicLink,
-            UserId = request.UserId,
+            PictureLink = command.PictureLink,
+            MusicLink = command.MusicLink,
+            UserId = command.UserId,
             UploadDate = _dateTimeProvider.UtcNow,
             Genres = new List<Models.Main.Genre>()
         };
 
-        foreach (var genreId in request.Genres)
+        foreach (var genreId in command.Genres)
         {
             var genre = await _context.Genres.FindAsync(genreId) 
                 ?? throw new NotFoundException<Models.Main.Genre>();

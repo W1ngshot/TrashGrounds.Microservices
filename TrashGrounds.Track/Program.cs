@@ -21,7 +21,7 @@ builder.Services
     .AddMediatR(configuration => configuration.RegisterServicesFromAssemblyContaining<Program>());
 
 builder.Services
-    .AddGrpcConfiguration()
+    .AddGrpcConfiguration(builder.Configuration)
     .AddGrpcServices();
 
 var app = builder.Build();

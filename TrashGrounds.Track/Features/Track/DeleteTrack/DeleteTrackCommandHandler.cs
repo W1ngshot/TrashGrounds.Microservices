@@ -15,12 +15,12 @@ public class DeleteTrackCommandHandler : IRequestHandler<DeleteTrackCommand, Suc
         _context = context;
     }
 
-    public async Task<SuccessResponse> Handle(DeleteTrackCommand request, CancellationToken cancellationToken)
+    public async Task<SuccessResponse> Handle(DeleteTrackCommand command, CancellationToken cancellationToken)
     {
-        var track = await _context.MusicTracks.FirstOrNotFoundAsync(track => track.Id == request.TrackId,
+        var track = await _context.MusicTracks.FirstOrNotFoundAsync(track => track.Id == command.TrackId,
             cancellationToken);
         
-        if (track.UserId != request.UserId)
+        if (track.UserId != command.UserId)
             throw new ForbiddenException("Can't delete not your track");
         
         //TODO Удаление из File микросервиса
