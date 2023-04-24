@@ -3,11 +3,11 @@ using TrashGrounds.Template.Database.Postgres.Configurations.Abstractions;
 
 namespace TrashGrounds.Template.Database.Postgres;
 
-public class TrackDbContext : DbContext
+public class TemplateDbContext : DbContext
 {
     private readonly IEnumerable<DependencyInjectedEntityConfiguration> _configurations;
     
-    public TrackDbContext(DbContextOptions<TrackDbContext> options, 
+    public TemplateDbContext(DbContextOptions<TemplateDbContext> options, 
         IEnumerable<DependencyInjectedEntityConfiguration> configurations) : base(options)
     {
         _configurations = configurations;
