@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrashGrounds.Track", "Trash
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrashGrounds.Template", "TrashGrounds.Template\TrashGrounds.Template.csproj", "{90521C7D-987E-4E3F-9D01-89FA4282DC4A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrashGrounds.Comment", "TrashGrounds.Comment\TrashGrounds.Comment.csproj", "{98823CBC-E4C4-4855-873D-C8EAE3D54095}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,5 +31,9 @@ Global
 		{90521C7D-987E-4E3F-9D01-89FA4282DC4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{90521C7D-987E-4E3F-9D01-89FA4282DC4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{90521C7D-987E-4E3F-9D01-89FA4282DC4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98823CBC-E4C4-4855-873D-C8EAE3D54095}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98823CBC-E4C4-4855-873D-C8EAE3D54095}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98823CBC-E4C4-4855-873D-C8EAE3D54095}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98823CBC-E4C4-4855-873D-C8EAE3D54095}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
