@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrashGrounds.Template", "Tr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrashGrounds.Comment", "TrashGrounds.Comment\TrashGrounds.Comment.csproj", "{98823CBC-E4C4-4855-873D-C8EAE3D54095}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrashGrounds.Post", "TrashGrounds.Post\TrashGrounds.Post.csproj", "{53D667FC-77CD-4B7F-9744-7507460FDFBB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,5 +37,9 @@ Global
 		{98823CBC-E4C4-4855-873D-C8EAE3D54095}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{98823CBC-E4C4-4855-873D-C8EAE3D54095}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{98823CBC-E4C4-4855-873D-C8EAE3D54095}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53D667FC-77CD-4B7F-9744-7507460FDFBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53D667FC-77CD-4B7F-9744-7507460FDFBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53D667FC-77CD-4B7F-9744-7507460FDFBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53D667FC-77CD-4B7F-9744-7507460FDFBB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
