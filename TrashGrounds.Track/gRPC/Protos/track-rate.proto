@@ -1,6 +1,6 @@
 ﻿syntax = "proto3";
 
-option csharp_namespace = "TrackRateServer";
+option csharp_namespace = "TrackRateClient";
 
 message GetTracksRateRequest {
   repeated string ids = 1;

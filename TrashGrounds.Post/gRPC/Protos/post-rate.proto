@@ -1,6 +1,6 @@
 ﻿syntax = "proto3";
 
-option csharp_namespace = "PostRateServer";
+option csharp_namespace = "PostRateClient";
 
 message GetPostsRateRequest {
   repeated string ids = 1;

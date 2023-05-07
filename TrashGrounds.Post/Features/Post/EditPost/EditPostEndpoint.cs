@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Mvc;
 using TrashGrounds.Post.Infrastructure.Routing;
 using TrashGrounds.Post.Infrastructure.ValidationSetup;
 using TrashGrounds.Post.Services.Interfaces;
