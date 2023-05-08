@@ -32,15 +32,13 @@ public class UpdateTrackCommandHandler : ICommandHandler<UpdateTrackCommand, Ful
 
         if (track.UserId != request.UserId)
             throw new ForbiddenException("Can't change not your track");
-        
-        foreach (var genreId in request.Genres)
-        {
-            var genre = await _context.Genres.FindAsync(genreId) 
-                        ?? throw new NotFoundException<Models.Main.Genre>();
-            if (!track.Genres.Contains(genre))
-                track.Genres.Add(genre);
-        }
 
+        var genres = await _context.Genres.Where(genre => request.Genres.Contains(genre.Id))
+            .ToListAsync(cancellationToken: cancellationToken);
+        if (!track.Genres.Any())
+            throw new NotFoundException<Models.Main.Genre>();
+
+        track.Genres = genres;
         track.Title = request.Title;
         track.Description = request.Description;
         track.IsExplicit = request.IsExplicit;

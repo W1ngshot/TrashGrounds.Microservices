@@ -1,4 +1,5 @@
-﻿using TrashGrounds.Track.Database.Postgres;
+﻿using Microsoft.EntityFrameworkCore;
+using TrashGrounds.Track.Database.Postgres;
 using TrashGrounds.Track.gRPC.Services;
 using TrashGrounds.Track.Infrastructure.Exceptions;
 using TrashGrounds.Track.Infrastructure.Mediator.Command;
@@ -37,23 +38,21 @@ public class AddTrackCommandHandler : ICommandHandler<AddTrackCommand, FullTrack
             MusicLink = request.MusicLink,
             UserId = request.UserId,
             UploadDate = _dateTimeProvider.UtcNow,
-            Genres = new List<Models.Main.Genre>()
+            Genres = await _context.Genres.Where(genre => request.Genres.Contains(genre.Id))
+                .ToListAsync(cancellationToken: cancellationToken)
         };
-
-        foreach (var genreId in request.Genres)
-        {
-            var genre = await _context.Genres.FindAsync(genreId) 
-                ?? throw new NotFoundException<Models.Main.Genre>();
-            track.Genres.Add(genre);
-        }
         
+        if (!track.Genres.Any())
+            throw new NotFoundException<Models.Main.Genre>();
+
         _context.MusicTracks.Add(track);
         await _context.SaveEntitiesAsync();
 
         return new FullTrack
         {
             Track = track,
-            UserInfo = await _userInfo.GetUserInfoAsync(track.UserId)
+            UserInfo = await _userInfo.GetUserInfoAsync(track.UserId),
+            Rate = null
         };
     }
 }
