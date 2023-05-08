@@ -19,7 +19,8 @@ public class GetBestRatedTracksQueryHandler : IRequestHandler<GetBestRatedTracks
         var bestTracks = await _context.TrackRates
             .GroupBy(rate => rate.TrackId)
             .OrderByDescending(g => g.Average(rate => rate.Rate))
-            .Take(request.Count)
+            .Skip(request.Skip)
+            .Take(request.Take)
             .Select(g => new TrackRateResponse(g.Key, g.Average(r => r.Rate)))
             .ToListAsync(cancellationToken: cancellationToken);
 

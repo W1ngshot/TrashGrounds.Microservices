@@ -1,4 +1,5 @@
 using TrashGrounds.Rate.Bootstrap;
+using TrashGrounds.Rate.gRPC.Services;
 using TrashGrounds.Rate.Infrastructure.Routing;
 using TrashGrounds.Rate.Middleware;
 
@@ -38,5 +39,7 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.UseCustomEndpoints();
+app.MapGrpcService<PostRateService>();
+app.MapGrpcService<TrackRateService>();
 
 app.Run();

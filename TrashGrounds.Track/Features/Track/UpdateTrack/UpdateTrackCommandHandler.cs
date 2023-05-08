@@ -12,11 +12,16 @@ public class UpdateTrackCommandHandler : IRequestHandler<UpdateTrackCommand, Ful
 {
     private readonly TrackDbContext _context;
     private readonly UserMicroserviceService _userMicroservice;
+    private readonly TrackRateService _trackRateService;
 
-    public UpdateTrackCommandHandler(TrackDbContext context, UserMicroserviceService userMicroservice)
+    public UpdateTrackCommandHandler(
+        TrackDbContext context,
+        UserMicroserviceService userMicroservice,
+        TrackRateService trackRateService)
     {
         _context = context;
         _userMicroservice = userMicroservice;
+        _trackRateService = trackRateService;
     }
 
     public async Task<FullTrack> Handle(UpdateTrackCommand command, CancellationToken cancellationToken)
@@ -46,8 +51,8 @@ public class UpdateTrackCommandHandler : IRequestHandler<UpdateTrackCommand, Ful
         return new FullTrack
         {
             Track = track,
-            UserInfo = await _userMicroservice.GetUserInfoAsync(track.UserId)
-            //TODO добавить оценку
+            UserInfo = await _userMicroservice.GetUserInfoAsync(track.UserId),
+            Rate = await _trackRateService.GetTrackRate(track.Id)
         };
     }
 }

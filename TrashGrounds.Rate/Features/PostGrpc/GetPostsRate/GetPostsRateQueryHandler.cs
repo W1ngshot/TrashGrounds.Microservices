@@ -19,9 +19,13 @@ public class GetPostsRateQueryHandler : IRequestHandler<GetPostsRateQuery, Posts
         var postsRate = await _context.PostRates
             .Where(rate => request.Ids.Contains(rate.PostId))
             .GroupBy(rate => rate.PostId)
-            .Select(g => new PostRateResponse(g.Key, g.Sum(rate => rate.Rate)))
+            .Select(g => new {Id = g.Key, Rate = g.Sum(rate => rate.Rate)})
             .ToListAsync(cancellationToken: cancellationToken);
 
-        return new PostsRateResponse(postsRate);
+        var rates = request.Ids.Select(id => new PostRateResponse(
+            id,
+            postsRate.FirstOrDefault(r => r.Id == id)?.Rate ?? 0));
+        
+        return new PostsRateResponse(rates);
     }
 }

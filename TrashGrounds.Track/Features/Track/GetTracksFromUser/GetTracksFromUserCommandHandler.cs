@@ -11,11 +11,16 @@ public class GetTracksFromUserCommandHandler : IRequestHandler<GetTracksFromUser
 {
     private readonly TrackDbContext _context;
     private readonly UserMicroserviceService _userMicroservice;
+    private readonly TrackRateService _trackRateService;
 
-    public GetTracksFromUserCommandHandler(TrackDbContext context, UserMicroserviceService userMicroservice)
+    public GetTracksFromUserCommandHandler(
+        TrackDbContext context, 
+        UserMicroserviceService userMicroservice,
+        TrackRateService trackRateService)
     {
         _context = context;
         _userMicroservice = userMicroservice;
+        _trackRateService = trackRateService;
     }
 
     public async Task<IEnumerable<FullTrackInfo>> Handle(GetTracksFromUserCommand command, CancellationToken cancellationToken)
@@ -28,13 +33,14 @@ public class GetTracksFromUserCommandHandler : IRequestHandler<GetTracksFromUser
         var user = tracks.FirstOrDefault()?.UserId is null ? 
             null : 
             await _userMicroservice.GetUserInfoAsync(tracks.FirstOrDefault()!.UserId);
-        
-        //TODO запрос на оценки
+
+        var rates = await _trackRateService.GetTracksRate(tracks.Select(track => track.Id));
 
         return tracks.Select(trackInfo => new FullTrackInfo
         {
             TrackInfo = trackInfo,
-            UserInfo = user
+            UserInfo = user,
+            Rate = rates?.FirstOrDefault(rate => rate.TrackId == trackInfo.Id)
         });
     }
 }

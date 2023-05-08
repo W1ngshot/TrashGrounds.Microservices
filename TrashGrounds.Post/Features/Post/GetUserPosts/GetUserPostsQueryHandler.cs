@@ -1,19 +1,23 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
 using TrashGrounds.Post.Database.Postgres;
+using TrashGrounds.Post.gRPC.Services;
+using TrashGrounds.Post.Models.Additional;
 
 namespace TrashGrounds.Post.Features.Post.GetUserPosts;
 
-public class GetUserPostsQueryHandler : IRequestHandler<GetUserPostsQuery, IEnumerable<Models.Main.Post>>
+public class GetUserPostsQueryHandler : IRequestHandler<GetUserPostsQuery, IEnumerable<PostWithRate>>
 {
     private readonly PostDbContext _context;
+    private readonly PostRateService _postRateService;
 
-    public GetUserPostsQueryHandler(PostDbContext context)
+    public GetUserPostsQueryHandler(PostDbContext context, PostRateService postRateService)
     {
         _context = context;
+        _postRateService = postRateService;
     }
 
-    public async Task<IEnumerable<Models.Main.Post>> Handle(GetUserPostsQuery request, CancellationToken cancellationToken)
+    public async Task<IEnumerable<PostWithRate>> Handle(GetUserPostsQuery request, CancellationToken cancellationToken)
     {
         var posts = await _context.Posts
             .Where(post => post.UserId == request.UserId && (request.ShowHidden || !post.IsHidden))
@@ -22,9 +26,10 @@ public class GetUserPostsQueryHandler : IRequestHandler<GetUserPostsQuery, IEnum
             .Take(request.Take)
             .ToListAsync(cancellationToken);
 
-        //получение оценки
-        //возможно получение пользователя
+        var rates = await _postRateService.GetPostsRateAsync(posts.Select(post => post.Id));
         
-        return posts;
+        return posts.Select(post => new PostWithRate(
+            post,
+            rates?.FirstOrDefault(rate => rate.PostId == post.Id)?.Rating));
     }
 };

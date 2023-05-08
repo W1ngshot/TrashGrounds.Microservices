@@ -31,9 +31,7 @@
             <OutputDir>obj\Debug\net7.0\</OutputDir>
             <Generator>MSBuild:Compile</Generator>
         </Protobuf>
-    </ItemGroup>
 
-    <ItemGroup>
         <Protobuf Include="gRPC\Protos\post-rate.proto">
             <GrpcServices>Server</GrpcServices>
             <Access>Public</Access>

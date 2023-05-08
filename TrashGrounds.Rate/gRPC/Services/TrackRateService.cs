@@ -18,14 +18,15 @@ public class TrackRateService : TrackRateServer.TrackRateService.TrackRateServic
 
     public override async Task<GetTrackRateResponse> GetTrackRate(GetTrackRateRequest request, ServerCallContext context)
     {
+        var rate = await _mediator.Send(new GetTrackRateQuery(
+            Guid.Parse(request.Id)));
         return new GetTrackRateResponse
         {
-            Rating = await _mediator.Send(new GetTrackRateQuery(
-                Guid.Parse(request.Id)))
+            Rating = rate
         };
     }
 
-    public override async Task<GetTracksRateResponse> GetTrackRates(GetTracksRateRequest request, ServerCallContext context)
+    public override async Task<GetTracksRateResponse> GetTracksRate(GetTracksRateRequest request, ServerCallContext context)
     {
         var tracksRate = await _mediator.Send(new GetTracksRateQuery(
             request.Ids.Select(Guid.Parse)));
@@ -41,7 +42,7 @@ public class TrackRateService : TrackRateServer.TrackRateService.TrackRateServic
 
     public override async Task<GetBestRatedTracksResponse> GetBestRatedTrack(GetBestRatedTracksRequest request, ServerCallContext context)
     {
-        var tracksRate = await _mediator.Send(new GetBestRatedTracksQuery(request.Count));
+        var tracksRate = await _mediator.Send(new GetBestRatedTracksQuery(request.Take, request.Skip));
         
         var response = new GetBestRatedTracksResponse();
         response.Rates.Add(tracksRate.TracksRate.Select(rate => new TrackRate

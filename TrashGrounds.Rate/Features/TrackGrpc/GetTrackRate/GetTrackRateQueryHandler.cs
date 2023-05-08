@@ -16,6 +16,6 @@ public class GetTrackRateQueryHandler : IRequestHandler<GetTrackRateQuery, doubl
     public async Task<double> Handle(GetTrackRateQuery request, CancellationToken cancellationToken)
     {
         return await _context.TrackRates.Where(rate => rate.TrackId == request.TrackId)
-            .AverageAsync(rate => rate.Rate, cancellationToken: cancellationToken);
+            .AverageAsync(rate => (double?)rate.Rate, cancellationToken: cancellationToken) ?? 0;
     }
 }
