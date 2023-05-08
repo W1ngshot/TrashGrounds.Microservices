@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using TrashGrounds.User.Database.Postgres.Interfaces;
+using TrashGrounds.User.Infrastructure.Constants;
 using TrashGrounds.User.Infrastructure.Exceptions;
 using TrashGrounds.User.Models.Main;
 using TrashGrounds.User.Models.Responses;
@@ -52,7 +53,7 @@ public class AuthenticationService
         var result = await _signInManager.CheckPasswordSignInAsync(identityUser, password, false);
 
         if (!result.Succeeded)
-            throw new UnauthorizedException("PASSWORD_INVALID");
+            throw new ValidationFailedException("Password", ValidationFailedMessages.WrongPassword);
 
         return await AuthenticateUser(identityUser, domainUser);
     }

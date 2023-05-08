@@ -1,16 +1,19 @@
 ﻿using FluentValidation;
 using TrashGrounds.User.Features.Auth.RefreshTokens;
+using TrashGrounds.User.Infrastructure.Constants;
 
-namespace TrashGrounds.User.Validation.Validators;
+namespace TrashGrounds.User.Validators;
 
 public class RefreshTokensDtoValidator : AbstractValidator<RefreshTokensEndpoint.RefreshTokensDto>
 {
     public RefreshTokensDtoValidator()
     {
         RuleFor(dto => dto.Token)
-            .NotEmpty();
+            .NotEmpty()
+            .WithMessage(ValidationFailedMessages.EmptyField);
 
         RuleFor(dto => dto.RefreshToken)
-            .NotEmpty();
+            .NotEmpty()
+            .WithMessage(ValidationFailedMessages.EmptyField);
     }
 }

@@ -1,7 +1,8 @@
 ﻿using FluentValidation;
 using TrashGrounds.User.Features.User.ChangeStatus;
+using TrashGrounds.User.Infrastructure.Constants;
 
-namespace TrashGrounds.User.Validation.Validators;
+namespace TrashGrounds.User.Validators;
 
 public class ChangeStatusDtoValidator : AbstractValidator<ChangeStatusEndpoint.ChangeStatusDto>
 {
@@ -9,10 +10,10 @@ public class ChangeStatusDtoValidator : AbstractValidator<ChangeStatusEndpoint.C
     {
         RuleFor(dto => dto.NewStatus)
             .NotEmpty()
-            .WithMessage(ValidationMessages.EmptyNewStatus)
+            .WithMessage(ValidationFailedMessages.EmptyField)
             .MinimumLength(5)
-            .WithMessage(ValidationMessages.TooShortStatus)
-            .MaximumLength(300)
-            .WithMessage(ValidationMessages.TooLongStatus);
+            .WithMessage(ValidationFailedMessages.TooShortField)
+            .MaximumLength(500)
+            .WithMessage(ValidationFailedMessages.TooLongField);
     }
 }

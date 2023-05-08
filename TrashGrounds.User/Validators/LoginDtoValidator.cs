@@ -1,7 +1,8 @@
 ﻿using FluentValidation;
 using TrashGrounds.User.Features.Auth.Login;
+using TrashGrounds.User.Infrastructure.Constants;
 
-namespace TrashGrounds.User.Validation.Validators;
+namespace TrashGrounds.User.Validators;
 
 public class LoginDtoValidator : AbstractValidator<LoginEndpoint.LoginDto>
 {
@@ -9,12 +10,12 @@ public class LoginDtoValidator : AbstractValidator<LoginEndpoint.LoginDto>
     {
         RuleFor(request => request.Email)
             .NotEmpty()
-            .WithMessage(ValidationMessages.EmptyEmail)
+            .WithMessage(ValidationFailedMessages.EmptyField)
             .EmailAddress()
-            .WithMessage(ValidationMessages.IncorrectEmail);
+            .WithMessage(ValidationFailedMessages.IncorrectEmail);
 
         RuleFor(request => request.Password)
             .NotEmpty()
-            .WithMessage(ValidationMessages.EmptyPassword);
+            .WithMessage(ValidationFailedMessages.EmptyField);
     }
 }

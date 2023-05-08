@@ -1,10 +1,11 @@
 ﻿using FluentValidation;
 using Microsoft.AspNetCore.Identity;
 using TrashGrounds.User.Features.Auth.Register;
+using TrashGrounds.User.Infrastructure.Constants;
 using TrashGrounds.User.Models.Main;
 using TrashGrounds.User.Services.Configs;
 
-namespace TrashGrounds.User.Validation.Validators;
+namespace TrashGrounds.User.Validators;
 
 public class RegisterDtoValidator : AbstractValidator<RegisterEndpoint.RegisterDto>
 {
@@ -16,45 +17,45 @@ public class RegisterDtoValidator : AbstractValidator<RegisterEndpoint.RegisterD
         
         RuleFor(request => request.Nickname)
             .NotEmpty()
-            .WithMessage(ValidationMessages.EmptyNickname)
+            .WithMessage(ValidationFailedMessages.EmptyField)
             .MinimumLength(3)
-            .WithMessage(ValidationMessages.TooShortNickname)
+            .WithMessage(ValidationFailedMessages.TooShortField)
             .MaximumLength(50)
-            .WithMessage(ValidationMessages.TooLongNickname)
+            .WithMessage(ValidationFailedMessages.TooLongField)
             .Matches(@"^[a-zA-Z0-9]+$")
-            .WithMessage(ValidationMessages.NicknameContainsWrongSymbols)
+            .WithMessage(ValidationFailedMessages.WrongSymbols)
             .MustAsync(IsUniqueNicknameAsync)
-            .WithMessage(ValidationMessages.NicknameAlreadyExists);;
+            .WithMessage(ValidationFailedMessages.AlreadyUsed);;
 
         RuleFor(request => request.Email)
             .NotEmpty()
-            .WithMessage(ValidationMessages.EmptyEmail)
+            .WithMessage(ValidationFailedMessages.EmptyField)
             .EmailAddress()
-            .WithMessage(ValidationMessages.IncorrectEmail)
+            .WithMessage(ValidationFailedMessages.IncorrectEmail)
             .MustAsync(IsUniqueEmailAsync)
-            .WithMessage(ValidationMessages.EmailAlreadyExists);
+            .WithMessage(ValidationFailedMessages.AlreadyUsed);
 
         RuleFor(request => request.Password)
             .NotEmpty()
-            .WithMessage(ValidationMessages.EmptyPassword)
+            .WithMessage(ValidationFailedMessages.EmptyField)
             .MaximumLength(60)
-            .WithMessage(ValidationMessages.TooLongPassword)
+            .WithMessage(ValidationFailedMessages.TooLongField)
             .MinimumLength(PasswordConfig.MinimumLength)
-            .WithMessage(ValidationMessages.TooShortPassword)
+            .WithMessage(ValidationFailedMessages.TooShortField)
             .Matches(@"^[a-zA-Z0-9\W]+$")
-            .WithMessage(ValidationMessages.PasswordContainsWrongSymbols)
+            .WithMessage(ValidationFailedMessages.WrongSymbols)
             .Matches(@"[a-z]")
             .When(_ => PasswordConfig.RequireLowercase, ApplyConditionTo.CurrentValidator)
-            .WithMessage(ValidationMessages.PasswordRequiresLowercase)
+            .WithMessage(ValidationFailedMessages.RequiresLowercase)
             .Matches(@"[A-Z]")
             .When(_ => PasswordConfig.RequireUppercase, ApplyConditionTo.CurrentValidator)
-            .WithMessage(ValidationMessages.PasswordRequiresUppercase)
+            .WithMessage(ValidationFailedMessages.RequiresUppercase)
             .Matches(@"\d")
             .When(_ => PasswordConfig.RequireDigit, ApplyConditionTo.CurrentValidator)
-            .WithMessage(ValidationMessages.PasswordRequiresDigit)
+            .WithMessage(ValidationFailedMessages.RequiresDigit)
             .Matches(@"\W")
             .When(_ => PasswordConfig.RequireNonAlphanumeric, ApplyConditionTo.CurrentValidator)
-            .WithMessage(ValidationMessages.PasswordRequiresNonAlphanumeric);
+            .WithMessage(ValidationFailedMessages.RequiresNonAlphanumeric);
     }
     
     private async Task<bool> IsUniqueNicknameAsync(string nickname, CancellationToken cancellationToken)

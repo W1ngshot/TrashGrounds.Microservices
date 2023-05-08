@@ -1,8 +1,9 @@
 ﻿using FluentValidation;
 using TrashGrounds.User.Features.User.ChangePassword;
+using TrashGrounds.User.Infrastructure.Constants;
 using TrashGrounds.User.Services.Configs;
 
-namespace TrashGrounds.User.Validation.Validators;
+namespace TrashGrounds.User.Validators;
 
 public class ChangePasswordDtoValidator : AbstractValidator<ChangePasswordEndpoint.ChangePasswordDto>
 {
@@ -10,28 +11,28 @@ public class ChangePasswordDtoValidator : AbstractValidator<ChangePasswordEndpoi
     {
         RuleFor(dto => dto.OldPassword)
             .NotEmpty()
-            .WithMessage(ValidationMessages.EmptyPassword);
+            .WithMessage(ValidationFailedMessages.EmptyField);
 
         RuleFor(request => request.NewPassword)
             .NotEmpty()
-            .WithMessage(ValidationMessages.EmptyNewPassword)
+            .WithMessage(ValidationFailedMessages.EmptyField)
             .MaximumLength(60)
-            .WithMessage(ValidationMessages.TooLongPassword)
+            .WithMessage(ValidationFailedMessages.TooLongField)
             .MinimumLength(PasswordConfig.MinimumLength)
-            .WithMessage(ValidationMessages.TooShortPassword)
+            .WithMessage(ValidationFailedMessages.TooShortField)
             .Matches(@"^[a-zA-Z0-9\W]+$")
-            .WithMessage(ValidationMessages.PasswordContainsWrongSymbols)
+            .WithMessage(ValidationFailedMessages.WrongSymbols)
             .Matches(@"[a-z]")
             .When(_ => PasswordConfig.RequireLowercase, ApplyConditionTo.CurrentValidator)
-            .WithMessage(ValidationMessages.PasswordRequiresLowercase)
+            .WithMessage(ValidationFailedMessages.RequiresLowercase)
             .Matches(@"[A-Z]")
             .When(_ => PasswordConfig.RequireUppercase, ApplyConditionTo.CurrentValidator)
-            .WithMessage(ValidationMessages.PasswordRequiresUppercase)
+            .WithMessage(ValidationFailedMessages.RequiresUppercase)
             .Matches(@"\d")
             .When(_ => PasswordConfig.RequireDigit, ApplyConditionTo.CurrentValidator)
-            .WithMessage(ValidationMessages.PasswordRequiresDigit)
+            .WithMessage(ValidationFailedMessages.RequiresDigit)
             .Matches(@"\W")
             .When(_ => PasswordConfig.RequireNonAlphanumeric, ApplyConditionTo.CurrentValidator)
-            .WithMessage(ValidationMessages.PasswordRequiresNonAlphanumeric);
+            .WithMessage(ValidationFailedMessages.RequiresNonAlphanumeric);
     }
 }
