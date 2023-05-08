@@ -7,21 +7,14 @@ namespace TrashGrounds.Post.Features.Post.EditPost;
 
 public class EditPostEndpoint : IEndpoint
 {
-    private readonly IUserService _userService;
-
-    public EditPostEndpoint(IUserService userService)
-    {
-        _userService = userService;
-    }
-
     public record EditPostDto(string Text, string? AssetLink, bool IsHidden = false);
     
     public void Map(IEndpointRouteBuilder endpoints)
     {
         endpoints.MapPut("/{postId:guid}",
-                async (EditPostDto dto, Guid postId, IMediator mediator) =>
+                async (EditPostDto dto, Guid postId, IUserService userService, IMediator mediator) =>
                     Results.Ok(await mediator.Send(new EditPostCommand(
-                        _userService.GetUserIdOrThrow(),
+                        userService.GetUserIdOrThrow(),
                         postId,
                         dto.Text,
                         dto.AssetLink,

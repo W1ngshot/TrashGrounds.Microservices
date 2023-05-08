@@ -1,5 +1,6 @@
 using TrashGrounds.Rate.Bootstrap;
 using TrashGrounds.Rate.gRPC.Services;
+using TrashGrounds.Rate.Infrastructure;
 using TrashGrounds.Rate.Infrastructure.Routing;
 using TrashGrounds.Rate.Middleware;
 
@@ -23,6 +24,7 @@ builder.Services
     .AddMediatR(configuration => configuration.RegisterServicesFromAssemblyContaining<Program>());
 
 var app = builder.Build();
+await app.TryMigrateDatabaseAsync();
 
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 

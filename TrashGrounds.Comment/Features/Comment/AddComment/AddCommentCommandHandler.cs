@@ -1,11 +1,11 @@
-﻿using MediatR;
-using TrashGrounds.Comment.Database.Postgres;
+﻿using TrashGrounds.Comment.Database.Postgres;
 using TrashGrounds.Comment.Infrastructure;
+using TrashGrounds.Comment.Infrastructure.Mediator.Command;
 using TrashGrounds.Comment.Services.Interfaces;
 
 namespace TrashGrounds.Comment.Features.Comment.AddComment;
 
-public class AddCommentCommandHandler : IRequestHandler<AddCommentCommand, Models.Main.Comment>
+public class AddCommentCommandHandler : ICommandHandler<AddCommentCommand, Models.Main.Comment>
 {
     private readonly CommentDbContext _context;
     private readonly IDateTimeProvider _dateTimeProvider;

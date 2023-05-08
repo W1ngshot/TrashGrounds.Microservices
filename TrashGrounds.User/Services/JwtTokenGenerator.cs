@@ -29,13 +29,12 @@ public class JwtTokenGenerator : IJwtTokenGenerator
             ValidateAudience = false
         };
     }
-    
-    public string GenerateUserToken(DomainUser user, IEnumerable<string> roles, DateTime expiration) 
-        => GenerateFromClaims(new[]
-        {
-            new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-            new Claim(ClaimTypes.Role, roles.First())
-        }, expiration);
+
+    public string GenerateUserToken(DomainUser user, IEnumerable<string> roles, DateTime expiration)
+        => GenerateFromClaims(roles
+                .Select(role => new Claim(ClaimTypes.Role, role))
+                .Append(new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())),
+            expiration);
 
     public string GenerateFromClaims(IEnumerable<Claim> claims, DateTime expiresAt)
     {

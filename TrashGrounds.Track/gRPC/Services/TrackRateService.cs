@@ -1,4 +1,5 @@
-﻿using TrackRateClient;
+﻿using AutoMapper;
+using TrackRateClient;
 using TrashGrounds.Track.Models.Main;
 
 namespace TrashGrounds.Track.gRPC.Services;
@@ -6,19 +7,21 @@ namespace TrashGrounds.Track.gRPC.Services;
 public class TrackRateService
 {
     private readonly TrackRateClient.TrackRateService.TrackRateServiceClient _client;
+    private readonly IMapper _mapper;
 
-    public TrackRateService(TrackRateClient.TrackRateService.TrackRateServiceClient client)
+    public TrackRateService(TrackRateClient.TrackRateService.TrackRateServiceClient client, IMapper mapper)
     {
         _client = client;
+        _mapper = mapper;
     }
 
     public async Task<Rate?> GetTrackRate(Guid id)
     {
         try
         {
-            return new Rate(
-                id,
-                (await _client.GetTrackRateAsync(new GetTrackRateRequest {Id = id.ToString()})).Rating);
+            var response = await _client.GetTrackRateAsync(new GetTrackRateRequest {Id = id.ToString()});
+            
+            return new Rate(id, response.Rating);
         }
         catch (Exception e)
         {
@@ -35,7 +38,7 @@ public class TrackRateService
 
             var response = await _client.GetTracksRateAsync(request);
 
-            return response.Rates.Select(rate => new Rate(Guid.Parse(rate.Id), rate.Rating));
+            return response.Rates.Select(rate => _mapper.Map<Rate>(rate));
         }
         catch (Exception e)
         {
@@ -50,7 +53,7 @@ public class TrackRateService
             var response =
                 await _client.GetBestRatedTrackAsync(new GetBestRatedTracksRequest {Count = take, Skip = skip});
 
-            return response.Rates.Select(rate => new Rate(Guid.Parse(rate.Id), rate.Rating));
+            return response.Rates.Select(rate => _mapper.Map<Rate>(rate));
         }
         catch (Exception e)
         {

@@ -1,59 +1,53 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using TrashGrounds.Track.Database.Postgres;
 using TrashGrounds.Track.gRPC.Services;
 using TrashGrounds.Track.Infrastructure.Exceptions;
+using TrashGrounds.Track.Infrastructure.Mediator.Command;
 using TrashGrounds.Track.Models.Additional;
 using TrashGrounds.Track.Models.Main;
 using TrashGrounds.Track.Services.Interfaces;
 
 namespace TrashGrounds.Track.Features.Track.AddTrack;
 
-public class AddTrackCommandHandler : IRequestHandler<AddTrackCommand, FullTrack>
+public class AddTrackCommandHandler : ICommandHandler<AddTrackCommand, FullTrack>
 {
     private readonly TrackDbContext _context;
     private readonly IDateTimeProvider _dateTimeProvider;
-    private readonly UserMicroserviceService _userMicroservice;
+    private readonly UserInfoService _userInfo;
+    private readonly IMapper _mapper;
 
     public AddTrackCommandHandler(TrackDbContext context, 
         IDateTimeProvider dateTimeProvider, 
-        UserMicroserviceService userMicroservice)
+        UserInfoService userInfo, 
+        IMapper mapper)
     {
         _context = context;
         _dateTimeProvider = dateTimeProvider;
-        _userMicroservice = userMicroservice;
+        _userInfo = userInfo;
+        _mapper = mapper;
     }
 
-    public async Task<FullTrack> Handle(AddTrackCommand command, CancellationToken cancellationToken)
+    public async Task<FullTrack> Handle(AddTrackCommand request, CancellationToken cancellationToken)
     {
-        //TODO запрос на микросервис с файлами и получение ссылок
-        //TODO маппинг
-        var track = new MusicTrack
-        {
-            Title = command.Title,
-            Description = command.Description,
-            IsExplicit = command.IsExplicit,
-            ListensCount = 0,
-            PictureLink = command.PictureLink,
-            MusicLink = command.MusicLink,
-            UserId = command.UserId,
-            UploadDate = _dateTimeProvider.UtcNow,
-            Genres = new List<Models.Main.Genre>()
-        };
-
-        foreach (var genreId in command.Genres)
-        {
-            var genre = await _context.Genres.FindAsync(genreId) 
-                ?? throw new NotFoundException<Models.Main.Genre>();
-            track.Genres.Add(genre);
-        }
+        var track = _mapper.Map<AddTrackCommand, MusicTrack>(request);
+        track.UploadDate = _dateTimeProvider.UtcNow;
         
+        track.Genres = await _context.Genres.Where(genre => request.Genres.Contains(genre.Id))
+            .ToListAsync(cancellationToken: cancellationToken);
+        if (!track.Genres.Any())
+            throw new NotFoundException<Models.Main.Genre>();
+        
+        //TODO запрос на микросервис с файлами и получение ссылок
+
         _context.MusicTracks.Add(track);
         await _context.SaveEntitiesAsync();
 
         return new FullTrack
         {
             Track = track,
-            UserInfo = await _userMicroservice.GetUserInfoAsync(track.UserId)
+            UserInfo = await _userInfo.GetUserInfoAsync(track.UserId),
+            Rate = null
         };
     }
 }

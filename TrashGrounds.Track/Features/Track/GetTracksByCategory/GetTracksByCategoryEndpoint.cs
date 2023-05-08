@@ -11,6 +11,6 @@ public class GetTracksByCategoryEndpoint : IEndpoint
         endpoints.MapGet("/{category}", 
             async (Category category, int tracksCount, int? skip, IMediator mediator) =>
                 Results.Ok(await mediator.Send(
-                    new GetTracksByCategoryCommand(category, tracksCount, skip ?? default))));
+                    new GetTracksByCategoryQuery(category, tracksCount, skip ?? default))));
     }
 }

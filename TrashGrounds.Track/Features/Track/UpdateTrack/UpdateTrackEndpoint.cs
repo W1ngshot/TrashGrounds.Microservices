@@ -7,21 +7,15 @@ namespace TrashGrounds.Track.Features.Track.UpdateTrack;
 
 public class UpdateTrackEndpoint : IEndpoint
 {
-    private readonly IUserService _userService;
-
-    public UpdateTrackEndpoint(IUserService userService)
-    {
-        _userService = userService;
-    }
-
     public record UpdateTrackDto(Guid TrackId, string Title, string? Description,
         bool IsExplicit, string? PictureLink, IEnumerable<Guid> Genres);
     
     public void Map(IEndpointRouteBuilder endpoints)
     {
-        endpoints.MapPost("/update", async (UpdateTrackDto dto, IMediator mediator) =>
+        endpoints.MapPut("/update", 
+                async (UpdateTrackDto dto, IUserService userService, IMediator mediator) =>
                 Results.Ok(await mediator.Send(new UpdateTrackCommand(
-                    _userService.GetUserIdOrThrow(),
+                    userService.GetUserIdOrThrow(),
                     dto.TrackId,
                     dto.Title,
                     dto.Description,
@@ -29,6 +23,6 @@ public class UpdateTrackEndpoint : IEndpoint
                     dto.PictureLink,
                     dto.Genres))))
             .RequireAuthorization()
-            .AddValidation(builder => builder.AddFor<UpdateTrackDto>()); //TODO маппер
+            .AddValidation(builder => builder.AddFor<UpdateTrackDto>());
     }
 }

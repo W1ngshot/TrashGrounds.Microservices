@@ -1,13 +1,13 @@
-﻿using MediatR;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using TrashGrounds.Rate.Database.Postgres;
+using TrashGrounds.Rate.Infrastructure.Mediator.Command;
 using TrashGrounds.Rate.Models.Additional.Track;
 using TrashGrounds.Rate.Models.Main;
 using TrashGrounds.Rate.Services.Interfaces;
 
 namespace TrashGrounds.Rate.Features.Track.ChangeTrackRate;
 
-public class ChangeTrackRateCommandHandler : IRequestHandler<ChangeTrackRateCommand, TrackUserRateResponse>
+public class ChangeTrackRateCommandHandler : ICommandHandler<ChangeTrackRateCommand, TrackUserRateResponse>
 {
     private readonly RateDbContext _context;
     private readonly IDateTimeProvider _dateTimeProvider;

@@ -10,7 +10,7 @@ public static class LoggingBootstrap
         {
             configuration.ReadFrom.Configuration(context.Configuration);
             configuration.Enrich.FromLogContext();
-            configuration.Enrich.WithProperty("Application", "TrashGrounds.User");
+            configuration.Enrich.WithProperty("Application", "TrashGrounds.Comment");
             configuration.Enrich.WithProperty("Environment", context.HostingEnvironment.EnvironmentName);
             configuration.WriteTo.Console();
         });

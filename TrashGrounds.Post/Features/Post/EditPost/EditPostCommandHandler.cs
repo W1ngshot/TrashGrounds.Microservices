@@ -1,11 +1,11 @@
-﻿using MediatR;
-using TrashGrounds.Post.Database.Postgres;
+﻿using TrashGrounds.Post.Database.Postgres;
 using TrashGrounds.Post.Infrastructure;
 using TrashGrounds.Post.Infrastructure.Exceptions;
+using TrashGrounds.Post.Infrastructure.Mediator.Command;
 
 namespace TrashGrounds.Post.Features.Post.EditPost;
 
-public class EditPostCommandHandler : IRequestHandler<EditPostCommand, Models.Main.Post>
+public class EditPostCommandHandler : ICommandHandler<EditPostCommand, Models.Main.Post>
 {
     private readonly PostDbContext _context;
 

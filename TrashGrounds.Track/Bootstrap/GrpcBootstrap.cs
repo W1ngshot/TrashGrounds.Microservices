@@ -24,7 +24,7 @@ public static class GrpcBootstrap
 
     public static IServiceCollection AddGrpcServices(this IServiceCollection services)
     {
-        services.AddScoped<UserMicroserviceService>();
+        services.AddScoped<UserInfoService>();
         services.AddScoped<TrackRateService>();
 
         return services;

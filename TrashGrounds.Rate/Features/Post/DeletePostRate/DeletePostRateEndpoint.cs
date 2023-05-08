@@ -7,19 +7,13 @@ namespace TrashGrounds.Rate.Features.Post.DeletePostRate;
 
 public class DeletePostRateEndpoint : IEndpoint
 {
-    private readonly IUserService _userService;
-
-    public DeletePostRateEndpoint(IUserService userService)
-    {
-        _userService = userService;
-    }
-
     public void Map(IEndpointRouteBuilder endpoints)
     {
         endpoints.MapDelete("{postId:guid}",
-                async ([FromRoute] Guid postId, IMediator mediator) =>
-                    Results.Ok(await mediator.Send(
-                        new DeletePostRateCommand(_userService.GetUserIdOrThrow(), postId))))
+                async ([FromRoute] Guid postId, IUserService userService, IMediator mediator) =>
+                    Results.Ok(await mediator.Send(new DeletePostRateCommand(
+                        userService.GetUserIdOrThrow(),
+                        postId))))
             .RequireAuthorization();
     }
 }

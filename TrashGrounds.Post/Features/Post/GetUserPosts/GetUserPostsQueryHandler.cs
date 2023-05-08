@@ -1,12 +1,12 @@
-﻿using MediatR;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using TrashGrounds.Post.Database.Postgres;
 using TrashGrounds.Post.gRPC.Services;
+using TrashGrounds.Post.Infrastructure.Mediator.Query;
 using TrashGrounds.Post.Models.Additional;
 
 namespace TrashGrounds.Post.Features.Post.GetUserPosts;
 
-public class GetUserPostsQueryHandler : IRequestHandler<GetUserPostsQuery, IEnumerable<PostWithRate>>
+public class GetUserPostsQueryHandler : IQueryHandler<GetUserPostsQuery, IEnumerable<PostWithRate>>
 {
     private readonly PostDbContext _context;
     private readonly PostRateService _postRateService;

@@ -1,8 +1,8 @@
 ﻿using Grpc.Core;
 using MediatR;
 using PostRateServer;
-using TrashGrounds.Rate.Features.PostGrpc.GetPostRate;
-using TrashGrounds.Rate.Features.PostGrpc.GetPostsRate;
+using TrashGrounds.Rate.Features.Grpc.Post.GetPostRate;
+using TrashGrounds.Rate.Features.Grpc.Post.GetPostsRate;
 
 namespace TrashGrounds.Rate.gRPC.Services;
 

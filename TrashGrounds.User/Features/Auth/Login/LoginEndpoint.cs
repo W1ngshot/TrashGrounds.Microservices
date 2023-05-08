@@ -1,4 +1,5 @@
-﻿using TrashGrounds.User.Infrastructure.Routing;
+﻿using MediatR;
+using TrashGrounds.User.Infrastructure.Routing;
 using TrashGrounds.User.Infrastructure.ValidationSetup;
 
 namespace TrashGrounds.User.Features.Auth.Login;
@@ -9,8 +10,10 @@ public class LoginEndpoint : IEndpoint
 
     public void Map(IEndpointRouteBuilder endpoints)
     {
-        endpoints.MapPost("/login", async (LoginRequest request, LoginEndpointHandler handler) => 
-            Results.Ok(await handler.Handle(request)))
-            .AddValidation(builder => builder.AddFor<LoginRequest>());
+        endpoints.MapPost("/login", async (LoginDto dto, IMediator mediator) =>
+                Results.Ok(await mediator.Send(new LoginCommand(
+                    dto.Email,
+                    dto.Password))))
+            .AddValidation(builder => builder.AddFor<LoginDto>());
     }
 }

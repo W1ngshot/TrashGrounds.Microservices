@@ -1,4 +1,4 @@
-﻿using MediatR;
+﻿using TrashGrounds.Comment.Infrastructure.Mediator.Command;
 
 namespace TrashGrounds.Comment.Features.Comment.EditComment;
 
@@ -7,4 +7,4 @@ public record EditCommentCommand(
     Guid TrackId,
     Guid CommentId, 
     string Message,
-    Guid? ReplyTo) : IRequest<Models.Main.Comment>;
+    Guid? ReplyTo) : ICommand<Models.Main.Comment>;

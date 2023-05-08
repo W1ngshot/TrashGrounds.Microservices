@@ -1,5 +1,6 @@
 using TrashGrounds.User.Bootstrap;
 using TrashGrounds.User.gRPC.Services;
+using TrashGrounds.User.Infrastructure;
 using TrashGrounds.User.Infrastructure.Routing;
 using TrashGrounds.User.Middleware;
 
@@ -16,14 +17,15 @@ builder.Services
     .AddEndpointsApiExplorer()
     .AddJwtAuthentication(builder.Configuration)
     .AddCustomSwagger(builder.Configuration)
-    .AddAuthorizationWithPolicy()
-    .AddCustomEndpointHandlers();
+    .AddAuthorizationWithPolicy();
 
 builder.Services
     .AddHelperServices()
-    .AddFluentValidation();
+    .AddFluentValidation()
+    .AddMediatR(configuration => configuration.RegisterServicesFromAssemblyContaining<Program>());;
 
 var app = builder.Build();
+await app.TryMigrateDatabaseAsync();
 
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 app.UseHttpsRedirection();

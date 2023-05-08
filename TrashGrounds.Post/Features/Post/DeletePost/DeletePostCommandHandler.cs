@@ -1,11 +1,11 @@
-﻿using MediatR;
-using TrashGrounds.Post.Database.Postgres;
+﻿using TrashGrounds.Post.Database.Postgres;
 using TrashGrounds.Post.Infrastructure;
 using TrashGrounds.Post.Infrastructure.Exceptions;
+using TrashGrounds.Post.Infrastructure.Mediator.Command;
 
 namespace TrashGrounds.Post.Features.Post.DeletePost;
 
-public class DeletePostCommandHandler : IRequestHandler<DeletePostCommand, bool>
+public class DeletePostCommandHandler : ICommandHandler<DeletePostCommand, bool>
 {
     private readonly PostDbContext _context;
 

@@ -9,24 +9,17 @@ namespace TrashGrounds.Rate.Features.Track.ChangeTrackRate;
 
 public class ChangeTrackRateEndpoint : IEndpoint
 {
-    private readonly IUserService _userService;
-
-    public ChangeTrackRateEndpoint(IUserService userService)
-    {
-        _userService = userService;
-    }
-
     public record ChangeTrackRateDto(int NewRate);
     
     public void Map(IEndpointRouteBuilder endpoints)
     {
         endpoints.MapPost("/",
-                async ([FromRoute] Guid trackId, ChangeTrackRateDto dto, IMediator mediator) =>
-                    Results.Ok(await mediator.Send(
-                        new ChangeTrackRateCommand(
-                            _userService.GetUserIdOrThrow(),
-                            trackId,
-                            dto.NewRate))))
+                async ([FromRoute] Guid trackId, ChangeTrackRateDto dto,
+                        IUserService userService, IMediator mediator) =>
+                    Results.Ok(await mediator.Send(new ChangeTrackRateCommand(
+                        userService.GetUserIdOrThrow(),
+                        trackId,
+                        dto.NewRate))))
             .RequireAuthorization()
             .AddValidation(builder => builder.AddFor<ChangeTrackRateDto>());
     }

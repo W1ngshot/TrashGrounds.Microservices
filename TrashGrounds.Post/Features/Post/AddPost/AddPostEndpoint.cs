@@ -7,20 +7,13 @@ namespace TrashGrounds.Post.Features.Post.AddPost;
 
 public class AddPostEndpoint : IEndpoint
 {
-    private readonly IUserService _userService;
-
-    public AddPostEndpoint(IUserService userService)
-    {
-        _userService = userService;
-    }
-
     public record AddPostDto(string Text, string? AssetLink, bool IsHidden = false);
     
     public void Map(IEndpointRouteBuilder endpoints)
     {
-        endpoints.MapPost("/add", async (AddPostDto dto, IMediator mediator) =>
+        endpoints.MapPost("/add", async (AddPostDto dto, IUserService userService, IMediator mediator) =>
                 Results.Ok(await mediator.Send(new AddPostCommand(
-                    _userService.GetUserIdOrThrow(),
+                    userService.GetUserIdOrThrow(),
                     dto.Text,
                     dto.AssetLink,
                     dto.IsHidden))))

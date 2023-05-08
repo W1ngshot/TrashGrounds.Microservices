@@ -1,12 +1,12 @@
-﻿using MediatR;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using TrashGrounds.Comment.Database.Postgres;
 using TrashGrounds.Comment.gRPC.Services;
+using TrashGrounds.Comment.Infrastructure.Mediator.Query;
 using TrashGrounds.Comment.Models.Additional;
 
 namespace TrashGrounds.Comment.Features.Comment.GetTrackComments;
 
-public class GetTrackCommentsQueryHandler : IRequestHandler<GetTrackCommentsQuery, IEnumerable<FullComment>>
+public class GetTrackCommentsQueryHandler : IQueryHandler<GetTrackCommentsQuery, IEnumerable<FullComment>>
 {
     private readonly CommentDbContext _context;
     private readonly UserMicroserviceService _userMicroservice;

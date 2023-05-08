@@ -7,19 +7,15 @@ namespace TrashGrounds.Post.Features.Post.MyPosts;
 
 public class GetMyPostsEndpoint : IEndpoint
 {
-    private readonly IUserService _userService;
-
-    public GetMyPostsEndpoint(IUserService userService)
-    {
-        _userService = userService;
-    }
-
     public void Map(IEndpointRouteBuilder endpoints)
     {
         endpoints.MapGet("/my",
-                async (int take, int? skip, IMediator mediator) =>
-                    Results.Ok(await mediator.Send(
-                        new GetUserPostsQuery(_userService.GetUserIdOrThrow(), take, skip ?? 0, true))))
+                async (int take, int? skip, IUserService userService, IMediator mediator) =>
+                    Results.Ok(await mediator.Send(new GetUserPostsQuery(
+                        userService.GetUserIdOrThrow(),
+                        take,
+                        skip ?? 0,
+                        true))))
             .RequireAuthorization();
     }
 }
