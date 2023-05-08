@@ -1,4 +1,5 @@
 using TrashGrounds.Comment.Bootstrap;
+using TrashGrounds.Comment.Infrastructure;
 using TrashGrounds.Comment.Infrastructure.Routing;
 using TrashGrounds.Comment.Middleware;
 
@@ -25,6 +26,7 @@ builder.Services
     .AddGrpcServices();
 
 var app = builder.Build();
+await app.TryMigrateDatabaseAsync();
 
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 

@@ -1,10 +1,10 @@
-﻿using MediatR;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using TrashGrounds.Rate.Database.Postgres;
+using TrashGrounds.Rate.Infrastructure.Mediator.Command;
 
 namespace TrashGrounds.Rate.Features.Post.DeletePostRate;
 
-public class DeletePostRateCommandHandler : IRequestHandler<DeletePostRateCommand, bool>
+public class DeletePostRateCommandHandler : ICommandHandler<DeletePostRateCommand, bool>
 {
     private readonly RateDbContext _context;
 

@@ -1,11 +1,11 @@
-﻿using MediatR;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using TrashGrounds.Rate.Database.Postgres;
+using TrashGrounds.Rate.Infrastructure.Mediator.Query;
 using TrashGrounds.Rate.Models.Additional.Post;
 
 namespace TrashGrounds.Rate.Features.Post.GetPostsUserRates;
 
-public class GetPostsUserRatesQueryHandler : IRequestHandler<GetPostsUserRatesQuery, PostsUserRateResponse>
+public class GetPostsUserRatesQueryHandler : IQueryHandler<GetPostsUserRatesQuery, PostsUserRateResponse>
 {
     private readonly RateDbContext _context;
 

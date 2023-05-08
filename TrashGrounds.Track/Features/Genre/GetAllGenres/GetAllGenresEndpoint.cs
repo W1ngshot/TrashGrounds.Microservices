@@ -8,6 +8,6 @@ public class GetAllGenresEndpoint : IEndpoint
     public void Map(IEndpointRouteBuilder endpoints)
     {
         endpoints.MapGet("/all", async (IMediator mediator) =>
-            Results.Ok(await mediator.Send(new GetAllGenresCommand())));
+            Results.Ok(await mediator.Send(new GetAllGenresQuery())));
     }
 }

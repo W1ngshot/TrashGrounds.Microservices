@@ -1,10 +1,10 @@
-﻿using MediatR;
-using TrashGrounds.Post.Database.Postgres;
+﻿using TrashGrounds.Post.Database.Postgres;
+using TrashGrounds.Post.Infrastructure.Mediator.Command;
 using TrashGrounds.Post.Services.Interfaces;
 
 namespace TrashGrounds.Post.Features.Post.AddPost;
 
-public class AddPostCommandHandler : IRequestHandler<AddPostCommand, Models.Main.Post>
+public class AddPostCommandHandler : ICommandHandler<AddPostCommand, Models.Main.Post>
 {
     private readonly PostDbContext _context;
     private readonly IDateTimeProvider _dateTimeProvider;

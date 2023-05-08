@@ -1,9 +1,9 @@
 ﻿using Grpc.Core;
 using MediatR;
 using TrackRateServer;
-using TrashGrounds.Rate.Features.TrackGrpc.GetBestRatedTracks;
-using TrashGrounds.Rate.Features.TrackGrpc.GetTrackRate;
-using TrashGrounds.Rate.Features.TrackGrpc.GetTracksRate;
+using TrashGrounds.Rate.Features.Grpc.Track.GetBestRatedTracks;
+using TrashGrounds.Rate.Features.Grpc.Track.GetTrackRate;
+using TrashGrounds.Rate.Features.Grpc.Track.GetTracksRate;
 
 namespace TrashGrounds.Rate.gRPC.Services;
 

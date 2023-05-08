@@ -1,4 +1,5 @@
-﻿using TrashGrounds.User.Infrastructure.Routing;
+﻿using MediatR;
+using TrashGrounds.User.Infrastructure.Routing;
 using TrashGrounds.User.Infrastructure.ValidationSetup;
 using TrashGrounds.User.Services.Interfaces;
 
@@ -11,12 +12,11 @@ public class ChangePasswordEndpoint : IEndpoint
     public void Map(IEndpointRouteBuilder endpoints)
     {
         endpoints.MapPost("/change-password",
-                async (ChangePasswordDto dto, IUserService userService, ChangePasswordEndpointHandler handler) =>
-                    Results.Ok(await handler.Handle(
-                        new ChangePasswordRequest(
-                            userService.GetUserIdOrThrow(),
-                            dto.OldPassword,
-                            dto.NewPassword))))
+                async (ChangePasswordDto dto, IUserService userService, IMediator mediator) =>
+                    Results.Ok(await mediator.Send(new ChangePasswordCommand(
+                        userService.GetUserIdOrThrow(),
+                        dto.OldPassword,
+                        dto.NewPassword))))
             .RequireAuthorization()
             .AddValidation(builder => builder.AddFor<ChangePasswordDto>());
     }

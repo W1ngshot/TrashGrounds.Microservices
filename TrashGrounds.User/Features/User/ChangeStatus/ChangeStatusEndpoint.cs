@@ -1,4 +1,5 @@
-﻿using TrashGrounds.User.Infrastructure.Routing;
+﻿using MediatR;
+using TrashGrounds.User.Infrastructure.Routing;
 using TrashGrounds.User.Infrastructure.ValidationSetup;
 using TrashGrounds.User.Services.Interfaces;
 
@@ -11,9 +12,10 @@ public class ChangeStatusEndpoint : IEndpoint
     public void Map(IEndpointRouteBuilder endpoints)
     {
         endpoints.MapPost("/change-status",
-                async (ChangeStatusDto dto, IUserService userService, ChangeStatusEndpointHandler handler) =>
-                    Results.Ok(await handler.Handle(
-                        new ChangeStatusRequest(userService.GetUserIdOrThrow(), dto.NewStatus))))
+                async (ChangeStatusDto dto, IUserService userService, IMediator mediator) =>
+                    Results.Ok(await mediator.Send(new ChangeStatusCommand(
+                        userService.GetUserIdOrThrow(),
+                        dto.NewStatus))))
             .RequireAuthorization()
             .AddValidation(builder => builder.AddFor<ChangeStatusDto>());
     }

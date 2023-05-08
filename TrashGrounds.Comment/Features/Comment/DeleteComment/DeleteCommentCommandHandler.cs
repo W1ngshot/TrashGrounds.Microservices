@@ -1,11 +1,11 @@
-﻿using MediatR;
-using TrashGrounds.Comment.Database.Postgres;
+﻿using TrashGrounds.Comment.Database.Postgres;
 using TrashGrounds.Comment.Infrastructure;
 using TrashGrounds.Comment.Infrastructure.Exceptions;
+using TrashGrounds.Comment.Infrastructure.Mediator.Command;
 
 namespace TrashGrounds.Comment.Features.Comment.DeleteComment;
 
-public class DeleteCommentCommandHandler : IRequestHandler<DeleteCommentCommand, bool>
+public class DeleteCommentCommandHandler : ICommandHandler<DeleteCommentCommand, bool>
 {
     private readonly CommentDbContext _context;
 

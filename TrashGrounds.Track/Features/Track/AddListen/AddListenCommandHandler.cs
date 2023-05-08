@@ -1,11 +1,11 @@
-﻿using MediatR;
-using TrashGrounds.Track.Database.Postgres;
+﻿using TrashGrounds.Track.Database.Postgres;
 using TrashGrounds.Track.Infrastructure;
+using TrashGrounds.Track.Infrastructure.Mediator.Command;
 using TrashGrounds.Track.Models.Additional;
 
 namespace TrashGrounds.Track.Features.Track.AddListen;
 
-public class AddListenCommandHandler : IRequestHandler<AddListenCommand, SuccessResponse>
+public class AddListenCommandHandler : ICommandHandler<AddListenCommand, SuccessResponse>
 {
     private readonly TrackDbContext _context;
 
@@ -14,9 +14,9 @@ public class AddListenCommandHandler : IRequestHandler<AddListenCommand, Success
         _context = context;
     }
 
-    public async Task<SuccessResponse> Handle(AddListenCommand command, CancellationToken cancellationToken)
+    public async Task<SuccessResponse> Handle(AddListenCommand request, CancellationToken cancellationToken)
     {
-        var track = await _context.MusicTracks.FirstOrNotFoundAsync(track => track.Id == command.TrackId,
+        var track = await _context.MusicTracks.FirstOrNotFoundAsync(track => track.Id == request.TrackId,
             cancellationToken: cancellationToken);
 
         track.ListensCount++;

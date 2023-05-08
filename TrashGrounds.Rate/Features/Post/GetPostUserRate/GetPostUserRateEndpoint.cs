@@ -7,21 +7,13 @@ namespace TrashGrounds.Rate.Features.Post.GetPostUserRate;
 
 public class GetPostUserRateEndpoint : IEndpoint
 {
-    private readonly IUserService _userService;
-
-    public GetPostUserRateEndpoint(IUserService userService)
-    {
-        _userService = userService;
-    }
-
     public void Map(IEndpointRouteBuilder endpoints)
     {
         endpoints.MapGet("{postId:guid}",
-                async ([FromRoute] Guid postId, IMediator mediator) =>
-                    Results.Ok(await mediator.Send(
-                        new GetPostUserRateQuery(
-                            _userService.GetUserIdOrThrow(),
-                            postId))))
+                async ([FromRoute] Guid postId, IUserService userService, IMediator mediator) =>
+                    Results.Ok(await mediator.Send(new GetPostUserRateQuery(
+                        userService.GetUserIdOrThrow(),
+                        postId))))
             .RequireAuthorization();
     }
 }

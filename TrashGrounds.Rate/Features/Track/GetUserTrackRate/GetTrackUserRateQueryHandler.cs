@@ -1,11 +1,11 @@
-﻿using MediatR;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using TrashGrounds.Rate.Database.Postgres;
+using TrashGrounds.Rate.Infrastructure.Mediator.Query;
 using TrashGrounds.Rate.Models.Additional.Track;
 
 namespace TrashGrounds.Rate.Features.Track.GetUserTrackRate;
 
-public class GetTrackUserRateQueryHandler : IRequestHandler<GetTrackUserRateQuery, TrackUserRateResponse>
+public class GetTrackUserRateQueryHandler : IQueryHandler<GetTrackUserRateQuery, TrackUserRateResponse>
 {
     private readonly RateDbContext _context;
 

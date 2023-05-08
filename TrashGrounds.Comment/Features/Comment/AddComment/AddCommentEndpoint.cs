@@ -8,20 +8,14 @@ namespace TrashGrounds.Comment.Features.Comment.AddComment;
 
 public class AddCommentEndpoint : IEndpoint
 {
-    private readonly IUserService _userService;
-
-    public AddCommentEndpoint(IUserService userService)
-    {
-        _userService = userService;
-    }
-
     public record AddCommentDto(string Message, Guid? ReplyTo);
     
     public void Map(IEndpointRouteBuilder endpoints)
     {
-        endpoints.MapPost("/add", async (AddCommentDto dto, [FromRoute] Guid trackId, IMediator mediator) =>
+        endpoints.MapPost("/add", async (AddCommentDto dto, [FromRoute] Guid trackId,
+                    IUserService userService, IMediator mediator) =>
                 Results.Ok(await mediator.Send(new AddCommentCommand(
-                    _userService.GetUserIdOrThrow(),
+                    userService.GetUserIdOrThrow(),
                     trackId,
                     dto.Message,
                     dto.ReplyTo))))

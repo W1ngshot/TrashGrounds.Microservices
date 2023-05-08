@@ -8,6 +8,6 @@ public class GetTrackEndpoint : IEndpoint
     public void Map(IEndpointRouteBuilder endpoints)
     {
         endpoints.MapGet("/{id:guid}", async (Guid id, IMediator mediator) =>
-            Results.Ok(await mediator.Send(new GetTrackCommand(id))));
+            Results.Ok(await mediator.Send(new GetTrackQuery(id))));
     }
 }

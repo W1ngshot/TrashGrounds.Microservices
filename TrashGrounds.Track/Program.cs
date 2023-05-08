@@ -1,4 +1,5 @@
 using TrashGrounds.Track.Bootstrap;
+using TrashGrounds.Track.Infrastructure;
 using TrashGrounds.Track.Infrastructure.Routing;
 using TrashGrounds.Track.Middleware;
 
@@ -25,6 +26,7 @@ builder.Services
     .AddGrpcServices();
 
 var app = builder.Build();
+await app.TryMigrateDatabaseAsync();
 
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 app.UseHttpsRedirection();
