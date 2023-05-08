@@ -11,41 +11,31 @@ public class SearchTracksCommandHandler : IRequestHandler<SearchTracksCommand, I
 {
     private readonly TrackDbContext _context;
     private readonly UserMicroserviceService _userMicroservice;
+    private readonly TrackRateService _trackRateService;
 
-    public SearchTracksCommandHandler(TrackDbContext context, UserMicroserviceService userMicroservice)
+    public SearchTracksCommandHandler(
+        TrackDbContext context, 
+        UserMicroserviceService userMicroservice,
+        TrackRateService trackRateService)
     {
         _context = context;
         _userMicroservice = userMicroservice;
+        _trackRateService = trackRateService;
     }
 
     public async Task<IEnumerable<FullTrackInfo>> Handle(SearchTracksCommand command, CancellationToken cancellationToken)
     {
-        var tracks = _context.MusicTracks
+        var tracks = await _context.MusicTracks
             .Include(track => track.Genres)
             .Where(track =>
-                command.Query == null || track.Title.ToLower().Contains(command.Query.ToLower()));
-
-        //TODO добавить поиск по жанрам и переделать сортировку по категориям
+                command.Query == null || track.Title.ToLower().Contains(command.Query.ToLower()))
+            /*.Where(track => command.GenresId == null || !command.GenresId.Any() ||
+                            track.Genres.Select(genre => genre.Id).Intersect(command.GenresId).Count() ==
+                            command.GenresId.Count())*/ //TODO не работает, переделать, с ALL тоже не работает
+            .ToTracksInfo(command.Take, command.Skip);
         
-        var orderedTracks = command.Category switch
-        {
-            null => tracks,
-            Category.New => tracks.OrderByDescending(track => track.UploadDate),
-            Category.MostStreaming => tracks.OrderByDescending(track => track.ListensCount),
-            Category.Popular => tracks.OrderByDescending(track => track.ListensCount), //TODO Получение с сервиса оценок списка самых популярных треков
-            _ => throw new ArgumentOutOfRangeException(nameof(command.Category), command.Category, null)
-        };
-
-        var filteredTracks = await orderedTracks.ToTracksInfo(command.Take, command.Skip);
-
-        var userIds = filteredTracks.Select(track => track.UserId);
-        var users = await _userMicroservice.GetUsersInfoAsync(userIds);
-
-        //TODO Получение оценок
-        return filteredTracks.Select(track => new FullTrackInfo
-        {
-            TrackInfo = track,
-            UserInfo = users?.FirstOrDefault(user => user.Id == track.UserId)
-        });
+        return tracks.ToFullTrackInfo(
+            await _userMicroservice.GetUsersInfoAsync(tracks.Select(track => track.UserId)),
+            await _trackRateService.GetTracksRate(tracks.Select(track => track.Id)));
     }
 }

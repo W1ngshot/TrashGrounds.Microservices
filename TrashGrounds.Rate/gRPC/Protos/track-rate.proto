@@ -24,7 +24,8 @@ message GetTrackRateResponse {
 }
 
 message GetBestRatedTracksRequest {
-  int32 count = 1;
+  int32 take = 1;
+  int32 skip = 2;
 }
 
 message GetBestRatedTracksResponse {

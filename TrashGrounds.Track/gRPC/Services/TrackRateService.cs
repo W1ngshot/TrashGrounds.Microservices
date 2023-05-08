@@ -43,11 +43,12 @@ public class TrackRateService
         }
     }
 
-    public async Task<IEnumerable<Rate>?> GetBestRatedTracks(int take)
+    public async Task<IEnumerable<Rate>?> GetBestRatedTracks(int take, int skip)
     {
         try
         {
-            var response = await _client.GetBestRatedTrackAsync(new GetBestRatedTracksRequest {Count = take});
+            var response =
+                await _client.GetBestRatedTrackAsync(new GetBestRatedTracksRequest {Count = take, Skip = skip});
 
             return response.Rates.Select(rate => new Rate(Guid.Parse(rate.Id), rate.Rating));
         }

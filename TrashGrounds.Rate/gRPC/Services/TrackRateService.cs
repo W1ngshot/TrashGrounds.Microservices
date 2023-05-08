@@ -42,7 +42,7 @@ public class TrackRateService : TrackRateServer.TrackRateService.TrackRateServic
 
     public override async Task<GetBestRatedTracksResponse> GetBestRatedTrack(GetBestRatedTracksRequest request, ServerCallContext context)
     {
-        var tracksRate = await _mediator.Send(new GetBestRatedTracksQuery(request.Count));
+        var tracksRate = await _mediator.Send(new GetBestRatedTracksQuery(request.Take, request.Skip));
         
         var response = new GetBestRatedTracksResponse();
         response.Rates.Add(tracksRate.TracksRate.Select(rate => new TrackRate

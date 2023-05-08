@@ -19,9 +19,13 @@ public class GetTracksRateQueryHandler : IRequestHandler<GetTracksRateQuery, Tra
         var tracksRate = await _context.TrackRates
             .Where(rate => request.Ids.Contains(rate.TrackId))
             .GroupBy(rate => rate.TrackId)
-            .Select(g => new TrackRateResponse(g.Key, g.Average(r => r.Rate)))
+            .Select(g => new {Id = g.Key, Rate = g.Average(rate => rate.Rate)})
             .ToListAsync(cancellationToken: cancellationToken);
 
-        return new TracksRateResponse(tracksRate);
+        var rates = request.Ids.Select(id => new TrackRateResponse(
+            id,
+            tracksRate.FirstOrDefault(r => r.Id == id)?.Rate ?? 0));
+        
+        return new TracksRateResponse(rates);
     }
 }

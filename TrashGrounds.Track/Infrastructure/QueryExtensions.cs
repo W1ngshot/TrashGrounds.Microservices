@@ -39,7 +39,10 @@ public static class QueryExtensions
         this IQueryable<MusicTrack> queryable,
         int take, int skip = 0)
     {
-        return await queryable.Select(track => new TrackInfo
+        return await queryable
+            .Skip(skip)
+            .Take(take)
+            .Select(track => new TrackInfo
             {
                 Id = track.Id,
                 Title = track.Title,
@@ -47,8 +50,17 @@ public static class QueryExtensions
                 PictureLink = track.PictureLink,
                 UserId = track.UserId
             })
-            .Skip(skip)
-            .Take(take)
             .ToListAsync();
+    }
+
+    public static IEnumerable<FullTrackInfo> ToFullTrackInfo(this IEnumerable<TrackInfo> tracks,
+        IEnumerable<UserInformation>? users, IEnumerable<Rate>? rates)
+    {
+        return tracks.Select(track => new FullTrackInfo
+        {
+            TrackInfo = track,
+            UserInfo = users?.FirstOrDefault(user => user.Id == track.UserId),
+            Rate = rates?.FirstOrDefault(rate => rate.TrackId == track.Id)
+        });
     }
 }
