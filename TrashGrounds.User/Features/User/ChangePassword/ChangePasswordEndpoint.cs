@@ -11,7 +11,7 @@ public class ChangePasswordEndpoint : IEndpoint
     
     public void Map(IEndpointRouteBuilder endpoints)
     {
-        endpoints.MapPost("/change-password",
+        endpoints.MapPatch("/change-password",
                 async (ChangePasswordDto dto, IUserService userService, IMediator mediator) =>
                     Results.Ok(await mediator.Send(new ChangePasswordCommand(
                         userService.GetUserIdOrThrow(),

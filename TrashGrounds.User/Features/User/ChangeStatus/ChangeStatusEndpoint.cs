@@ -11,7 +11,7 @@ public class ChangeStatusEndpoint : IEndpoint
     
     public void Map(IEndpointRouteBuilder endpoints)
     {
-        endpoints.MapPost("/change-status",
+        endpoints.MapPatch("/change-status",
                 async (ChangeStatusDto dto, IUserService userService, IMediator mediator) =>
                     Results.Ok(await mediator.Send(new ChangeStatusCommand(
                         userService.GetUserIdOrThrow(),

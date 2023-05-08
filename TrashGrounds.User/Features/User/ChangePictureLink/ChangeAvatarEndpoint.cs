@@ -10,7 +10,7 @@ public class ChangeAvatarEndpoint : IEndpoint
     
     public void Map(IEndpointRouteBuilder endpoints)
     {
-        endpoints.MapPost("/change-avatar",
+        endpoints.MapPatch("/change-avatar",
                 async (ChangeAvatarDto dto, IUserService userService, IMediator mediator) =>
                     Results.Ok(await mediator.Send(
                         new ChangeAvatarCommand(userService.GetUserIdOrThrow(), dto.NewLink))))
