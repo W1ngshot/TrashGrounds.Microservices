@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using TrashGrounds.Track.Database.Postgres;
 using TrashGrounds.Track.gRPC.Services;
 using TrashGrounds.Track.Infrastructure.Exceptions;
@@ -14,36 +15,30 @@ public class AddTrackCommandHandler : ICommandHandler<AddTrackCommand, FullTrack
     private readonly TrackDbContext _context;
     private readonly IDateTimeProvider _dateTimeProvider;
     private readonly UserInfoService _userInfo;
+    private readonly IMapper _mapper;
 
     public AddTrackCommandHandler(TrackDbContext context, 
         IDateTimeProvider dateTimeProvider, 
-        UserInfoService userInfo)
+        UserInfoService userInfo, 
+        IMapper mapper)
     {
         _context = context;
         _dateTimeProvider = dateTimeProvider;
         _userInfo = userInfo;
+        _mapper = mapper;
     }
 
     public async Task<FullTrack> Handle(AddTrackCommand request, CancellationToken cancellationToken)
     {
-        //TODO запрос на микросервис с файлами и получение ссылок
-        //TODO маппинг
-        var track = new MusicTrack
-        {
-            Title = request.Title,
-            Description = request.Description,
-            IsExplicit = request.IsExplicit,
-            ListensCount = 0,
-            PictureLink = request.PictureLink,
-            MusicLink = request.MusicLink,
-            UserId = request.UserId,
-            UploadDate = _dateTimeProvider.UtcNow,
-            Genres = await _context.Genres.Where(genre => request.Genres.Contains(genre.Id))
-                .ToListAsync(cancellationToken: cancellationToken)
-        };
+        var track = _mapper.Map<AddTrackCommand, MusicTrack>(request);
+        track.UploadDate = _dateTimeProvider.UtcNow;
         
+        track.Genres = await _context.Genres.Where(genre => request.Genres.Contains(genre.Id))
+            .ToListAsync(cancellationToken: cancellationToken);
         if (!track.Genres.Any())
             throw new NotFoundException<Models.Main.Genre>();
+        
+        //TODO запрос на микросервис с файлами и получение ссылок
 
         _context.MusicTracks.Add(track);
         await _context.SaveEntitiesAsync();

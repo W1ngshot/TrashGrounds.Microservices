@@ -1,4 +1,5 @@
-﻿using TrashGrounds.Track.Models.Additional;
+﻿using AutoMapper;
+using TrashGrounds.Track.Models.Additional;
 using UserMicroserviceClient;
 
 namespace TrashGrounds.Track.gRPC.Services;
@@ -6,10 +7,12 @@ namespace TrashGrounds.Track.gRPC.Services;
 public class UserInfoService
 {
     private readonly UserMicroservice.UserMicroserviceClient _userClient;
+    private readonly IMapper _mapper;
 
-    public UserInfoService(UserMicroservice.UserMicroserviceClient userClient)
+    public UserInfoService(UserMicroservice.UserMicroserviceClient userClient, IMapper mapper)
     {
         _userClient = userClient;
+        _mapper = mapper;
     }
 
     public async Task<UserInformation?> GetUserInfoAsync(Guid id)
@@ -17,16 +20,8 @@ public class UserInfoService
         try
         {
             var info = await _userClient.GetUserInfoAsync(new UserInfoRequest {Id = id.ToString()});
-            
-            return info?.User is null
-                ? null
-                : new UserInformation
-                {
-                    Id = Guid.Parse(info.User.Id),
-                    Nickname = info.User.Nickname,
-                    AvatarLink = info.User.AvatarLink,
-                    RegistrationDate = info.User.RegistrationDate.ToDateTime()
-                };
+
+            return info?.User is null ? null : _mapper.Map<UserInfo, UserInformation>(info.User);
         }
         catch (Exception e)
         {
@@ -43,13 +38,7 @@ public class UserInfoService
 
             var infos = await _userClient.GetUsersInfoAsync(request);
 
-            return infos?.Users?.Select(user => new UserInformation
-            {
-                Id = Guid.Parse(user.Id),
-                Nickname = user.Nickname,
-                AvatarLink = user.AvatarLink,
-                RegistrationDate = user.RegistrationDate.ToDateTime()
-            });
+            return infos?.Users?.Select(user => _mapper.Map<UserInfo, UserInformation>(user));
         }
         catch (Exception e)
         {

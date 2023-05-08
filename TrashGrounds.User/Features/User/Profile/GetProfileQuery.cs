@@ -3,4 +3,4 @@ using TrashGrounds.User.Models.Main;
 
 namespace TrashGrounds.User.Features.User.Profile;
 
-public record GetProfileQuery(Guid UserId) : IQuery<DomainUser>;
+public record GetProfileQuery(Guid UserId) : IQuery<UserProfile>;

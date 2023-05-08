@@ -23,6 +23,6 @@ public class UpdateTrackEndpoint : IEndpoint
                     dto.PictureLink,
                     dto.Genres))))
             .RequireAuthorization()
-            .AddValidation(builder => builder.AddFor<UpdateTrackDto>()); //TODO маппер
+            .AddValidation(builder => builder.AddFor<UpdateTrackDto>());
     }
 }
