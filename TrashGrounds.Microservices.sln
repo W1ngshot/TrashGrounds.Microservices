@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrashGrounds.Post", "TrashG
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrashGrounds.Rate", "TrashGrounds.Rate\TrashGrounds.Rate.csproj", "{03EC6305-C0E9-454F-A321-C1C0667EDF8F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrashGrounds.File", "TrashGrounds.File\TrashGrounds.File.csproj", "{8867EB81-F6E9-4904-B39B-4074C0CDFFE3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,5 +49,13 @@ Global
 		{03EC6305-C0E9-454F-A321-C1C0667EDF8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{03EC6305-C0E9-454F-A321-C1C0667EDF8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{03EC6305-C0E9-454F-A321-C1C0667EDF8F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D49CCC48-DB13-48D2-8448-E17BE2DF93E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D49CCC48-DB13-48D2-8448-E17BE2DF93E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D49CCC48-DB13-48D2-8448-E17BE2DF93E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D49CCC48-DB13-48D2-8448-E17BE2DF93E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8867EB81-F6E9-4904-B39B-4074C0CDFFE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8867EB81-F6E9-4904-B39B-4074C0CDFFE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8867EB81-F6E9-4904-B39B-4074C0CDFFE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8867EB81-F6E9-4904-B39B-4074C0CDFFE3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
