@@ -7,7 +7,7 @@ namespace TrashGrounds.Post.Features.Post.EditPost;
 
 public class EditPostEndpoint : IEndpoint
 {
-    public record EditPostDto(string Text, string? AssetLink, bool IsHidden = false);
+    public record EditPostDto(string Text, Guid? AssetId, bool IsHidden, bool ChangeAsset = false);
     
     public void Map(IEndpointRouteBuilder endpoints)
     {
@@ -17,7 +17,8 @@ public class EditPostEndpoint : IEndpoint
                         userService.GetUserIdOrThrow(),
                         postId,
                         dto.Text,
-                        dto.AssetLink,
+                        dto.AssetId,
+                        dto.ChangeAsset,
                         dto.IsHidden))))
             .RequireAuthorization()
             .AddValidation(builder => builder.AddFor<EditPostDto>());

@@ -41,17 +41,13 @@ public class AddTrackDtoValidator : AbstractValidator<AddTrackEndpoint.AddTrackD
             .WithMessage("not exists");
 
         RuleFor(dto => dto.PictureId)
-            .MustAsync(IsImageExistsAsync)
+            .MustAsync(IsImageNullOrExistsAsync)
             .WithMessage("not exists");
     }
     
     private async Task<bool> IsMusicExistsAsync(Guid trackId, CancellationToken cancellationToken) => 
         await _fileExistsService.IsTrackExistsAsync(trackId);
-    
-    private async Task<bool> IsImageExistsAsync(Guid? imageId, CancellationToken cancellationToken)
-    {
-        if (imageId == null)
-            return true;
-        return await _fileExistsService.IsImageExistsAsync(imageId.Value);
-    }
+
+    private async Task<bool> IsImageNullOrExistsAsync(Guid? imageId, CancellationToken cancellationToken) =>
+        imageId == null || await _fileExistsService.IsImageExistsAsync(imageId.Value);
 }

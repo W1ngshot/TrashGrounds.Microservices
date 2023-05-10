@@ -14,12 +14,10 @@ public class ChangeAvatarDtoValidator : AbstractValidator<ChangeAvatarEndpoint.C
         _fileExistsService = fileExistsService;
 
         RuleFor(dto => dto.NewAvatarId)
-            .MustAsync(IsImageExistsAsync)
+            .MustAsync(IsImageNullOrExistsAsync)
             .WithMessage(ValidationFailedMessages.NotExists);
     }
     
-    private async Task<bool> IsImageExistsAsync(Guid? imageId, CancellationToken cancellationToken)
-    {
-        return imageId == null || await _fileExistsService.IsImageExistsAsync(imageId.Value);
-    }
+    private async Task<bool> IsImageNullOrExistsAsync(Guid? imageId, CancellationToken cancellationToken) => 
+        imageId == null || await _fileExistsService.IsImageExistsAsync(imageId.Value);
 }

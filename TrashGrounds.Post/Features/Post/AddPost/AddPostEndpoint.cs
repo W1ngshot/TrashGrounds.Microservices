@@ -7,7 +7,7 @@ namespace TrashGrounds.Post.Features.Post.AddPost;
 
 public class AddPostEndpoint : IEndpoint
 {
-    public record AddPostDto(string Text, string? AssetLink, bool IsHidden = false);
+    public record AddPostDto(string Text, Guid? AssetId, bool IsHidden = false);
     
     public void Map(IEndpointRouteBuilder endpoints)
     {
@@ -15,7 +15,7 @@ public class AddPostEndpoint : IEndpoint
                 Results.Ok(await mediator.Send(new AddPostCommand(
                     userService.GetUserIdOrThrow(),
                     dto.Text,
-                    dto.AssetLink,
+                    dto.AssetId,
                     dto.IsHidden))))
             .RequireAuthorization()
             .AddValidation(builder => builder.AddFor<AddPostDto>());

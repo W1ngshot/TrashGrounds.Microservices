@@ -10,7 +10,7 @@ public class Post : BaseEntity
     
     public Guid UserId { get; set; }
     
-    public string? AssetLink { get; set; }
+    public Guid? AssetId { get; set; }
     
     public bool IsHidden { get; set; }
 }

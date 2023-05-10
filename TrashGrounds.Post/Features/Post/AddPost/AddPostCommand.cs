@@ -2,4 +2,4 @@
 
 namespace TrashGrounds.Post.Features.Post.AddPost;
 
-public record AddPostCommand(Guid UserId, string Text, string? AssetLink, bool IsHidden) : ICommand<Models.Main.Post>;
+public record AddPostCommand(Guid UserId, string Text, Guid? AssetId, bool IsHidden) : ICommand<Models.Main.Post>;

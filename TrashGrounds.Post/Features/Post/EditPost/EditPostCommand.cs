@@ -6,5 +6,6 @@ public record EditPostCommand(
     Guid CurrentUserId,
     Guid PostId,
     string Text,
-    string? AssetLink,
+    Guid? AssetId,
+    bool ChangeAssetId,
     bool IsHidden) : ICommand<Models.Main.Post>;

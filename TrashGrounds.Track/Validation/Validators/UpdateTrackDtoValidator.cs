@@ -45,9 +45,7 @@ public class UpdateTrackDtoValidator : AbstractValidator<UpdateTrackEndpoint.Upd
             .WithMessage("not exists");
         
         RuleFor(dto => dto.NewPictureId)
-            .NotEmpty()
-            .WithMessage("empty")
-            .MustAsync(IsImageExistsAsync)
+            .MustAsync(IsImageNullOrExistsAsync)
             .When(dto => dto.ChangePicture)
             .WithMessage("not exists");;
     }
@@ -57,8 +55,8 @@ public class UpdateTrackDtoValidator : AbstractValidator<UpdateTrackEndpoint.Upd
         return trackId != null && await _fileExistsService.IsTrackExistsAsync(trackId.Value);
     }
 
-    private async Task<bool> IsImageExistsAsync(Guid? imageId, CancellationToken cancellationToken)
+    private async Task<bool> IsImageNullOrExistsAsync(Guid? imageId, CancellationToken cancellationToken)
     {
-        return imageId != null && await _fileExistsService.IsImageExistsAsync(imageId.Value);
+        return imageId == null || await _fileExistsService.IsImageExistsAsync(imageId.Value);
     }
 }
