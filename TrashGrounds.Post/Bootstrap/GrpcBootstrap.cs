@@ -1,4 +1,6 @@
-﻿using PostRateClient;
+﻿using FileClient;
+using TrashGrounds.Post.gRPC.Services;
+using PostRateService = PostRateClient.PostRateService;
 
 namespace TrashGrounds.Post.Bootstrap;
 
@@ -13,12 +15,18 @@ public static class GrpcBootstrap
             options.Address = new Uri(configuration["Microservices:Rate"] ?? throw new InvalidOperationException());
         });
         
+        services.AddGrpcClient<FileService.FileServiceClient>(options =>
+        {
+            options.Address = new Uri(configuration["Microservices:File"] ?? throw new InvalidOperationException());
+        });
+        
         return services;
     }
 
     public static IServiceCollection AddGrpcServices(this IServiceCollection services)
     {
         services.AddScoped<gRPC.Services.PostRateService>();
+        services.AddScoped<FileExistsService>();
 
         return services;
     }

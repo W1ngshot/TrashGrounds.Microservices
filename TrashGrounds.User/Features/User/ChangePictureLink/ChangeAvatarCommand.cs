@@ -2,4 +2,4 @@
 
 namespace TrashGrounds.User.Features.User.ChangePictureLink;
 
-public record ChangeAvatarCommand(Guid UserId, string NewLink) : ICommand<ChangeAvatarResponse>;
+public record ChangeAvatarCommand(Guid UserId, Guid? NewAvatarId) : ICommand<ChangeAvatarResponse>;

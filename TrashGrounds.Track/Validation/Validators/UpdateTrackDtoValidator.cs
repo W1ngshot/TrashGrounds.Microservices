@@ -1,12 +1,17 @@
 ﻿using FluentValidation;
 using TrashGrounds.Track.Features.Track.UpdateTrack;
+using TrashGrounds.Track.gRPC.Services;
 
 namespace TrashGrounds.Track.Validation.Validators;
 
 public class UpdateTrackDtoValidator : AbstractValidator<UpdateTrackEndpoint.UpdateTrackDto>
 {
-    public UpdateTrackDtoValidator()
+    private readonly FileExistsService _fileExistsService;
+    
+    public UpdateTrackDtoValidator(FileExistsService fileExistsService)
     {
+        _fileExistsService = fileExistsService;
+        
         RuleFor(dto => dto.Title)
             .NotEmpty()
             .WithMessage(ValidationMessages.EmptyTitle)
@@ -31,5 +36,27 @@ public class UpdateTrackDtoValidator : AbstractValidator<UpdateTrackEndpoint.Upd
 
         RuleFor(dto => dto.TrackId)
             .NotEmpty();
+
+        RuleFor(dto => dto.NewMusicId)
+            .NotEmpty()
+            .WithMessage("empty")
+            .MustAsync(IsMusicExistsAsync)
+            .When(dto => dto.ChangeMusic)
+            .WithMessage("not exists");
+        
+        RuleFor(dto => dto.NewPictureId)
+            .MustAsync(IsImageNullOrExistsAsync)
+            .When(dto => dto.ChangePicture)
+            .WithMessage("not exists");;
+    }
+
+    private async Task<bool> IsMusicExistsAsync(Guid? trackId, CancellationToken cancellationToken)
+    {
+        return trackId != null && await _fileExistsService.IsTrackExistsAsync(trackId.Value);
+    }
+
+    private async Task<bool> IsImageNullOrExistsAsync(Guid? imageId, CancellationToken cancellationToken)
+    {
+        return imageId == null || await _fileExistsService.IsImageExistsAsync(imageId.Value);
     }
 }

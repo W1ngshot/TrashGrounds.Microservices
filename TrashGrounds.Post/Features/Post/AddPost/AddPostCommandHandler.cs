@@ -17,14 +17,12 @@ public class AddPostCommandHandler : ICommandHandler<AddPostCommand, Models.Main
 
     public async Task<Models.Main.Post> Handle(AddPostCommand request, CancellationToken cancellationToken)
     {
-        //TODO добавить files microservice для asset
-        
         var post = new Models.Main.Post
         {
             Text = request.Text,
             UploadDate = _dateTimeProvider.UtcNow,
             UserId = request.UserId,
-            AssetLink = request.AssetLink,
+            AssetId = request.AssetId,
             IsHidden = request.IsHidden
         };
 

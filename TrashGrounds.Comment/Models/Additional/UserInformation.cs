@@ -6,7 +6,7 @@ public class UserInformation
     
     public required string Nickname { get; set; }
     
-    public string? AvatarLink { get; set; }
+    public Guid? AvatarId { get; set; }
     
     public DateTime RegistrationDate { get; set; }
 }

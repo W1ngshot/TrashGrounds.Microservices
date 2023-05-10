@@ -47,7 +47,7 @@ public static class QueryExtensions
                 Id = track.Id,
                 Title = track.Title,
                 ListensCount = track.ListensCount,
-                PictureLink = track.PictureLink,
+                PictureId = track.PictureId,
                 UserId = track.UserId
             })
             .ToListAsync();

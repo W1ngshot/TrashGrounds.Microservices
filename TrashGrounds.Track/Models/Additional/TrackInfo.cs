@@ -8,7 +8,7 @@ public class TrackInfo
     
     public required int ListensCount { get; set; }
     
-    public string? PictureLink { get; set; }
+    public Guid? PictureId { get; set; }
     
     public required Guid UserId { get; set; }
 }

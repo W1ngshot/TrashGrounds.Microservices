@@ -8,6 +8,6 @@ public record AddTrackCommand(
     string Title,
     string? Description,
     bool IsExplicit,
-    string? PictureLink,
-    string MusicLink,
+    Guid? PictureId,
+    Guid MusicId,
     IEnumerable<Guid> Genres) : ICommand<FullTrack>;

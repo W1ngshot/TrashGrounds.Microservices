@@ -22,7 +22,8 @@ public class EditPostCommandHandler : ICommandHandler<EditPostCommand, Models.Ma
         if (post.UserId != request.CurrentUserId)
             throw new ForbiddenException("Not your post");
 
-        post.AssetLink = request.AssetLink; //переделать на вызов file microservice
+        if (request.ChangeAssetId)
+            post.AssetId = request.AssetId;
         
         post.Text = request.Text;
         post.IsHidden = request.IsHidden;

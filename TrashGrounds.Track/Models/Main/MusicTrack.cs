@@ -14,9 +14,9 @@ public class MusicTrack : BaseEntity
     
     public int ListensCount { get; set; }
     
-    public string? PictureLink { get; set; }
+    public Guid? PictureId { get; set; }
     
-    public required string MusicLink { get; set; }
+    public required Guid MusicId { get; set; }
     
     public required Guid UserId { get; set; }
     

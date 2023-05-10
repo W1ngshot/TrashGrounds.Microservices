@@ -1,18 +1,15 @@
-﻿using AutoMapper;
-using TrashGrounds.Track.Models.Additional;
-using UserMicroserviceClient;
+﻿using TrashGrounds.Track.Models.Additional;
+using UserClient;
 
 namespace TrashGrounds.Track.gRPC.Services;
 
 public class UserInfoService
 {
     private readonly UserMicroservice.UserMicroserviceClient _userClient;
-    private readonly IMapper _mapper;
 
-    public UserInfoService(UserMicroservice.UserMicroserviceClient userClient, IMapper mapper)
+    public UserInfoService(UserMicroservice.UserMicroserviceClient userClient)
     {
         _userClient = userClient;
-        _mapper = mapper;
     }
 
     public async Task<UserInformation?> GetUserInfoAsync(Guid id)
@@ -21,10 +18,19 @@ public class UserInfoService
         {
             var info = await _userClient.GetUserInfoAsync(new UserInfoRequest {Id = id.ToString()});
 
-            return info?.User is null ? null : _mapper.Map<UserInfo, UserInformation>(info.User);
+            return info?.User is null
+                ? null
+                : new UserInformation
+                {
+                    Id = Guid.Parse(info.User.Id),
+                    Nickname = info.User.Nickname,
+                    AvatarId = info.User.AvatarId is null ? null : Guid.Parse(info.User.AvatarId),
+                    RegistrationDate = info.User.RegistrationDate.ToDateTime()
+                };
         }
         catch (Exception e)
         {
+            Console.WriteLine(e);
             return null;
         }
     }
@@ -38,10 +44,17 @@ public class UserInfoService
 
             var infos = await _userClient.GetUsersInfoAsync(request);
 
-            return infos?.Users?.Select(user => _mapper.Map<UserInfo, UserInformation>(user));
+            return infos?.Users?.Select(user => new UserInformation
+            {
+                Id = Guid.Parse(user.Id),
+                Nickname = user.Nickname,
+                AvatarId = user.AvatarId is null ? null : Guid.Parse(user.AvatarId),
+                RegistrationDate = user.RegistrationDate.ToDateTime()
+            });
         }
         catch (Exception e)
         {
+            Console.WriteLine(e);
             return null;
         }
     }

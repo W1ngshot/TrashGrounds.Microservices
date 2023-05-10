@@ -21,10 +21,10 @@ public class ChangeAvatarCommandHandler : ICommandHandler<ChangeAvatarCommand, C
                        cancellationToken: cancellationToken)
                    ?? throw new NotFoundException<DomainUser>();
 
-        user.AvatarLink = request.NewLink;
+        user.AvatarId = request.NewAvatarId;
         
         await _context.SaveEntitiesAsync();
 
-        return new ChangeAvatarResponse(user.AvatarLink);
+        return new ChangeAvatarResponse(user.AvatarId);
     }
 }

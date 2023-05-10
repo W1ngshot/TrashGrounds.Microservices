@@ -87,6 +87,15 @@ namespace TrashGrounds.User.Infrastructure.Constants {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to NOT_EXISTS.
+        /// </summary>
+        public static string NotExists {
+            get {
+                return ResourceManager.GetString("NotExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to DIGIT_REQUIRED.
         /// </summary>
         public static string RequiresDigit {

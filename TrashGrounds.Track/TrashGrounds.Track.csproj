@@ -33,5 +33,6 @@
     <ItemGroup>
         <Protobuf Include="gRPC\Protos\track-rate.proto" GrpcServices="Client" />
         <Protobuf Include="gRPC\Protos\user.proto" GrpcServices="Client" />
+        <Protobuf Include="gRPC\Protos\file.proto" GrpcServices="Client" />
     </ItemGroup>
 </Project>

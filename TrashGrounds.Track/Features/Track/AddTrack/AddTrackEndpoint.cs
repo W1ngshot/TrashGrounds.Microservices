@@ -8,7 +8,7 @@ namespace TrashGrounds.Track.Features.Track.AddTrack;
 public class AddTrackEndpoint : IEndpoint
 {
     public record AddTrackDto(string Title, string? Description,
-        bool IsExplicit, string? PictureLink, string MusicLink, IEnumerable<Guid> Genres);
+        bool IsExplicit, Guid? PictureId, Guid MusicId, IEnumerable<Guid> Genres);
     
     public void Map(IEndpointRouteBuilder endpoints)
     {
@@ -18,10 +18,10 @@ public class AddTrackEndpoint : IEndpoint
                     dto.Title,
                     dto.Description,
                     dto.IsExplicit,
-                    dto.PictureLink,
-                    dto.MusicLink,
+                    dto.PictureId,
+                    dto.MusicId,
                     dto.Genres))))
             .RequireAuthorization()
-            .AddValidation(builder => builder.AddFor<AddTrackDto>()); //TODO маппер
+            .AddValidation(builder => builder.AddFor<AddTrackDto>());
     }
 }

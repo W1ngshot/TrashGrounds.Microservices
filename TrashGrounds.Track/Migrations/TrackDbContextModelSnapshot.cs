@@ -54,17 +54,17 @@ namespace TrashGrounds.Track.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("262e33dc-763e-4237-b8cb-c612986ff892"),
+                            Id = new Guid("d4b7bc34-3b01-4247-a9bc-02d4c5185e08"),
                             Name = "Русский рэп"
                         },
                         new
                         {
-                            Id = new Guid("d9683c50-cb9a-4b8f-b79b-1655f79b1c42"),
+                            Id = new Guid("251ceebe-752a-4ea4-810e-03b8eaee7e5f"),
                             Name = "Что-то странное"
                         },
                         new
                         {
-                            Id = new Guid("40f2239e-f12a-40d4-95b2-f2c650b1d983"),
+                            Id = new Guid("50e3aa21-ada0-42d3-a143-cf45922b97a5"),
                             Name = "Мэшап"
                         });
                 });
@@ -86,12 +86,11 @@ namespace TrashGrounds.Track.Migrations
                         .HasColumnType("integer")
                         .HasDefaultValue(0);
 
-                    b.Property<string>("MusicLink")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<Guid>("MusicId")
+                        .HasColumnType("uuid");
 
-                    b.Property<string>("PictureLink")
-                        .HasColumnType("text");
+                    b.Property<Guid?>("PictureId")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Title")
                         .IsRequired()

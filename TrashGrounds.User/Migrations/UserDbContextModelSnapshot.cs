@@ -51,19 +51,19 @@ namespace TrashGrounds.User.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("a462b26d-9e45-40af-b6a6-f5677058f42b"),
+                            Id = new Guid("6fe9e721-4910-4b2c-b626-23949805fa61"),
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = new Guid("7acbbce7-ec2a-4898-945a-c0d203561339"),
+                            Id = new Guid("c5d94634-95d8-424c-98b1-214dbeafbade"),
                             Name = "Moderator",
                             NormalizedName = "MODERATOR"
                         },
                         new
                         {
-                            Id = new Guid("a9a6cc61-c9e3-4590-bc8f-cea22d60b438"),
+                            Id = new Guid("59174f05-e8b2-444c-8e4e-bfc13e25aba6"),
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -248,8 +248,8 @@ namespace TrashGrounds.User.Migrations
                         .HasColumnType("uuid")
                         .HasDefaultValueSql("gen_random_uuid()");
 
-                    b.Property<string>("AvatarLink")
-                        .HasColumnType("text");
+                    b.Property<Guid?>("AvatarId")
+                        .HasColumnType("uuid");
 
                     b.Property<Guid>("IdentityUserId")
                         .HasColumnType("uuid");

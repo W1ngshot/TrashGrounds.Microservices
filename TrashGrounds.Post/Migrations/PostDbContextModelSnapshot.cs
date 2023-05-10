@@ -28,8 +28,8 @@ namespace TrashGrounds.Post.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("AssetLink")
-                        .HasColumnType("text");
+                    b.Property<Guid?>("AssetId")
+                        .HasColumnType("uuid");
 
                     b.Property<bool>("IsHidden")
                         .HasColumnType("boolean");

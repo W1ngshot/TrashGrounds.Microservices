@@ -3,7 +3,7 @@ using Grpc.Core;
 using Microsoft.EntityFrameworkCore;
 using TrashGrounds.User.Database.Postgres;
 using TrashGrounds.User.Infrastructure;
-using UserMicroserviceServer;
+using UserServer;
 
 namespace TrashGrounds.User.gRPC.Services;
 
@@ -25,7 +25,7 @@ public class UserInfoGrpcService : UserMicroservice.UserMicroserviceBase
             user.Id,
             user.Nickname,
             user.RegistrationDate,
-            user.AvatarLink
+            user.AvatarId
         }).FirstOrNotFoundAsync(user => user.Id == guidId);
 
         return new UserInfoReply
@@ -34,7 +34,7 @@ public class UserInfoGrpcService : UserMicroservice.UserMicroserviceBase
             {
                 Id = info.Id.ToString(),
                 Nickname = info.Nickname,
-                AvatarLink = info.AvatarLink,
+                AvatarId = info.AvatarId?.ToString(),
                 RegistrationDate = Timestamp.FromDateTime(info.RegistrationDate)
             }
         };
@@ -51,7 +51,7 @@ public class UserInfoGrpcService : UserMicroservice.UserMicroserviceBase
                 user.Id,
                 user.Nickname,
                 user.RegistrationDate,
-                user.AvatarLink
+                user.AvatarId
             }).ToListAsync();
 
         var reply = new UsersInfoReply();
@@ -61,7 +61,7 @@ public class UserInfoGrpcService : UserMicroservice.UserMicroserviceBase
             {
                 Id = info.Id.ToString(),
                 Nickname = info.Nickname,
-                AvatarLink = info.AvatarLink,
+                AvatarId = info.AvatarId?.ToString(),
                 RegistrationDate = Timestamp.FromDateTime(info.RegistrationDate)
             }));
 

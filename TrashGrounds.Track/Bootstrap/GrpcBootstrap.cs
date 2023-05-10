@@ -1,5 +1,6 @@
-﻿using TrashGrounds.Track.gRPC.Services;
-using UserMicroserviceClient;
+﻿using FileClient;
+using TrashGrounds.Track.gRPC.Services;
+using UserClient;
 
 namespace TrashGrounds.Track.Bootstrap;
 
@@ -19,6 +20,11 @@ public static class GrpcBootstrap
             options.Address = new Uri(configuration["Microservices:Rate"] ?? throw new InvalidOperationException());
         });
         
+        services.AddGrpcClient<FileService.FileServiceClient>(options =>
+        {
+            options.Address = new Uri(configuration["Microservices:File"] ?? throw new InvalidOperationException());
+        });
+        
         return services;
     }
 
@@ -26,6 +32,7 @@ public static class GrpcBootstrap
     {
         services.AddScoped<UserInfoService>();
         services.AddScoped<TrackRateService>();
+        services.AddScoped<FileExistsService>();
 
         return services;
     }

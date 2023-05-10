@@ -8,7 +8,8 @@ namespace TrashGrounds.Track.Features.Track.UpdateTrack;
 public class UpdateTrackEndpoint : IEndpoint
 {
     public record UpdateTrackDto(Guid TrackId, string Title, string? Description,
-        bool IsExplicit, string? PictureLink, IEnumerable<Guid> Genres);
+        bool IsExplicit, IEnumerable<Guid> Genres, Guid? NewPictureId = null, Guid? NewMusicId = null,
+        bool ChangePicture = false, bool ChangeMusic = false);
     
     public void Map(IEndpointRouteBuilder endpoints)
     {
@@ -20,8 +21,11 @@ public class UpdateTrackEndpoint : IEndpoint
                     dto.Title,
                     dto.Description,
                     dto.IsExplicit,
-                    dto.PictureLink,
-                    dto.Genres))))
+                    dto.Genres,
+                    dto.NewPictureId,
+                    dto.ChangePicture,
+                    dto.NewMusicId,
+                    dto.ChangeMusic))))
             .RequireAuthorization()
             .AddValidation(builder => builder.AddFor<UpdateTrackDto>());
     }

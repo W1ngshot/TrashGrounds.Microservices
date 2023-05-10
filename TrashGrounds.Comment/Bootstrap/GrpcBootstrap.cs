@@ -1,5 +1,5 @@
 ﻿using TrashGrounds.Comment.gRPC.Services;
-using UserMicroserviceClient;
+using UserClient;
 
 namespace TrashGrounds.Comment.Bootstrap;
 
@@ -19,7 +19,7 @@ public static class GrpcBootstrap
 
     public static IServiceCollection AddGrpcServices(this IServiceCollection services)
     {
-        services.AddScoped<UserMicroserviceService>();
+        services.AddScoped<UserInfoService>();
 
         return services;
     }
