@@ -42,7 +42,11 @@ public class UpdateTrackCommandHandler : ICommandHandler<UpdateTrackCommand, Ful
         track.Title = request.Title;
         track.Description = request.Description;
         track.IsExplicit = request.IsExplicit;
-        track.PictureLink = request.PictureLink; //TODO переписать на вызов сервиса файлов
+
+        if (request.ChangePicture)
+            track.PictureId = request.NewPictureId;
+        if (request.ChangeMusic)
+            track.MusicId = request.NewMusicId!.Value;
 
         await _context.SaveEntitiesAsync();
 

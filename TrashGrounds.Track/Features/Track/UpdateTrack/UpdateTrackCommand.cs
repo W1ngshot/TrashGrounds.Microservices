@@ -9,5 +9,8 @@ public record UpdateTrackCommand(
     string Title,
     string? Description,
     bool IsExplicit,
-    string? PictureLink,
-    IEnumerable<Guid> Genres) : ICommand<FullTrack>;
+    IEnumerable<Guid> Genres,
+    Guid? NewPictureId,
+    bool ChangePicture,
+    Guid? NewMusicId,
+    bool ChangeMusic) : ICommand<FullTrack>;
