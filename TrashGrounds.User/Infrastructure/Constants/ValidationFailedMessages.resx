@@ -51,4 +51,7 @@
     <data name="WrongPassword" xml:space="preserve">
         <value>PASSWORD_INVALID</value>
     </data>
+    <data name="NotExists" xml:space="preserve">
+        <value>NOT_EXISTS</value>
+    </data>
 </root>

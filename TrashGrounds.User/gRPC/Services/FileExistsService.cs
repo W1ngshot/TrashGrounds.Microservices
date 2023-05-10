@@ -1,7 +1,7 @@
 ﻿using FileClient;
-using TrashGrounds.Track.Infrastructure.Exceptions;
+using TrashGrounds.User.Infrastructure.Exceptions;
 
-namespace TrashGrounds.Track.gRPC.Services;
+namespace TrashGrounds.User.gRPC.Services;
 
 public class FileExistsService
 {
@@ -19,23 +19,6 @@ public class FileExistsService
             var response = await _fileServiceClient.CheckImageExistsAsync(new ImageRequest
             {
                 ImageId = imageId.ToString()
-            });
-            return response.Exists;
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            throw new DomainException("Cant connect to Files");
-        }
-    }
-
-    public async Task<bool> IsTrackExistsAsync(Guid trackId)
-    {
-        try
-        {
-            var response = await _fileServiceClient.CheckTrackExistsAsync(new TrackRequest
-            {
-                TrackId = trackId.ToString()
             });
             return response.Exists;
         }

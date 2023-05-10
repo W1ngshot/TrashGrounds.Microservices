@@ -3,29 +3,29 @@
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
 
-option csharp_namespace = "UserMicroserviceServer";
+option csharp_namespace = "UserServer";
 
 message UserInfo {
   string id = 1;
   string nickname = 2;
   google.protobuf.Timestamp registration_date = 3;
-  google.protobuf.StringValue avatar_link = 4;
+  google.protobuf.StringValue avatar_id = 4;
 }
 
 message UserInfoRequest {
-  string id = 5;
+  string id = 1;
 }
 
 message UserInfoReply {
-  UserInfo user = 6;
+  UserInfo user = 1;
 }
 
 message UsersInfoRequest {
-  repeated string ids = 7;
+  repeated string ids = 1;
 }
 
 message UsersInfoReply {
-  repeated UserInfo users = 8;
+  repeated UserInfo users = 1;
 }
 
 service UserMicroservice {

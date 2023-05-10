@@ -10,8 +10,7 @@ builder.Host.AddCustomLogging();
 
 builder.Services
     .AddDatabaseWithIdentity(builder.Configuration)
-    .AddRedis(builder.Configuration)
-    .AddGrpc();
+    .AddRedis(builder.Configuration);
 
 builder.Services
     .AddEndpointsApiExplorer()
@@ -22,7 +21,11 @@ builder.Services
 builder.Services
     .AddHelperServices()
     .AddFluentValidation()
-    .AddMediatR(configuration => configuration.RegisterServicesFromAssemblyContaining<Program>());;
+    .AddMediatR(configuration => configuration.RegisterServicesFromAssemblyContaining<Program>());
+
+builder.Services
+    .AddGrpcConfiguration(builder.Configuration)
+    .AddGrpcServices();
 
 var app = builder.Build();
 await app.TryMigrateDatabaseAsync();

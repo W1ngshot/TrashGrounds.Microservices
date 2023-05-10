@@ -1,7 +1,7 @@
-﻿using TrashGrounds.Comment.gRPC.Services;
-using UserClient;
+﻿using FileClient;
+using TrashGrounds.User.gRPC.Services;
 
-namespace TrashGrounds.Comment.Bootstrap;
+namespace TrashGrounds.User.Bootstrap;
 
 public static class GrpcBootstrap
 {
@@ -9,9 +9,9 @@ public static class GrpcBootstrap
     {
         services.AddGrpc();
 
-        services.AddGrpcClient<UserMicroservice.UserMicroserviceClient>(options =>
+        services.AddGrpcClient<FileService.FileServiceClient>(options =>
         {
-            options.Address = new Uri(configuration["Microservices:User"] ?? throw new InvalidOperationException());
+            options.Address = new Uri(configuration["Microservices:File"] ?? throw new InvalidOperationException());
         });
         
         return services;
@@ -19,7 +19,7 @@ public static class GrpcBootstrap
 
     public static IServiceCollection AddGrpcServices(this IServiceCollection services)
     {
-        services.AddScoped<UserInfoService>();
+        services.AddScoped<FileExistsService>();
 
         return services;
     }

@@ -9,12 +9,12 @@ namespace TrashGrounds.Comment.Features.Comment.GetTrackComments;
 public class GetTrackCommentsQueryHandler : IQueryHandler<GetTrackCommentsQuery, IEnumerable<FullComment>>
 {
     private readonly CommentDbContext _context;
-    private readonly UserMicroserviceService _userMicroservice;
+    private readonly UserInfoService _userInfo;
 
-    public GetTrackCommentsQueryHandler(CommentDbContext context, UserMicroserviceService userMicroservice)
+    public GetTrackCommentsQueryHandler(CommentDbContext context, UserInfoService userInfo)
     {
         _context = context;
-        _userMicroservice = userMicroservice;
+        _userInfo = userInfo;
     }
 
     public async Task<IEnumerable<FullComment>> Handle(GetTrackCommentsQuery request, CancellationToken cancellationToken)
@@ -26,7 +26,7 @@ public class GetTrackCommentsQueryHandler : IQueryHandler<GetTrackCommentsQuery,
             .Take(request.Take)
             .ToListAsync(cancellationToken: cancellationToken);
 
-        var users = await _userMicroservice.GetUsersInfoAsync(
+        var users = await _userInfo.GetUsersInfoAsync(
             comments.Select(comment => comment.UserId));
 
         return comments.Select(comment => new FullComment

@@ -1,3 +1,3 @@
 ﻿namespace TrashGrounds.User.Features.User.ChangePictureLink;
 
-public record ChangeAvatarResponse(string NewLink);
+public record ChangeAvatarResponse(Guid? NewAvatarId);

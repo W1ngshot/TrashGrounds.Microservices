@@ -1,13 +1,13 @@
 ﻿using TrashGrounds.Comment.Models.Additional;
-using UserMicroserviceClient;
+using UserClient;
 
 namespace TrashGrounds.Comment.gRPC.Services;
 
-public class UserMicroserviceService
+public class UserInfoService
 {
     private readonly UserMicroservice.UserMicroserviceClient _userClient;
 
-    public UserMicroserviceService(UserMicroservice.UserMicroserviceClient userClient)
+    public UserInfoService(UserMicroservice.UserMicroserviceClient userClient)
     {
         _userClient = userClient;
     }
@@ -24,12 +24,13 @@ public class UserMicroserviceService
                 {
                     Id = Guid.Parse(info.User.Id),
                     Nickname = info.User.Nickname,
-                    AvatarLink = info.User.AvatarLink,
+                    AvatarId = info.User.AvatarId is null ? null : Guid.Parse(info.User.AvatarId),
                     RegistrationDate = info.User.RegistrationDate.ToDateTime()
                 };
         }
         catch (Exception e)
         {
+            Console.WriteLine(e);
             return null;
         }
     }
@@ -47,12 +48,13 @@ public class UserMicroserviceService
             {
                 Id = Guid.Parse(user.Id),
                 Nickname = user.Nickname,
-                AvatarLink = user.AvatarLink,
+                AvatarId = user.AvatarId is null ? null : Guid.Parse(user.AvatarId),
                 RegistrationDate = user.RegistrationDate.ToDateTime()
             });
         }
         catch (Exception e)
         {
+            Console.WriteLine(e);
             return null;
         }
     }

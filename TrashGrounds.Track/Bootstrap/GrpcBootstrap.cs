@@ -1,6 +1,6 @@
 ﻿using FileClient;
 using TrashGrounds.Track.gRPC.Services;
-using UserMicroserviceClient;
+using UserClient;
 
 namespace TrashGrounds.Track.Bootstrap;
 

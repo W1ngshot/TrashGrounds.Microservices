@@ -8,7 +8,7 @@ public class DomainUser : BaseEntity
     
     public DateTime RegistrationDate { get; set; }
     
-    public string? AvatarLink { get; set; }
+    public Guid? AvatarId { get; set; }
     
     public string? Status { get; set; }
 

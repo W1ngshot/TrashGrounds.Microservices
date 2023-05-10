@@ -25,6 +25,7 @@ public class TrackRateService
         }
         catch (Exception e)
         {
+            Console.WriteLine(e);
             return null;
         }
     }
@@ -42,6 +43,7 @@ public class TrackRateService
         }
         catch (Exception e)
         {
+            Console.WriteLine(e);
             return null;
         }
     }
@@ -57,6 +59,7 @@ public class TrackRateService
         }
         catch (Exception e)
         {
+            Console.WriteLine(e);
             return null;
         }
     }
