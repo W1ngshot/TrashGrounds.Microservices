@@ -1,4 +1,4 @@
-﻿namespace TrashGrounds.Template.Infrastructure.Exceptions;
+﻿namespace TrashGrounds.File.Infrastructure.Exceptions;
 
 public class DomainException : Exception
 {

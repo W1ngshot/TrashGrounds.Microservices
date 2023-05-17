@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TrashGrounds.Template.Infrastructure.Constants {
+namespace TrashGrounds.File.Infrastructure.Constants {
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>

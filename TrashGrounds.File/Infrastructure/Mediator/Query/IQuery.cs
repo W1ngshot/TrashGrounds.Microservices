@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace TrashGrounds.Template.Infrastructure.Mediator.Query;
+namespace TrashGrounds.File.Infrastructure.Mediator.Query;
 
 public interface IQuery<out T> : IRequest<T>
 {

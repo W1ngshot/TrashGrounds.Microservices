@@ -1,4 +1,4 @@
-﻿namespace TrashGrounds.Template.Database.Postgres;
+﻿namespace TrashGrounds.File.Database.Postgres;
 
 public static class ConfigurationBootstrap
 {

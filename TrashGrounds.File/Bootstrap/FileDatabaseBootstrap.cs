@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using TrashGrounds.Template.Database.Postgres;
+using TrashGrounds.File.Database.Postgres;
 
-namespace TrashGrounds.Template.Bootstrap;
+namespace TrashGrounds.File.Bootstrap;
 
 public static class FileDatabaseBootstrap
 {

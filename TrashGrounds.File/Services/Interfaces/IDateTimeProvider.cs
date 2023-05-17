@@ -1,4 +1,4 @@
-﻿namespace TrashGrounds.Template.Services.Interfaces;
+﻿namespace TrashGrounds.File.Services.Interfaces;
 
 public interface IDateTimeProvider
 {

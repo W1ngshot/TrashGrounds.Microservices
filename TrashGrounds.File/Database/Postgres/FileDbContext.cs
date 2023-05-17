@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using TrashGrounds.Template.Database.Postgres.Configurations.Abstractions;
-using TrashGrounds.Template.Models.Main;
+using TrashGrounds.File.Database.Postgres.Configurations.Abstractions;
+using TrashGrounds.File.Models.Main;
 
-namespace TrashGrounds.Template.Database.Postgres;
+namespace TrashGrounds.File.Database.Postgres;
 
 public class FileDbContext : DbContext
 {

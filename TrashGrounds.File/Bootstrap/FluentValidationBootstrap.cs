@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using FluentValidation.AspNetCore;
 
-namespace TrashGrounds.Template.Bootstrap;
+namespace TrashGrounds.File.Bootstrap;
 
 public static class FluentValidationBootstrap
 {

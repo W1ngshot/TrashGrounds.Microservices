@@ -1,12 +1,12 @@
-﻿using TrashGrounds.Template.Database.Postgres;
-using TrashGrounds.Template.Extensions;
-using TrashGrounds.Template.Infrastructure;
-using TrashGrounds.Template.Infrastructure.Exceptions;
-using TrashGrounds.Template.Infrastructure.Mediator.Query;
-using TrashGrounds.Template.Models.Additional;
-using TrashGrounds.Template.Models.Main;
+﻿using TrashGrounds.File.Database.Postgres;
+using TrashGrounds.File.Extensions;
+using TrashGrounds.File.Infrastructure;
+using TrashGrounds.File.Infrastructure.Exceptions;
+using TrashGrounds.File.Infrastructure.Mediator.Query;
+using TrashGrounds.File.Models.Additional;
+using TrashGrounds.File.Models.Main;
 
-namespace TrashGrounds.Template.Features.Image.GetImage;
+namespace TrashGrounds.File.Features.Image.GetImage;
 
 public class GetImageQueryHandler : IQueryHandler<GetImageQuery, FileResponse>
 {
@@ -24,7 +24,7 @@ public class GetImageQueryHandler : IQueryHandler<GetImageQuery, FileResponse>
 
         var filePath = imageFile.Route;
 
-        if (!File.Exists(filePath))
+        if (!System.IO.File.Exists(filePath))
             throw new NotFoundException<MusicFile>();
 
         var memory = new MemoryStream();

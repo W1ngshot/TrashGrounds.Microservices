@@ -1,4 +1,4 @@
-﻿namespace TrashGrounds.Template.Bootstrap;
+﻿namespace TrashGrounds.File.Bootstrap;
 
 public static class AuthorizationPolicyBootstrap
 {

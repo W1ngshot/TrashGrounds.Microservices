@@ -1,8 +1,8 @@
 ﻿using System.Net;
 using FluentValidation.Results;
-using TrashGrounds.Template.Infrastructure.Constants;
+using TrashGrounds.File.Infrastructure.Constants;
 
-namespace TrashGrounds.Template.Infrastructure.Exceptions;
+namespace TrashGrounds.File.Infrastructure.Exceptions;
 
 public record PropertyValidationInfo(string Message, Dictionary<string, object>? LocalizationValues = null)
 {

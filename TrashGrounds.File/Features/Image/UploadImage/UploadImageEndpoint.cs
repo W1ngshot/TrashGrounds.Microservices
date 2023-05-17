@@ -1,9 +1,8 @@
 ﻿using MediatR;
-using TrashGrounds.Template.Infrastructure.Routing;
-using TrashGrounds.Template.Infrastructure.ValidationSetup;
-using TrashGrounds.Template.Services.Interfaces;
+using TrashGrounds.File.Infrastructure.Routing;
+using TrashGrounds.File.Services.Interfaces;
 
-namespace TrashGrounds.Template.Features.Image.UploadImage;
+namespace TrashGrounds.File.Features.Image.UploadImage;
 
 public class UploadImageEndpoint : IEndpoint
 {

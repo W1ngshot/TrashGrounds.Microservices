@@ -1,8 +1,8 @@
-﻿using TrashGrounds.Template.Features.Image.GetImage;
-using TrashGrounds.Template.Features.Image.UploadImage;
-using TrashGrounds.Template.Infrastructure.Routing;
+﻿using TrashGrounds.File.Features.Image.GetImage;
+using TrashGrounds.File.Features.Image.UploadImage;
+using TrashGrounds.File.Infrastructure.Routing;
 
-namespace TrashGrounds.Template.Features.Image;
+namespace TrashGrounds.File.Features.Image;
 
 public class ImageEndpointRoot : IEndpointRoot
 {

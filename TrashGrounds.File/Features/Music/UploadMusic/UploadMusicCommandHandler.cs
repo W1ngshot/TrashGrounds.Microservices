@@ -1,9 +1,9 @@
-﻿using TrashGrounds.Template.Database.Postgres;
-using TrashGrounds.Template.Infrastructure.Mediator.Command;
-using TrashGrounds.Template.Models.Main;
-using TrashGrounds.Template.Services.Interfaces;
+﻿using TrashGrounds.File.Database.Postgres;
+using TrashGrounds.File.Infrastructure.Mediator.Command;
+using TrashGrounds.File.Models.Main;
+using TrashGrounds.File.Services.Interfaces;
 
-namespace TrashGrounds.Template.Features.Music.UploadMusic;
+namespace TrashGrounds.File.Features.Music.UploadMusic;
 
 public class UploadMusicCommandHandler : ICommandHandler<UploadMusicCommand, Guid>
 {

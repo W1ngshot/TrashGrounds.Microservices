@@ -1,7 +1,7 @@
 ﻿using MediatR;
-using TrashGrounds.Template.Infrastructure.Routing;
+using TrashGrounds.File.Infrastructure.Routing;
 
-namespace TrashGrounds.Template.Features.Image.GetImage;
+namespace TrashGrounds.File.Features.Image.GetImage;
 
 public class GetImageEndpoint : IEndpoint
 {

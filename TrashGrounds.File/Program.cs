@@ -1,9 +1,10 @@
+using Hangfire;
 using Microsoft.AspNetCore.Http.Features;
-using TrashGrounds.Template.Bootstrap;
-using TrashGrounds.Template.gRPC.Services;
-using TrashGrounds.Template.Infrastructure;
-using TrashGrounds.Template.Infrastructure.Routing;
-using TrashGrounds.Template.Middleware;
+using TrashGrounds.File.Bootstrap;
+using TrashGrounds.File.gRPC.Services;
+using TrashGrounds.File.Infrastructure;
+using TrashGrounds.File.Infrastructure.Routing;
+using TrashGrounds.File.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,10 +28,14 @@ builder.Services
 builder.Services
     .AddHelperServices()
     .AddFluentValidation()
-    .AddMediatR(configuration => configuration.RegisterServicesFromAssemblyContaining<Program>());
+    .AddMediatR(configuration => configuration.RegisterServicesFromAssemblyContaining<Program>())
+    .AddHangfireConfiguration(builder.Configuration);
 
 var app = builder.Build();
 await app.TryMigrateDatabaseAsync();
+
+app.UseHangfireDashboard();
+HangfireBootstrap.AddHangfireJobs();
 
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 
@@ -47,6 +52,7 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.UseCustomEndpoints();
+app.MapHangfireDashboard();
 app.MapGrpcService<FileExistsService>();
 
 app.Run();

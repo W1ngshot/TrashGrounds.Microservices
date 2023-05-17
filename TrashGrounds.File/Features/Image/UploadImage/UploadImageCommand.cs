@@ -1,5 +1,5 @@
-﻿using TrashGrounds.Template.Infrastructure.Mediator.Command;
+﻿using TrashGrounds.File.Infrastructure.Mediator.Command;
 
-namespace TrashGrounds.Template.Features.Image.UploadImage;
+namespace TrashGrounds.File.Features.Image.UploadImage;
 
 public record UploadImageCommand(IFormFile File, Guid UserId) : ICommand<Guid>;

@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 
-namespace TrashGrounds.Template.Bootstrap;
+namespace TrashGrounds.File.Bootstrap;
 
 public static class JwtAuthenticationBootstrap
 {

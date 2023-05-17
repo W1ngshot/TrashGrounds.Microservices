@@ -1,7 +1,7 @@
 ﻿
-using TrashGrounds.Template.Infrastructure.Constants;
+using TrashGrounds.File.Infrastructure.Constants;
 
-namespace TrashGrounds.Template.Infrastructure.Exceptions;
+namespace TrashGrounds.File.Infrastructure.Exceptions;
 
 public class AlreadyExistsException : ConflictException
 {

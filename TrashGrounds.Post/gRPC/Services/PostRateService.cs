@@ -20,6 +20,7 @@ public class PostRateService
         }
         catch (Exception e)
         {
+            Console.WriteLine(e);
             return null;
         }
     }
@@ -37,6 +38,7 @@ public class PostRateService
         }
         catch (Exception e)
         {
+            Console.WriteLine(e);
             return null;
         }
     }

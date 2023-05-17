@@ -1,7 +1,7 @@
 ﻿using MediatR;
-using TrashGrounds.Template.Infrastructure.Routing;
+using TrashGrounds.File.Infrastructure.Routing;
 
-namespace TrashGrounds.Template.Features.Music.GetMusic;
+namespace TrashGrounds.File.Features.Music.GetMusic;
 
 public class GetMusicEndpoint : IEndpoint
 {

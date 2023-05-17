@@ -1,4 +1,4 @@
-﻿namespace TrashGrounds.Template.Infrastructure.Routing;
+﻿namespace TrashGrounds.File.Infrastructure.Routing;
 
 public interface IEndpointRoot
 {
