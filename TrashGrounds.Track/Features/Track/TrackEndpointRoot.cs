@@ -14,7 +14,7 @@ public class TrackEndpointRoot : IEndpointRoot
 {
     public void MapEndpoints(IEndpointRouteBuilder endpoints)
     {
-        endpoints.MapGroup("/track")
+        endpoints.MapGroup("/api/track")
             .WithTags("Треки")
             .AddEndpoint<AddTrackEndpoint>()
             .AddEndpoint<GetTrackEndpoint>()
@@ -23,7 +23,6 @@ public class TrackEndpointRoot : IEndpointRoot
             .AddEndpoint<SearchTracksEndpoint>()
             .AddEndpoint<DeleteTrackEndpoint>()
             .AddEndpoint<UpdateTrackEndpoint>()
-            .AddEndpoint<CheckAuthEndpoint>()
             .AddEndpoint<AddListenEndpoint>();
     }
 }

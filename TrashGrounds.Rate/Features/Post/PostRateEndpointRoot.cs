@@ -10,7 +10,7 @@ public class PostRateEndpointRoot : IEndpointRoot
 {
     public void MapEndpoints(IEndpointRouteBuilder endpoints)
     {
-        endpoints.MapGroup("/post-rate")
+        endpoints.MapGroup("/api/post-rate")
             .WithTags("Оценка поста")
             .AddEndpoint<GetPostUserRateEndpoint>()
             .AddEndpoint<ChangePostRateEndpoint>()

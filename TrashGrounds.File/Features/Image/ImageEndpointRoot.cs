@@ -8,7 +8,7 @@ public class ImageEndpointRoot : IEndpointRoot
 {
     public void MapEndpoints(IEndpointRouteBuilder endpoints)
     {
-        endpoints.MapGroup("/file/image")
+        endpoints.MapGroup("/api/file/image")
             .WithTags("Изображения")
             .AddEndpoint<UploadImageEndpoint>()
             .AddEndpoint<GetImageEndpoint>();

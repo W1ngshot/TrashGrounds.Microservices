@@ -11,7 +11,7 @@ public class PostEndpointRoot : IEndpointRoot
 {
     public void MapEndpoints(IEndpointRouteBuilder endpoints)
     {
-        endpoints.MapGroup("/posts")
+        endpoints.MapGroup("/api/posts")
             .AddEndpoint<AddPostEndpoint>()
             .AddEndpoint<EditPostEndpoint>()
             .AddEndpoint<DeletePostEndpoint>()

@@ -8,7 +8,7 @@ public class MusicEndpointRoot : IEndpointRoot
 {
     public void MapEndpoints(IEndpointRouteBuilder endpoints)
     {
-        endpoints.MapGroup("/file/music")
+        endpoints.MapGroup("/api/file/music")
             .WithTags("Музыка")
             .AddEndpoint<UploadMusicEndpoint>()
             .AddEndpoint<GetMusicEndpoint>();

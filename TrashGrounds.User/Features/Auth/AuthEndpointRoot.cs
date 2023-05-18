@@ -10,7 +10,7 @@ public class AuthEndpointRoot : IEndpointRoot
 {
     public void MapEndpoints(IEndpointRouteBuilder endpoints)
     {
-        endpoints.MapGroup("/auth")
+        endpoints.MapGroup("/api/auth")
             .WithTags("Авторизация")
             .AddEndpoint<LoginEndpoint>()
             .AddEndpoint<RegisterEndpoint>()
