@@ -8,7 +8,7 @@ using TrashGrounds.File.Database.Postgres;
 
 #nullable disable
 
-namespace TrashGrounds.Template.Migrations
+namespace TrashGrounds.File.Migrations
 {
     [DbContext(typeof(FileDbContext))]
     partial class FileDbContextModelSnapshot : ModelSnapshot
@@ -22,7 +22,7 @@ namespace TrashGrounds.Template.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("TrashGrounds.Template.Models.Main.ImageFile", b =>
+            modelBuilder.Entity("TrashGrounds.File.Models.Main.ImageFile", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -43,7 +43,7 @@ namespace TrashGrounds.Template.Migrations
                     b.ToTable("ImageFiles");
                 });
 
-            modelBuilder.Entity("TrashGrounds.Template.Models.Main.MusicFile", b =>
+            modelBuilder.Entity("TrashGrounds.File.Models.Main.MusicFile", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()

@@ -9,10 +9,10 @@ using TrashGrounds.File.Database.Postgres;
 
 #nullable disable
 
-namespace TrashGrounds.Template.Migrations
+namespace TrashGrounds.File.Migrations
 {
     [DbContext(typeof(FileDbContext))]
-    [Migration("20230510131525_Initial")]
+    [Migration("20230517190245_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -25,7 +25,7 @@ namespace TrashGrounds.Template.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("TrashGrounds.Template.Models.Main.ImageFile", b =>
+            modelBuilder.Entity("TrashGrounds.File.Models.Main.ImageFile", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -46,7 +46,7 @@ namespace TrashGrounds.Template.Migrations
                     b.ToTable("ImageFiles");
                 });
 
-            modelBuilder.Entity("TrashGrounds.Template.Models.Main.MusicFile", b =>
+            modelBuilder.Entity("TrashGrounds.File.Models.Main.MusicFile", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()

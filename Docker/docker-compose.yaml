@@ -1,25 +1,65 @@
-version: '3.8'
+version: "3"
 
 services:
-  postgres:
-    image: postgres
-    volumes:
-      - database:/var/lib/postgresql/data
-      - ./docker/postgres/dumps/:/tmp/
+  users-db:
+    image: postgres:latest
     ports:
-      - "5432:5432"
+      - 5439:5432
     environment:
-      LC_ALL: C.UTF-8
-      POSTGRES_DB: "tg_users"
-      POSTGRES_USER: "postgres"
-      POSTGRES_PASSWORD: "123456"
-    restart: always
-  redis-data:
-    image: redis:alpine
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=tg_users
+
+  tracks-db:
+    image: postgres:latest
     ports:
-      - "127.0.0.1:6380:6379"
-    networks:
-      - default
-volumes:
-  database:
-    driver: local
+      - 5433:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=tg_tracks
+
+  rates-db:
+    image: postgres:latest
+    ports:
+      - 5434:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=tg_rates
+
+  posts-db:
+    image: postgres:latest
+    ports:
+      - 5435:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=tg_posts
+
+  files-db:
+    image: postgres:latest
+    ports:
+      - 5436:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=tg_files
+
+  comments-db:
+    image: postgres:latest
+    ports:
+      - 5437:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=tg_comments
+
+  hangfire-db:
+    image: postgres:latest
+    ports:
+      - 5438:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=tg_hangfire

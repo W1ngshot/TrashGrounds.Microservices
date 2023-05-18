@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace TrashGrounds.Template.Migrations
+namespace TrashGrounds.File.Migrations
 {
     /// <inheritdoc />
     public partial class Initial : Migration

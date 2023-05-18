@@ -29,5 +29,6 @@
     <ItemGroup>
         <Protobuf Include="gRPC\Protos\file.proto" GrpcServices="Client" />
         <Protobuf Include="gRPC\Protos\post-rate.proto" GrpcServices="Client" />
+        <Protobuf Include="gRPC\Protos\used-files.proto" GrpcServices="Server" />
     </ItemGroup>
 </Project>

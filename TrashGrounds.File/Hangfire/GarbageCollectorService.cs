@@ -1,5 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Hangfire;
+using Microsoft.EntityFrameworkCore;
 using TrashGrounds.File.Database.Postgres;
+using TrashGrounds.File.gRPC.Services;
 using TrashGrounds.File.Services.Interfaces;
 
 namespace TrashGrounds.File.Hangfire;
@@ -8,43 +10,48 @@ public class GarbageCollectorService
 {
     private readonly FileDbContext _context;
     private readonly IDateTimeProvider _dateTimeProvider;
+    private readonly UsedFilesService _usedFilesService;
 
-    public GarbageCollectorService(FileDbContext context, IDateTimeProvider dateTimeProvider)
+    public GarbageCollectorService(
+        FileDbContext context, 
+        IDateTimeProvider dateTimeProvider, 
+        UsedFilesService usedFilesService)
     {
         _context = context;
         _dateTimeProvider = dateTimeProvider;
+        _usedFilesService = usedFilesService;
     }
 
+    [Queue("gc")]
     public async Task DeleteUnusedTracks()
     {
-        var usedIds = new List<Guid>(); //grpc to track ms
+        var usedIds = await _usedFilesService.GetUsedTrackIdsAsync();
         var currentDate = _dateTimeProvider.UtcNow;
 
         var notUsedTracks = await _context.MusicFiles
             .Where(music => (currentDate - music.UploadDate).TotalDays >= 1 && !usedIds.Contains(music.Id))
-            .Select(music => new {music.Id, music.Route})
             .ToListAsync();
 
-        _context.Remove(notUsedTracks);
+        _context.RemoveRange(notUsedTracks);
         await _context.SaveEntitiesAsync();
 
-        RemoveUnusedFiles(notUsedTracks.Select(x => x.Route));
+        RemoveUnusedFiles(notUsedTracks.Select(music => music.Route));
     }
 
+    [Queue("gc")]
     public async Task DeleteUnusedImages()
     {
-        var usedIds = new List<Guid>(); //grpc to track ms
+        var usedIds = await _usedFilesService.GetUsedImageIdsAsync();
         var currentDate = _dateTimeProvider.UtcNow;
 
         var notUsedImages = await _context.ImageFiles
             .Where(image => (currentDate - image.UploadDate).TotalDays >= 1 && !usedIds.Contains(image.Id))
-            .Select(image => new {image.Id, image.Route})
             .ToListAsync();
 
-        _context.Remove(notUsedImages);
+        _context.RemoveRange(notUsedImages);
         await _context.SaveEntitiesAsync();
 
-        RemoveUnusedFiles(notUsedImages.Select(x => x.Route));
+        RemoveUnusedFiles(notUsedImages.Select(image => image.Route));
     }
 
     private static void RemoveUnusedFiles(IEnumerable<string> routes)

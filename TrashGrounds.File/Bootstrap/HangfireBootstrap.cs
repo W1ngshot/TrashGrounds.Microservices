@@ -15,20 +15,21 @@ public static class HangfireBootstrap
 
         services.AddHangfireServer(opt =>
         {
-            opt.Queues = new[] {"GC"};
+            opt.Queues = new[] {"gc", "default"};
             opt.WorkerCount = 1;
         });
 
-        services.AddSingleton<GarbageCollectorService>();
+        services.AddScoped<GarbageCollectorService>();
         
         return services;
     }
 
     public static void AddHangfireJobs()
     {
-        RecurringJob.AddOrUpdate<GarbageCollectorService>("clear-music", "GC", service =>
-            service.DeleteUnusedTracks(), Cron.Daily(0, 0));
-        RecurringJob.AddOrUpdate<GarbageCollectorService>("clear-images", "GC", service =>
-            service.DeleteUnusedImages(), Cron.Daily(0, 0));
+        //TODO убрать повторы
+        RecurringJob.AddOrUpdate<GarbageCollectorService>("clear-music", service =>
+            service.DeleteUnusedTracks(), Cron.Hourly);
+        RecurringJob.AddOrUpdate<GarbageCollectorService>("clear-images", service =>
+            service.DeleteUnusedImages(), Cron.Hourly);
     }
 }

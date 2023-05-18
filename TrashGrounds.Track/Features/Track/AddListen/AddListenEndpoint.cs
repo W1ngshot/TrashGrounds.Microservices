@@ -9,6 +9,7 @@ public class AddListenEndpoint : IEndpoint
     
     public void Map(IEndpointRouteBuilder endpoints)
     {
+        //TODO починить
         endpoints.MapPost("/add-listen", async (AddListenDto dto, IMediator mediator) =>
             Results.Ok(await mediator.Send(new AddListenCommand(dto.TrackId))));
     }

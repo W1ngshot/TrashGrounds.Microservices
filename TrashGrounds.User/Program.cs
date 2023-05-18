@@ -1,5 +1,4 @@
 using TrashGrounds.User.Bootstrap;
-using TrashGrounds.User.gRPC.Services;
 using TrashGrounds.User.Infrastructure;
 using TrashGrounds.User.Infrastructure.Routing;
 using TrashGrounds.User.Middleware;
@@ -9,8 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Host.AddCustomLogging();
 
 builder.Services
-    .AddDatabaseWithIdentity(builder.Configuration)
-    .AddRedis(builder.Configuration);
+    .AddDatabaseWithIdentity(builder.Configuration);
+    //.AddRedis(builder.Configuration);
 
 builder.Services
     .AddEndpointsApiExplorer()
@@ -45,6 +44,6 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseCustomEndpoints();
-app.MapGrpcService<UserInfoGrpcService>();
+app.MapGrpcServices();
 
 app.Run();

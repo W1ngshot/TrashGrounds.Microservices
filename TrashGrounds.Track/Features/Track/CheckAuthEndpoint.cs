@@ -8,6 +8,7 @@ public class CheckAuthEndpoint : IEndpoint
 {
     public void Map(IEndpointRouteBuilder endpoints)
     {
+        //TODO удалить
         endpoints.MapGet("/get-current-id",
                 ([FromServices] IUserService userService) =>
                     Results.Ok(userService.GetUserIdOrThrow()))

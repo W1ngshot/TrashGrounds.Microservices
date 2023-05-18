@@ -43,5 +43,6 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.UseCustomEndpoints();
+app.MapGrpcServices();
 
 app.Run();

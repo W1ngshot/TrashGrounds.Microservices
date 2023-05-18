@@ -1,7 +1,6 @@
 using Hangfire;
 using Microsoft.AspNetCore.Http.Features;
 using TrashGrounds.File.Bootstrap;
-using TrashGrounds.File.gRPC.Services;
 using TrashGrounds.File.Infrastructure;
 using TrashGrounds.File.Infrastructure.Routing;
 using TrashGrounds.File.Middleware;
@@ -16,8 +15,7 @@ builder.Services.Configure<FormOptions>(options =>
 });
 
 builder.Services
-    .AddDatabase(builder.Configuration)
-    .AddGrpc();
+    .AddDatabase(builder.Configuration);
 
 builder.Services
     .AddEndpointsApiExplorer()
@@ -31,11 +29,14 @@ builder.Services
     .AddMediatR(configuration => configuration.RegisterServicesFromAssemblyContaining<Program>())
     .AddHangfireConfiguration(builder.Configuration);
 
+builder.Services
+    .AddGrpcConfiguration(builder.Configuration)
+    .AddGrpcServices();
+
 var app = builder.Build();
 await app.TryMigrateDatabaseAsync();
 
 app.UseHangfireDashboard();
-HangfireBootstrap.AddHangfireJobs();
 
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 
@@ -53,6 +54,7 @@ app.UseAuthorization();
 
 app.UseCustomEndpoints();
 app.MapHangfireDashboard();
-app.MapGrpcService<FileExistsService>();
+app.MapGrpcServices();
 
+HangfireBootstrap.AddHangfireJobs();
 app.Run();
