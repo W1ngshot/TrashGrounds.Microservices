@@ -40,7 +40,7 @@ app.UseHangfireDashboard();
 
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment() || app.Environment.EnvironmentName == "Local")
 {
     app.UseSwagger();
     app.UseSwaggerUI();
