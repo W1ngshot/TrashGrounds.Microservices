@@ -6,7 +6,7 @@ using TrashGrounds.User.Infrastructure.Mediator.Command;
 using TrashGrounds.User.Models.Main;
 using TrashGrounds.User.Models.Responses;
 
-namespace TrashGrounds.User.Features.User.ChangePassword;
+namespace TrashGrounds.User.Features.Auth.ChangePassword;
 
 public class ChangePasswordCommandHandler : ICommandHandler<ChangePasswordCommand, SuccessResponse>
 {

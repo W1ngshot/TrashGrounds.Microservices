@@ -9,7 +9,7 @@ public class DeletePostRateEndpoint : IEndpoint
 {
     public void Map(IEndpointRouteBuilder endpoints)
     {
-        endpoints.MapDelete("{postId:guid}",
+        endpoints.MapDelete("/",
                 async ([FromRoute] Guid postId, IUserService userService, IMediator mediator) =>
                     Results.Ok(await mediator.Send(new DeletePostRateCommand(
                         userService.GetUserIdOrThrow(),

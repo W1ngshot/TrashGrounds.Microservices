@@ -20,7 +20,7 @@ public class ChangePostRateEndpoint : IEndpoint
     
     public void Map(IEndpointRouteBuilder endpoints)
     {
-        endpoints.MapPost("{postId:guid}",
+        endpoints.MapPost("/",
                 async ([FromRoute] Guid postId, ChangePostRateDto dto, IMediator mediator) =>
                     Results.Ok(await mediator.Send(
                         new ChangePostRateCommand(

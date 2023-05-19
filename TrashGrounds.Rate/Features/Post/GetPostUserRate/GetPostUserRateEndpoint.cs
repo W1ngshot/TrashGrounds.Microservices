@@ -9,7 +9,7 @@ public class GetPostUserRateEndpoint : IEndpoint
 {
     public void Map(IEndpointRouteBuilder endpoints)
     {
-        endpoints.MapGet("{postId:guid}",
+        endpoints.MapGet("/",
                 async ([FromRoute] Guid postId, IUserService userService, IMediator mediator) =>
                     Results.Ok(await mediator.Send(new GetPostUserRateQuery(
                         userService.GetUserIdOrThrow(),

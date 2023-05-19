@@ -16,6 +16,7 @@ public class GetPostsUserRatesEndpoint : IEndpoint
         }
     }
 
+    //не используется
     public void Map(IEndpointRouteBuilder endpoints)
     {
         endpoints.MapGet("/from-posts",

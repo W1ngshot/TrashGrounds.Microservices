@@ -28,6 +28,7 @@ public class GetTracksFromUserQueryHandler : IQueryHandler<GetTracksFromUserQuer
         var tracks = await _context.MusicTracks
             .Include(track => track.Genres)
             .Where(track => track.UserId == request.UserId && track.Id != request.ExcludeTrackId)
+            .OrderByDescending(track => track.UploadDate)
             .ToTracksInfo(request.Take, request.Skip);
 
         var user = tracks.FirstOrDefault()?.UserId is null ? 

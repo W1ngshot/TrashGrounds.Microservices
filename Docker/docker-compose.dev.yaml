@@ -5,6 +5,8 @@ services:
     image: postgres:latest
     ports:
       - 5439:5432
+    volumes:
+      - ./data/users-db:/var/lib/postgresql/data
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=password
@@ -14,6 +16,8 @@ services:
     image: postgres:latest
     ports:
       - 5433:5432
+    volumes:
+      - ./data/tracks-db:/var/lib/postgresql/data
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=password
@@ -23,6 +27,8 @@ services:
     image: postgres:latest
     ports:
       - 5434:5432
+    volumes:
+      - ./data/rates-db:/var/lib/postgresql/data
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=password
@@ -32,6 +38,8 @@ services:
     image: postgres:latest
     ports:
       - 5435:5432
+    volumes:
+      - ./data/posts-db:/var/lib/postgresql/data
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=password
@@ -41,6 +49,8 @@ services:
     image: postgres:latest
     ports:
       - 5436:5432
+    volumes:
+      - ./data/files-db:/var/lib/postgresql/data
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=password
@@ -50,6 +60,8 @@ services:
     image: postgres:latest
     ports:
       - 5437:5432
+    volumes:
+      - ./data/comments-db:/var/lib/postgresql/data
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=password

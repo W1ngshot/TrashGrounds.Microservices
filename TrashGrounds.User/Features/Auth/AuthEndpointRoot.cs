@@ -1,4 +1,5 @@
 ﻿using TrashGrounds.User.Features.Auth.AuthCheck;
+using TrashGrounds.User.Features.Auth.ChangePassword;
 using TrashGrounds.User.Features.Auth.Login;
 using TrashGrounds.User.Features.Auth.RefreshTokens;
 using TrashGrounds.User.Features.Auth.Register;
@@ -15,6 +16,7 @@ public class AuthEndpointRoot : IEndpointRoot
             .AddEndpoint<LoginEndpoint>()
             .AddEndpoint<RegisterEndpoint>()
             .AddEndpoint<RefreshTokensEndpoint>()
-            .AddEndpoint<AuthCheckEndpoint>();
+            .AddEndpoint<AuthCheckEndpoint>()
+            .AddEndpoint<ChangePasswordEndpoint>();
     }
 }

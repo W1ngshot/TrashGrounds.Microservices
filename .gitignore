@@ -72,3 +72,6 @@ testem.log
 # Images & Music
 **/Files/Images/*
 **/Files/Music/*
+
+**/appsettings.Local.json
+**/Docker/data

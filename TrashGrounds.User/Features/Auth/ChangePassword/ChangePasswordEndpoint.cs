@@ -3,7 +3,7 @@ using TrashGrounds.User.Infrastructure.Routing;
 using TrashGrounds.User.Infrastructure.ValidationSetup;
 using TrashGrounds.User.Services.Interfaces;
 
-namespace TrashGrounds.User.Features.User.ChangePassword;
+namespace TrashGrounds.User.Features.Auth.ChangePassword;
 
 public class ChangePasswordEndpoint : IEndpoint
 {

@@ -8,7 +8,7 @@ public class AuthCheckEndpoint : IEndpoint
 {
     public void Map(IEndpointRouteBuilder endpoints)
     {
-        endpoints.MapGet("/get-current-id",
+        endpoints.MapGet("/current-id",
                 ([FromServices] IUserService userService) => 
                     Results.Ok(userService.GetUserIdOrThrow()))
             .RequireAuthorization();
