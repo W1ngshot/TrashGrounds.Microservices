@@ -9,7 +9,7 @@
           "Port": "7002"
         }
       ],
-      "UpstreamPathTemplate": "posts/add",
+      "UpstreamPathTemplate": "/posts/add",
       "UpstreamHttpMethod": [ "POST" ]
     },
     {
@@ -21,7 +21,7 @@
           "Port": "7002"
         }
       ],
-      "UpstreamPathTemplate": "posts/{postId}",
+      "UpstreamPathTemplate": "/posts/{postId}",
       "UpstreamHttpMethod": [ "PUT", "DELETE" ]
     },
     {
@@ -33,7 +33,7 @@
           "Port": "7002"
         }
       ],
-      "UpstreamPathTemplate": "posts/from-user/{userId}",
+      "UpstreamPathTemplate": "/posts/from-user/{userId}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": { "TtlSeconds": 60 }
     },
@@ -46,7 +46,7 @@
           "Port": "7002"
         }
       ],
-      "UpstreamPathTemplate": "posts/my",
+      "UpstreamPathTemplate": "/posts/my",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": { "TtlSeconds": 30 }
     }
