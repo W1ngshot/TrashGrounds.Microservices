@@ -2,11 +2,11 @@
   "Routes": [
     {
       "DownstreamPathTemplate": "/api/auth/current-id", 
-      "DownstreamScheme": "https", 
+      "DownstreamScheme": "http", 
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost", 
-          "Port": "7035"
+          "Host": "users-service", 
+          "Port": "7070"
         }
       ], 
       "UpstreamPathTemplate": "/auth/current-id", 
@@ -14,11 +14,11 @@
     },
     {
       "DownstreamPathTemplate": "/api/auth/login",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": "7035"
+          "Host": "users-service",
+          "Port": "7070"
         }
       ],
       "UpstreamPathTemplate": "/auth/login",
@@ -26,11 +26,11 @@
     },
     {
       "DownstreamPathTemplate": "/api/auth/refresh-tokens",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": "7035"
+          "Host": "users-service",
+          "Port": "7070"
         }
       ],
       "UpstreamPathTemplate": "/auth/refresh",
@@ -38,11 +38,11 @@
     },
     {
       "DownstreamPathTemplate": "/api/auth/register",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": "7035"
+          "Host": "users-service",
+          "Port": "7070"
         }
       ],
       "UpstreamPathTemplate": "/auth/register",
@@ -50,11 +50,11 @@
     },
     {
       "DownstreamPathTemplate": "/api/auth/change-password",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": "7035"
+          "Host": "users-service",
+          "Port": "7070"
         }
       ],
       "UpstreamPathTemplate": "/auth/change-password",
@@ -63,11 +63,11 @@
     
     {
       "DownstreamPathTemplate": "/api/user/change-avatar",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": "7035"
+          "Host": "users-service",
+          "Port": "7070"
         }
       ],
       "UpstreamPathTemplate": "/user/avatar",
@@ -75,11 +75,11 @@
     },
     {
       "DownstreamPathTemplate": "/api/user/change-status",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": "7035"
+          "Host": "users-service",
+          "Port": "7070"
         }
       ],
       "UpstreamPathTemplate": "/user/status",
@@ -87,11 +87,11 @@
     },
     {
       "DownstreamPathTemplate": "/api/user/me",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": "7035"
+          "Host": "users-service",
+          "Port": "7070"
         }
       ],
       "UpstreamPathTemplate": "/user/profile/my",
@@ -99,11 +99,11 @@
     },
     {
       "DownstreamPathTemplate": "/api/user/{id}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": "7035"
+          "Host": "users-service",
+          "Port": "7070"
         }
       ],
       "UpstreamPathTemplate": "/user/profile/{id}",

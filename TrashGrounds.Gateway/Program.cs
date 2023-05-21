@@ -4,7 +4,10 @@ using Ocelot.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Configuration.AddOcelot("./Ocelot", builder.Environment);
+builder.Configuration.AddOcelot(
+    builder.Environment.IsDevelopment() ? "./OcelotDev" : "./Ocelot", 
+    builder.Environment);
+
 builder.Services
     .AddOcelot()
     .AddCacheManager(builderCachePart => builderCachePart.WithDictionaryHandle());

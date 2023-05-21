@@ -2,11 +2,11 @@
   "Routes": [
     {
       "DownstreamPathTemplate": "/api/post/{postId}/rate",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": "7003"
+          "Host": "rates-service",
+          "Port": "7072"
         }
       ],
       "UpstreamPathTemplate": "/post/{postId}/rate",
@@ -14,16 +14,15 @@
     },
     {
       "DownstreamPathTemplate": "/api/track/{trackId}/rate",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": "7003"
+          "Host": "rates-service",
+          "Port": "7072"
         }
       ],
       "UpstreamPathTemplate": "/track/{trackId}/rate",
-      "UpstreamHttpMethod": [ "GET", "POST", "DELETE" ],
-      "FileCacheOptions": { "TtlSeconds": 10 }
+      "UpstreamHttpMethod": [ "GET", "POST", "DELETE" ]
     }
   ]
 }

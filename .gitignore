@@ -74,5 +74,5 @@ testem.log
 **/Files/Music/*
 
 **/appsettings.Local.json
-**/TrashGrounds.Gateway/ocelot.json
-**/Docker/data
+ocelot.json
+**/Docker/**/data

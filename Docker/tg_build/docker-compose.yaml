@@ -1,0 +1,292 @@
+version: "3.4"
+
+services:
+  users-db:
+    container_name: users-db
+    image: postgres:latest
+    restart: unless-stopped
+    ports:
+      - 5439:5432
+    volumes:
+      - ./data/users-db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=tg_users
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d tg_users -U postgres"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+
+  users-service:
+    container_name: users-service
+    restart: unless-stopped
+    build:
+      context: ./../../TrashGrounds.User
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+      - 7070:7070
+    depends_on:
+      users-db:
+        condition: service_healthy
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ASPNETCORE_URLS: https://+:8080;http://+:7070
+      ASPNETCORE_Kestrel__Certificates__Default__Password: 123456
+      ASPNETCORE_Kestrel__Certificates__Default__Path: /https/aspnetapp.pfx
+      ConnectionStrings__Postgres: "Host=users-db;Port=5432;Username=postgres;Password=password;Database=tg_users"
+      Jwt__Key: "gdsgsdhsgjsgggrrsdgbfdshfhdfgfsdrgrshfdshfdsbhfsfbfdsgtrregsdfgsfdgsdfgsfg"
+      Microservices__File: "http://files-service:7075"
+    volumes:
+      - ~/.aspnet/https:/https:ro
+
+  tracks-db:
+    container_name: tracks-db
+    image: postgres:latest
+    ports:
+      - 5433:5432
+    volumes:
+      - ./data/tracks-db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=tg_tracks
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d tg_tracks -U postgres"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  tracks-service:
+    container_name: tracks-service
+    restart: unless-stopped
+    build:
+      context: ./../../TrashGrounds.Track
+      dockerfile: Dockerfile
+    ports:
+      - 8081:8081
+      - 7071:7071
+    depends_on:
+      tracks-db:
+        condition: service_healthy
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ASPNETCORE_URLS: https://+:8081;http://+:7071
+      ASPNETCORE_Kestrel__Certificates__Default__Password: 123456
+      ASPNETCORE_Kestrel__Certificates__Default__Path: /https/aspnetapp.pfx
+      ConnectionStrings__Postgres: "Host=tracks-db;Port=5432;Username=postgres;Password=password;Database=tg_tracks"
+      Jwt__Key: "gdsgsdhsgjsgggrrsdgbfdshfhdfgfsdrgrshfdshfdsbhfsfbfdsgtrregsdfgsfdgsdfgsfg"
+      Microservices__User: "http://users-service:7070"
+      Microservices__Rate: "http://rates-service:7072"
+      Microservices__File: "http://files-service:7075"
+    volumes:
+      - ~/.aspnet/https:/https:ro
+
+  rates-db:
+    container_name: rates-db
+    image: postgres:latest
+    ports:
+      - 5434:5432
+    volumes:
+      - ./data/rates-db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=tg_rates
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d tg_rates -U postgres"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  rates-service:
+    container_name: rates-service
+    restart: unless-stopped
+    build:
+      context: ./../../TrashGrounds.Rate
+      dockerfile: Dockerfile
+    ports:
+      - 8082:8082
+      - 7072:7072
+    depends_on:
+      rates-db:
+        condition: service_healthy
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ASPNETCORE_URLS: https://+:8082;http://+:7072
+      ASPNETCORE_Kestrel__Certificates__Default__Password: 123456
+      ASPNETCORE_Kestrel__Certificates__Default__Path: /https/aspnetapp.pfx
+      ConnectionStrings__Postgres: "Host=rates-db;Port=5432;Username=postgres;Password=password;Database=tg_rates"
+      Jwt__Key: "gdsgsdhsgjsgggrrsdgbfdshfhdfgfsdrgrshfdshfdsbhfsfbfdsgtrregsdfgsfdgsdfgsfg"
+    volumes:
+      - ~/.aspnet/https:/https:ro
+
+  posts-db:
+    container_name: posts-db
+    image: postgres:latest
+    ports:
+      - 5435:5432
+    volumes:
+      - ./data/posts-db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=tg_posts
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d tg_posts -U postgres"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  posts-service:
+    container_name: posts-service
+    restart: unless-stopped
+    build:
+      context: ./../../TrashGrounds.Post
+      dockerfile: Dockerfile
+    ports:
+      - 8083:8083
+      - 7073:7073
+    depends_on:
+      posts-db:
+        condition: service_healthy
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ASPNETCORE_URLS: https://+:8083;http://+:7073
+      ASPNETCORE_Kestrel__Certificates__Default__Password: 123456
+      ASPNETCORE_Kestrel__Certificates__Default__Path: /https/aspnetapp.pfx
+      ConnectionStrings__Postgres: "Host=posts-db;Port=5432;Username=postgres;Password=password;Database=tg_posts"
+      Jwt__Key: "gdsgsdhsgjsgggrrsdgbfdshfhdfgfsdrgrshfdshfdsbhfsfbfdsgtrregsdfgsfdgsdfgsfg"
+      Microservices__Rate: "http://rates-service:7072"
+      Microservices__File: "http://files-service:7075"
+    volumes:
+      - ~/.aspnet/https:/https:ro
+
+  comments-db:
+    container_name: comments-db
+    image: postgres:latest
+    ports:
+      - 5437:5432
+    volumes:
+      - ./data/comments-db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=tg_comments
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d tg_comments -U postgres"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  comments-service:
+    container_name: comments-service
+    restart: unless-stopped
+    build:
+      context: ./../../TrashGrounds.Comment
+      dockerfile: Dockerfile
+    ports:
+      - 8084:8084
+      - 7074:7074
+    depends_on:
+      comments-db:
+        condition: service_healthy
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ASPNETCORE_URLS: https://+:8084;http://+:7074
+      ASPNETCORE_Kestrel__Certificates__Default__Password: 123456
+      ASPNETCORE_Kestrel__Certificates__Default__Path: /https/aspnetapp.pfx
+      ConnectionStrings__Postgres: "Host=comments-db;Port=5432;Username=postgres;Password=password;Database=tg_comments"
+      Jwt__Key: "gdsgsdhsgjsgggrrsdgbfdshfhdfgfsdrgrshfdshfdsbhfsfbfdsgtrregsdfgsfdgsdfgsfg"
+      Microservices__User: "http://users-service:7070"
+    volumes:
+      - ~/.aspnet/https:/https:ro
+
+  files-db:
+    container_name: files-db
+    image: postgres:latest
+    ports:
+      - 5436:5432
+    volumes:
+      - ./data/files-db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=tg_files
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d tg_files -U postgres"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  hangfire-db:
+    container_name: hangfire-db
+    image: postgres:latest
+    ports:
+      - 5438:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=tg_hangfire
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d tg_hangfire -U postgres"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  files-service:
+    container_name: files-service
+    restart: unless-stopped
+    build:
+      context: ./../../TrashGrounds.File
+      dockerfile: Dockerfile
+    ports:
+      - 8085:8085
+      - 7075:7075
+    depends_on:
+      files-db:
+        condition: service_healthy
+      hangfire-db:
+        condition: service_healthy
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ASPNETCORE_URLS: https://+:8085;http://+:7075
+      ASPNETCORE_Kestrel__Certificates__Default__Password: 123456
+      ASPNETCORE_Kestrel__Certificates__Default__Path: /https/aspnetapp.pfx
+      ConnectionStrings__Postgres: "Host=files-db;Port=5432;Username=postgres;Password=password;Database=tg_posts"
+      ConnectionStrings__Hangfire: "Host=hangfire-db;Port=5432;Username=postgres;Password=password;Database=tg_hangfire"
+      Jwt__Key: "gdsgsdhsgjsgggrrsdgbfdshfhdfgfsdrgrshfdshfdsbhfsfbfdsgtrregsdfgsfdgsdfgsfg"
+      UsedFiles__User: "http://users-service:7070"
+      UsedFiles__Post: "http://posts-service:7073"
+      UsedFiles__Track: "http://tracks-service:7071"
+    volumes:
+      - ~/.aspnet/https:/https:ro
+      - filedata:/app/Files/Image
+      - filedata:/app/Files/Music
+
+  gateway:
+    container_name: gateway
+    restart: unless-stopped
+    build:
+      context: ./../../TrashGrounds.Gateway
+      dockerfile: Dockerfile
+    ports:
+      - 8000:8000
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ASPNETCORE_URLS: https://+:8000
+      ASPNETCORE_Kestrel__Certificates__Default__Password: 123456
+      ASPNETCORE_Kestrel__Certificates__Default__Path: /https/aspnetapp.pfx
+    volumes:
+      - ~/.aspnet/https:/https:ro
+
+volumes:
+  filedata:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /files
