@@ -1,8 +1,9 @@
 ﻿using FluentValidation;
 using TrashGrounds.Track.Features.Track.AddTrack;
 using TrashGrounds.Track.gRPC.Services;
+using TrashGrounds.Track.Infrastructure.Constants;
 
-namespace TrashGrounds.Track.Validation.Validators;
+namespace TrashGrounds.Track.Validators;
 
 public class AddTrackDtoValidator : AbstractValidator<AddTrackEndpoint.AddTrackDto>
 {
@@ -14,35 +15,35 @@ public class AddTrackDtoValidator : AbstractValidator<AddTrackEndpoint.AddTrackD
         
         RuleFor(dto => dto.Title)
             .NotEmpty()
-            .WithMessage(ValidationMessages.EmptyTitle)
+            .WithMessage(ValidationFailedMessages.EmptyField)
             .MinimumLength(2)
-            .WithMessage(ValidationMessages.TooShortTitle)
+            .WithMessage(ValidationFailedMessages.TooShortField)
             .MaximumLength(60)
-            .WithMessage(ValidationMessages.TooLongTitle)
-            .Matches(@"^[\w\s]+$")
-            .WithMessage(ValidationMessages.TitleContainsWrongSymbols);
+            .WithMessage(ValidationFailedMessages.TooLongField)
+            .Matches(@"^[\w\d\s\p{P}]+$")
+            .WithMessage(ValidationFailedMessages.WrongSymbols);
 
         RuleFor(dto => dto.Description)
             .MinimumLength(3)
-            .WithMessage(ValidationMessages.TooShortDescription)
+            .WithMessage(ValidationFailedMessages.TooShortField)
             .MaximumLength(300)
-            .WithMessage(ValidationMessages.TooLongDescription)
-            .Matches(@"^[\w\s]+$")
-            .WithMessage(ValidationMessages.DescriptionContainsWrongSymbols);
+            .WithMessage(ValidationFailedMessages.TooLongField)
+            .Matches(@"^[\w\d\s\p{P}]+$")
+            .WithMessage(ValidationFailedMessages.WrongSymbols);
 
         RuleFor(dto => dto.Genres)
             .NotEmpty()
-            .WithMessage(ValidationMessages.EmptyGenresList);
+            .WithMessage(ValidationFailedMessages.EmptyField);
 
         RuleFor(dto => dto.MusicId)
             .NotEmpty()
-            .WithMessage("empty music id")
+            .WithMessage(ValidationFailedMessages.EmptyField)
             .MustAsync(IsMusicExistsAsync)
-            .WithMessage("not exists");
+            .WithMessage(ValidationFailedMessages.NotExists);
 
         RuleFor(dto => dto.PictureId)
             .MustAsync(IsImageNullOrExistsAsync)
-            .WithMessage("not exists");
+            .WithMessage(ValidationFailedMessages.NotExists);
     }
     
     private async Task<bool> IsMusicExistsAsync(Guid trackId, CancellationToken cancellationToken) => 

@@ -45,4 +45,19 @@
     <ItemGroup>
       <Folder Include="Features\Grpc\" />
     </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Update="Infrastructure\Constants\ValidationFailedMessages.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>ValidationFailedMessages.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Infrastructure\Constants\ValidationFailedMessages.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>ValidationFailedMessages.resx</DependentUpon>
+      </Compile>
+    </ItemGroup>
 </Project>

@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using TrashGrounds.Rate.Infrastructure.Constants;
 using TrashGrounds.Rate.Infrastructure.Routing;
 using TrashGrounds.Rate.Infrastructure.ValidationSetup;
 using TrashGrounds.Rate.Services.Interfaces;
@@ -36,7 +37,8 @@ public class ChangePostRateEndpoint : IEndpoint
         public ChangePostRateDtoValidator()
         {
             RuleFor(dto => dto.NewRate)
-                .Must(rate => rate is 1 or -1);
+                .Must(rate => rate is 1 or -1)
+                .WithMessage(ValidationFailedMessages.IncorrectValue);
         }
     }
 }

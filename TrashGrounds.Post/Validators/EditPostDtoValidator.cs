@@ -1,8 +1,9 @@
 ﻿using FluentValidation;
 using TrashGrounds.Post.Features.Post.EditPost;
 using TrashGrounds.Post.gRPC.Services;
+using TrashGrounds.Post.Infrastructure.Constants;
 
-namespace TrashGrounds.Post.Validation.Validators;
+namespace TrashGrounds.Post.Validators;
 
 public class EditPostDtoValidator : AbstractValidator<EditPostEndpoint.EditPostDto>
 {
@@ -14,14 +15,14 @@ public class EditPostDtoValidator : AbstractValidator<EditPostEndpoint.EditPostD
         
         RuleFor(dto => dto.Text)
             .NotEmpty()
-            .WithMessage(ValidationMessages.EmptyText)
+            .WithMessage(ValidationFailedMessages.EmptyField)
             .MaximumLength(3000)
-            .WithMessage(ValidationMessages.TooLongText);
+            .WithMessage(ValidationFailedMessages.TooLongField);
 
         RuleFor(dto => dto.AssetId)
             .MustAsync(IsImageNullOrExistsAsync)
             .When(dto => dto.ChangeAsset)
-            .WithMessage("not exists");
+            .WithMessage(ValidationFailedMessages.NotExists);
     }
     
     private async Task<bool> IsImageNullOrExistsAsync(Guid? imageId, CancellationToken cancellationToken) => 

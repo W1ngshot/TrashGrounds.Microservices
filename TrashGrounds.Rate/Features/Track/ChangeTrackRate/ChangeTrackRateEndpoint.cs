@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using TrashGrounds.Rate.Infrastructure.Constants;
 using TrashGrounds.Rate.Infrastructure.Routing;
 using TrashGrounds.Rate.Infrastructure.ValidationSetup;
 using TrashGrounds.Rate.Services.Interfaces;
@@ -30,7 +31,9 @@ public class ChangeTrackRateEndpoint : IEndpoint
         {
             RuleFor(dto => dto.NewRate)
                 .GreaterThanOrEqualTo(1)
-                .LessThanOrEqualTo(5);
+                .WithMessage(ValidationFailedMessages.IncorrectValue)
+                .LessThanOrEqualTo(5)
+                .WithMessage(ValidationFailedMessages.IncorrectValue);
         }
     }
 }

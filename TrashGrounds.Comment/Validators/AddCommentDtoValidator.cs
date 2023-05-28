@@ -1,7 +1,8 @@
 ﻿using FluentValidation;
 using TrashGrounds.Comment.Features.Comment.AddComment;
+using TrashGrounds.Comment.Infrastructure.Constants;
 
-namespace TrashGrounds.Comment.Validation.Validators;
+namespace TrashGrounds.Comment.Validators;
 
 public class AddCommentDtoValidator : AbstractValidator<AddCommentEndpoint.AddCommentDto>
 {
@@ -9,8 +10,8 @@ public class AddCommentDtoValidator : AbstractValidator<AddCommentEndpoint.AddCo
     {
         RuleFor(dto => dto.Message)
             .NotEmpty()
-            .WithMessage(ValidationMessages.EmptyCommentMessage)
+            .WithMessage(ValidationFailedMessages.EmptyField)
             .MaximumLength(300)
-            .WithMessage(ValidationMessages.TooLongCommentMessage);
+            .WithMessage(ValidationFailedMessages.TooLongField);
     }
 }
