@@ -11,6 +11,12 @@ builder.Services
     .AddDatabaseWithIdentity(builder.Configuration);
     //.AddRedis(builder.Configuration);
 
+builder.Services.AddCors(opt =>
+    opt.AddDefaultPolicy(policy =>
+        policy.AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader()));
+
 builder.Services
     .AddEndpointsApiExplorer()
     .AddJwtAuthentication(builder.Configuration)
@@ -31,6 +37,7 @@ await app.TryMigrateDatabaseAsync();
 
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 app.UseHttpsRedirection();
+app.UseCors();
 
 if (app.Environment.IsDevelopment() || app.Environment.EnvironmentName == "Local")
 {

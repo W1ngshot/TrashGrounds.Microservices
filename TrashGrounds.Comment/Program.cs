@@ -9,6 +9,11 @@ builder.Host.AddCustomLogging();
 
 builder.Services
     .AddDatabase(builder.Configuration);
+builder.Services.AddCors(opt =>
+    opt.AddDefaultPolicy(policy =>
+        policy.AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader()));
 
 builder.Services
     .AddEndpointsApiExplorer()
@@ -37,6 +42,7 @@ if (app.Environment.IsDevelopment() || app.Environment.EnvironmentName == "Local
 }
 
 app.UseHttpsRedirection();
+app.UseCors();
 
 app.UseRouting();
 

@@ -30,7 +30,7 @@ public class ChangeTrackRateEndpoint : IEndpoint
         {
             RuleFor(dto => dto.NewRate)
                 .GreaterThanOrEqualTo(1)
-                .LessThanOrEqualTo(10);
+                .LessThanOrEqualTo(5);
         }
     }
 }
