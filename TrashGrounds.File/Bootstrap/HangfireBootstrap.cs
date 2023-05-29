@@ -26,10 +26,9 @@ public static class HangfireBootstrap
 
     public static void AddHangfireJobs()
     {
-        //TODO убрать повторы
         RecurringJob.AddOrUpdate<GarbageCollectorService>("clear-music", service =>
-            service.DeleteUnusedTracks(), Cron.Hourly);
+            service.DeleteUnusedTracks(), Cron.Daily);
         RecurringJob.AddOrUpdate<GarbageCollectorService>("clear-images", service =>
-            service.DeleteUnusedImages(), Cron.Hourly);
+            service.DeleteUnusedImages(), Cron.Daily);
     }
 }
