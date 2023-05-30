@@ -11,7 +11,8 @@ public static class LoggingBootstrap
         {
             configuration.ReadFrom.Configuration(context.Configuration)
                 .Enrich.FromLogContext()
-                .Enrich.WithProperty("Application", "TrashGrounds.User")
+                .Enrich.WithProperty("Application",
+                    context.Configuration["ApplicationName"] ?? throw new InvalidOperationException("no app name"))
                 .Enrich.WithProperty("Environment", context.HostingEnvironment.EnvironmentName)
                 .WriteTo.Console()
                 .WriteTo.Elasticsearch(new ElasticsearchSinkOptions(
