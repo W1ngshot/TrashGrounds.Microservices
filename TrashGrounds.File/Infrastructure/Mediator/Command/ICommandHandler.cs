@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace TrashGrounds.Template.Infrastructure.Mediator.Command;
+namespace TrashGrounds.File.Infrastructure.Mediator.Command;
 
 public interface ICommandHandler<in TCommand, TOut> : IRequestHandler<TCommand, TOut>
     where TCommand : ICommand<TOut>

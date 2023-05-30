@@ -8,7 +8,7 @@ public class TrackRateEndpointRoot : IEndpointRoot
 {
     public void MapEndpoints(IEndpointRouteBuilder endpoints)
     {
-        endpoints.MapGroup("/track/{trackId:guid}/rate")
+        endpoints.MapGroup("/api/track/{trackId:guid}/rate")
             .WithTags("Оценка трека")
             .AddEndpoint<ChangeTrackRateEndpoint>()
             .AddEndpoint<GetTrackUserRateEndpoint>();

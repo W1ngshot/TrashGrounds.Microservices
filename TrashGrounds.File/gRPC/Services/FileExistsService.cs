@@ -1,9 +1,9 @@
 ﻿using FileServer;
 using Grpc.Core;
 using Microsoft.EntityFrameworkCore;
-using TrashGrounds.Template.Database.Postgres;
+using TrashGrounds.File.Database.Postgres;
 
-namespace TrashGrounds.Template.gRPC.Services;
+namespace TrashGrounds.File.gRPC.Services;
 
 public class FileExistsService : FileService.FileServiceBase
 {

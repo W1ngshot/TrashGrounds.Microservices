@@ -1,4 +1,4 @@
-﻿namespace TrashGrounds.Template.Models.Main;
+﻿namespace TrashGrounds.File.Models.Main;
 
 public static class StoragePaths
 {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.OpenApi.Models;
 
-namespace TrashGrounds.Template.Bootstrap;
+namespace TrashGrounds.File.Bootstrap;
 
 public static class SwaggerBootstrap
 {

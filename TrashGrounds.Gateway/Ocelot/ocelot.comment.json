@@ -1,0 +1,40 @@
+﻿{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/track/{trackId}/comments/",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "comments-service",
+          "Port": "7074"
+        }
+      ],
+      "UpstreamPathTemplate": "/track/{trackId}/comments/",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/track/{trackId}/comments/{commentId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "comments-service",
+          "Port": "7074"
+        }
+      ],
+      "UpstreamPathTemplate": "/track/{trackId}/comments/{commentId}",
+      "UpstreamHttpMethod": [ "PUT", "DELETE" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/track/{trackId}/comments/add",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "comments-service",
+          "Port": "7074"
+        }
+      ],
+      "UpstreamPathTemplate": "/track/{trackId}/comments/add",
+      "UpstreamHttpMethod": [ "POST" ]
+    }
+  ]
+}

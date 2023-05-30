@@ -1,4 +1,5 @@
-﻿using TrashGrounds.Track.Database.Postgres;
+﻿using Microsoft.EntityFrameworkCore;
+using TrashGrounds.Track.Database.Postgres;
 using TrashGrounds.Track.gRPC.Services;
 using TrashGrounds.Track.Infrastructure;
 using TrashGrounds.Track.Infrastructure.Mediator.Query;
@@ -24,7 +25,9 @@ public class GetTrackQueryHandler : IQueryHandler<GetTrackQuery, FullTrack>
 
     public async Task<FullTrack> Handle(GetTrackQuery request, CancellationToken cancellationToken)
     {
-        var track = await _context.MusicTracks.FirstOrNotFoundAsync(track => track.Id == request.Id,
+        var track = await _context.MusicTracks
+            .Include(track => track.Genres)
+            .FirstOrNotFoundAsync(track => track.Id == request.Id,
             cancellationToken: cancellationToken);
 
         return new FullTrack

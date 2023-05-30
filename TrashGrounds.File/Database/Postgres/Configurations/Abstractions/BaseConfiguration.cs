@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using TrashGrounds.Template.Models.Main.Abstractions;
+using TrashGrounds.File.Models.Main.Abstractions;
 
-namespace TrashGrounds.Template.Database.Postgres.Configurations.Abstractions;
+namespace TrashGrounds.File.Database.Postgres.Configurations.Abstractions;
 
 public abstract class BaseConfiguration<TEntity> : DependencyInjectedEntityConfiguration<TEntity>
     where TEntity : BaseEntity

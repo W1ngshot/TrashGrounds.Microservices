@@ -1,6 +1,6 @@
-﻿using TrashGrounds.Template.Models.Main.Abstractions;
+﻿using TrashGrounds.File.Models.Main.Abstractions;
 
-namespace TrashGrounds.Template.Models.Main;
+namespace TrashGrounds.File.Models.Main;
 
 public class MusicFile : BaseFile
 {

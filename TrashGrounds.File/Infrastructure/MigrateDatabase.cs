@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Npgsql;
-using TrashGrounds.Template.Database.Postgres;
+using TrashGrounds.File.Database.Postgres;
 
-namespace TrashGrounds.Template.Infrastructure;
+namespace TrashGrounds.File.Infrastructure;
 
 public static class MigrateDatabase
 {

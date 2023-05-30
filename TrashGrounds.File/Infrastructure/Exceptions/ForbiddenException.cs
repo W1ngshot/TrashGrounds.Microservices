@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace TrashGrounds.Template.Infrastructure.Exceptions;
+namespace TrashGrounds.File.Infrastructure.Exceptions;
 
 public class ForbiddenException: DomainException
 {

@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace TrashGrounds.Template.Database.Postgres.Configurations.Abstractions;
+namespace TrashGrounds.File.Database.Postgres.Configurations.Abstractions;
 
 public abstract class DependencyInjectedEntityConfiguration
 {

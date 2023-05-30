@@ -1,8 +1,8 @@
 ﻿using FluentValidation;
-using TrashGrounds.Template.Infrastructure.Exceptions;
-using TrashGrounds.Template.Infrastructure.Exceptions.Utlils;
+using TrashGrounds.File.Infrastructure.Exceptions;
+using TrashGrounds.File.Infrastructure.Exceptions.Utlils;
 
-namespace TrashGrounds.Template.Infrastructure.ValidationSetup;
+namespace TrashGrounds.File.Infrastructure.ValidationSetup;
 
 public static class EndpointsValidationExtensions
 {

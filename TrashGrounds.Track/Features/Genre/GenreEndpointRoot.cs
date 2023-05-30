@@ -7,7 +7,7 @@ public class GenreEndpointRoot : IEndpointRoot
 {
     public void MapEndpoints(IEndpointRouteBuilder endpoints)
     {
-        endpoints.MapGroup("/genre")
+        endpoints.MapGroup("/api/genre")
             .WithTags("Жанры")
             .AddEndpoint<GetAllGenresEndpoint>();
     }

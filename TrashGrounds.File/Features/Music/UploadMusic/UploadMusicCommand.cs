@@ -1,5 +1,5 @@
-﻿using TrashGrounds.Template.Infrastructure.Mediator.Command;
+﻿using TrashGrounds.File.Infrastructure.Mediator.Command;
 
-namespace TrashGrounds.Template.Features.Music.UploadMusic;
+namespace TrashGrounds.File.Features.Music.UploadMusic;
 
 public record UploadMusicCommand(IFormFile File, Guid UserId) : ICommand<Guid>;

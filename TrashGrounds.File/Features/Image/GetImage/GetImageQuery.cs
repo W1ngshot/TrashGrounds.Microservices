@@ -1,6 +1,6 @@
-﻿using TrashGrounds.Template.Infrastructure.Mediator.Query;
-using TrashGrounds.Template.Models.Additional;
+﻿using TrashGrounds.File.Infrastructure.Mediator.Query;
+using TrashGrounds.File.Models.Additional;
 
-namespace TrashGrounds.Template.Features.Image.GetImage;
+namespace TrashGrounds.File.Features.Image.GetImage;
 
 public record GetImageQuery(Guid FileId) : IQuery<FileResponse>;

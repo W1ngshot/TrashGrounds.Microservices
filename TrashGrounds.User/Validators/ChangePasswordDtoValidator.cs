@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using TrashGrounds.User.Features.User.ChangePassword;
+using TrashGrounds.User.Features.Auth.ChangePassword;
 using TrashGrounds.User.Infrastructure.Constants;
 using TrashGrounds.User.Services.Configs;
 

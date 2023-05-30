@@ -1,8 +1,8 @@
 ﻿using System.Security.Claims;
-using TrashGrounds.Template.Infrastructure.Exceptions;
-using TrashGrounds.Template.Services.Interfaces;
+using TrashGrounds.File.Infrastructure.Exceptions;
+using TrashGrounds.File.Services.Interfaces;
 
-namespace TrashGrounds.Template.Services;
+namespace TrashGrounds.File.Services;
 
 public class UserService : IUserService
 {

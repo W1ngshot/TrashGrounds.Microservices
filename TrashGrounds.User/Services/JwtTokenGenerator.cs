@@ -73,7 +73,7 @@ public class JwtTokenGenerator : IJwtTokenGenerator
         {
             var principal = ReadToken(token, validationParameters);
             var claim = principal.Claims.FirstOrDefault(c => c.Type == typeof(T).Name);
-            return JsonSerializer.Deserialize<T>(claim.Value);    
+            return JsonSerializer.Deserialize<T>(claim!.Value);    
         }
         catch (Exception e)
         {

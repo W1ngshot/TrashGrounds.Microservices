@@ -1,8 +1,8 @@
 ﻿using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
-using TrashGrounds.Template.Infrastructure.Exceptions;
+using TrashGrounds.File.Infrastructure.Exceptions;
 
-namespace TrashGrounds.Template.Infrastructure;
+namespace TrashGrounds.File.Infrastructure;
 
 public static class QueryExtensions
 {

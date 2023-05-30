@@ -1,9 +1,9 @@
 ﻿using FluentValidation;
 using MediatR;
-using TrashGrounds.Template.Infrastructure.Routing;
-using TrashGrounds.Template.Services.Interfaces;
+using TrashGrounds.File.Infrastructure.Routing;
+using TrashGrounds.File.Services.Interfaces;
 
-namespace TrashGrounds.Template.Features.Music.UploadMusic;
+namespace TrashGrounds.File.Features.Music.UploadMusic;
 
 public class UploadMusicEndpoint : IEndpoint
 {

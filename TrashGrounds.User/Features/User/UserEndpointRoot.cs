@@ -1,5 +1,4 @@
-﻿using TrashGrounds.User.Features.User.ChangePassword;
-using TrashGrounds.User.Features.User.ChangePictureLink;
+﻿using TrashGrounds.User.Features.User.ChangePictureLink;
 using TrashGrounds.User.Features.User.ChangeStatus;
 using TrashGrounds.User.Features.User.Me;
 using TrashGrounds.User.Features.User.Profile;
@@ -11,12 +10,11 @@ public class UserEndpointRoot : IEndpointRoot
 {
     public void MapEndpoints(IEndpointRouteBuilder endpoints)
     {
-        endpoints.MapGroup("/user")
+        endpoints.MapGroup("/api/user")
             .WithTags("Пользователь")
             .AddEndpoint<GetProfileEndpoint>()
             .AddEndpoint<ChangeAvatarEndpoint>()
             .AddEndpoint<ChangeStatusEndpoint>()
-            .AddEndpoint<ChangePasswordEndpoint>()
             .AddEndpoint<MeEndpoint>();
     }
 }

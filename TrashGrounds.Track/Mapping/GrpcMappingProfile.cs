@@ -1,8 +1,6 @@
 ﻿using AutoMapper;
 using TrackRateClient;
-using TrashGrounds.Track.Models.Additional;
 using TrashGrounds.Track.Models.Main;
-using UserClient;
 
 namespace TrashGrounds.Track.Mapping;
 

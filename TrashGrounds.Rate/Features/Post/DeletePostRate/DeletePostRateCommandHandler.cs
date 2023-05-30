@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using TrashGrounds.Rate.Database.Postgres;
+﻿using TrashGrounds.Rate.Database.Postgres;
 using TrashGrounds.Rate.Infrastructure;
 using TrashGrounds.Rate.Infrastructure.Mediator.Command;
 

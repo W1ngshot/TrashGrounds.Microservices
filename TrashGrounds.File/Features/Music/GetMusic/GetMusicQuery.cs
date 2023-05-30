@@ -1,6 +1,6 @@
-﻿using TrashGrounds.Template.Infrastructure.Mediator.Query;
-using TrashGrounds.Template.Models.Additional;
+﻿using TrashGrounds.File.Infrastructure.Mediator.Query;
+using TrashGrounds.File.Models.Additional;
 
-namespace TrashGrounds.Template.Features.Music.GetMusic;
+namespace TrashGrounds.File.Features.Music.GetMusic;
 
 public record GetMusicQuery(Guid FileId) : IQuery<FileResponse>;

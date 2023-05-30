@@ -3,10 +3,10 @@ using System.Reflection;
 using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
-using TrashGrounds.Template.Infrastructure.Exceptions;
-using TrashGrounds.Template.Infrastructure.Exceptions.Utlils;
+using TrashGrounds.File.Infrastructure.Exceptions;
+using TrashGrounds.File.Infrastructure.Exceptions.Utlils;
 
-namespace TrashGrounds.Template.Middleware;
+namespace TrashGrounds.File.Middleware;
 
 public class ExceptionHandlingMiddleware
 {

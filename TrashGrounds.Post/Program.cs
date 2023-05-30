@@ -30,7 +30,7 @@ await app.TryMigrateDatabaseAsync();
 
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment() || app.Environment.EnvironmentName == "Local")
 {
     app.UseSwagger();
     app.UseSwaggerUI();
@@ -43,5 +43,6 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.UseCustomEndpoints();
+app.MapGrpcServices();
 
 app.Run();

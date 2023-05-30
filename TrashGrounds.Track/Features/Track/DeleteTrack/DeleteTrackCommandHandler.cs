@@ -23,8 +23,6 @@ public class DeleteTrackCommandHandler : ICommandHandler<DeleteTrackCommand, Suc
         if (track.UserId != request.UserId)
             throw new ForbiddenException("Can't delete not your track");
         
-        //TODO Удаление из File микросервиса
-
         _context.MusicTracks.Remove(track);
         await _context.SaveEntitiesAsync();
 

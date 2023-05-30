@@ -1,6 +1,6 @@
-﻿using TrashGrounds.Template.Services.Interfaces;
+﻿using TrashGrounds.File.Services.Interfaces;
 
-namespace TrashGrounds.Template.Services;
+namespace TrashGrounds.File.Services;
 
 public class DateTimeProvider : IDateTimeProvider
 {

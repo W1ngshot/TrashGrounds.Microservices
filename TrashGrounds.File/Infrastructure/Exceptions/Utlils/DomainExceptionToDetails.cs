@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace TrashGrounds.Template.Infrastructure.Exceptions.Utlils;
+namespace TrashGrounds.File.Infrastructure.Exceptions.Utlils;
 
 public static class DomainExceptionToDetails
 {

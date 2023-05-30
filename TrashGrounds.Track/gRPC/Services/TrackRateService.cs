@@ -39,7 +39,7 @@ public class TrackRateService
 
             var response = await _client.GetTracksRateAsync(request);
 
-            return response.Rates.Select(rate => _mapper.Map<Rate>(rate));
+            return response.Rates.Select(rate => new Rate(Guid.Parse(rate.Id), rate.Rating));
         }
         catch (Exception e)
         {

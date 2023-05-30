@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using TrashGrounds.Track.Infrastructure.Routing;
 using TrashGrounds.Track.Infrastructure.ValidationSetup;
 using TrashGrounds.Track.Services.Interfaces;
@@ -12,7 +13,7 @@ public class AddTrackEndpoint : IEndpoint
     
     public void Map(IEndpointRouteBuilder endpoints)
     {
-        endpoints.MapPost("/add", async (AddTrackDto dto, IUserService userService, IMediator mediator) =>
+        endpoints.MapPost("/add", async ([FromBody] AddTrackDto dto, [FromServices] IUserService userService, IMediator mediator) =>
                 Results.Ok(await mediator.Send(new AddTrackCommand(
                     userService.GetUserIdOrThrow(),
                     dto.Title,

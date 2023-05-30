@@ -1,4 +1,4 @@
-﻿namespace TrashGrounds.Template.Infrastructure.ValidationSetup;
+﻿namespace TrashGrounds.File.Infrastructure.ValidationSetup;
 
 public readonly struct ValidationBuilder<TBuilder> where TBuilder : IEndpointConventionBuilder
 {

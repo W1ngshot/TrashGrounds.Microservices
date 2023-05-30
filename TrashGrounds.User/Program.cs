@@ -1,5 +1,4 @@
 using TrashGrounds.User.Bootstrap;
-using TrashGrounds.User.gRPC.Services;
 using TrashGrounds.User.Infrastructure;
 using TrashGrounds.User.Infrastructure.Routing;
 using TrashGrounds.User.Middleware;
@@ -9,8 +8,14 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Host.AddCustomLogging();
 
 builder.Services
-    .AddDatabaseWithIdentity(builder.Configuration)
-    .AddRedis(builder.Configuration);
+    .AddDatabaseWithIdentity(builder.Configuration);
+    //.AddRedis(builder.Configuration);
+
+builder.Services.AddCors(opt =>
+    opt.AddDefaultPolicy(policy =>
+        policy.AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader()));
 
 builder.Services
     .AddEndpointsApiExplorer()
@@ -32,8 +37,9 @@ await app.TryMigrateDatabaseAsync();
 
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 app.UseHttpsRedirection();
+app.UseCors();
 
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment() || app.Environment.EnvironmentName == "Local")
 {
     app.UseSwagger();
     app.UseSwaggerUI();
@@ -45,6 +51,6 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseCustomEndpoints();
-app.MapGrpcService<UserInfoGrpcService>();
+app.MapGrpcServices();
 
 app.Run();

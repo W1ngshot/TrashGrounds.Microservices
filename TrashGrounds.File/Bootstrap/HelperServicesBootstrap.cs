@@ -1,7 +1,7 @@
-﻿using TrashGrounds.Template.Services;
-using TrashGrounds.Template.Services.Interfaces;
+﻿using TrashGrounds.File.Services;
+using TrashGrounds.File.Services.Interfaces;
 
-namespace TrashGrounds.Template.Bootstrap;
+namespace TrashGrounds.File.Bootstrap;
 
 public static class HelperServicesBootstrap
 {

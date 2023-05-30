@@ -1,4 +1,5 @@
 ﻿using Serilog;
+using Serilog.Sinks.Elasticsearch;
 
 namespace TrashGrounds.User.Bootstrap;
 
@@ -8,11 +9,19 @@ public static class LoggingBootstrap
     {
         hostBuilder.UseSerilog((context, _, configuration) =>
         {
-            configuration.ReadFrom.Configuration(context.Configuration);
-            configuration.Enrich.FromLogContext();
-            configuration.Enrich.WithProperty("Application", "TrashGrounds.User");
-            configuration.Enrich.WithProperty("Environment", context.HostingEnvironment.EnvironmentName);
-            configuration.WriteTo.Console();
+            configuration.ReadFrom.Configuration(context.Configuration)
+                .Enrich.FromLogContext()
+                .Enrich.WithProperty("Application",
+                    context.Configuration["ApplicationName"] ?? throw new InvalidOperationException("no app name"))
+                .Enrich.WithProperty("Environment", context.HostingEnvironment.EnvironmentName)
+                .WriteTo.Console()
+                .WriteTo.Elasticsearch(new ElasticsearchSinkOptions(
+                    new Uri(context.Configuration["ElasticConfiguration:Uri"] ??
+                            throw new InvalidOperationException("No es uri")))
+                {
+                    IndexFormat =
+                        $"{context.Configuration["ApplicationName"]}-logs-{context.HostingEnvironment.EnvironmentName.ToLower().Replace(".", "-")}-{DateTime.UtcNow:yyyy-mm}"
+                });
         });
     }
 }

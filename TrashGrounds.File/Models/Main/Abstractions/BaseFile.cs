@@ -1,4 +1,4 @@
-﻿namespace TrashGrounds.Template.Models.Main.Abstractions;
+﻿namespace TrashGrounds.File.Models.Main.Abstractions;
 
 public abstract class BaseFile : BaseEntity
 {

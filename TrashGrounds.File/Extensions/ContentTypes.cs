@@ -1,4 +1,4 @@
-﻿namespace TrashGrounds.Template.Extensions;
+﻿namespace TrashGrounds.File.Extensions;
 
 public static class ContentTypes
 {
