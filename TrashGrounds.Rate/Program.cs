@@ -1,3 +1,4 @@
+using System.Net;
 using TrashGrounds.Rate.Bootstrap;
 using TrashGrounds.Rate.gRPC.Services;
 using TrashGrounds.Rate.Infrastructure;
@@ -5,7 +6,7 @@ using TrashGrounds.Rate.Infrastructure.Routing;
 using TrashGrounds.Rate.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
-
+ServicePointManager.ServerCertificateValidationCallback += (_, _, _, _) => true;
 builder.Host.AddCustomLogging();
 
 builder.Services

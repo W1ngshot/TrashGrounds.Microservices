@@ -2,11 +2,11 @@
   "Routes": [
     {
       "DownstreamPathTemplate": "/api/genre/all",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "tracks-service",
-          "Port": "7071"
+          "Port": "8081"
         }
       ],
       "UpstreamPathTemplate": "/genres/all",
@@ -15,11 +15,11 @@
     },
     {
       "DownstreamPathTemplate": "/api/track/{trackId}/add-listen",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "tracks-service",
-          "Port": "7071"
+          "Port": "8081"
         }
       ],
       "UpstreamPathTemplate": "/track/{trackId}/add-listen",
@@ -27,11 +27,11 @@
     },
     {
       "DownstreamPathTemplate": "/api/track/add",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "tracks-service",
-          "Port": "7071"
+          "Port": "8081"
         }
       ],
       "UpstreamPathTemplate": "/track/add",
@@ -39,11 +39,11 @@
     },
     {
       "DownstreamPathTemplate": "/api/track/{trackId}",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "tracks-service",
-          "Port": "7071"
+          "Port": "8081"
         }
       ],
       "UpstreamPathTemplate": "/track/{trackId}",
@@ -52,11 +52,11 @@
     },
     {
       "DownstreamPathTemplate": "/api/track/{category}",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "tracks-service",
-          "Port": "7071"
+          "Port": "8081"
         }
       ],
       "UpstreamPathTemplate": "/track/{category}",
@@ -65,11 +65,11 @@
     },
     {
       "DownstreamPathTemplate": "/api/track/from-user/{id}",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "tracks-service",
-          "Port": "7071"
+          "Port": "8081"
         }
       ],
       "UpstreamPathTemplate": "/track/from-user/{id}",
@@ -78,11 +78,11 @@
     },
     {
       "DownstreamPathTemplate": "/api/track/search",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "tracks-service",
-          "Port": "7071"
+          "Port": "8081"
         }
       ],
       "UpstreamPathTemplate": "/track/from-user/search",
@@ -90,11 +90,11 @@
     },
     {
       "DownstreamPathTemplate": "/api/track/update",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "tracks-service",
-          "Port": "7071"
+          "Port": "8081"
         }
       ],
       "UpstreamPathTemplate": "/track/from-user/update",

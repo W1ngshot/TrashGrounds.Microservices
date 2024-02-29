@@ -19,7 +19,7 @@ public class UploadMusicCommandHandler : ICommandHandler<UploadMusicCommand, Gui
     public async Task<Guid> Handle(UploadMusicCommand request, CancellationToken cancellationToken)
     {
         var filePath = Path.Combine(StoragePaths.MusicPath,
-            $"{Guid.NewGuid()}_{_dateTimeProvider.UtcNow.ToShortDateString()}{Path.GetExtension(request.File.FileName)}");
+            $"{Guid.NewGuid()}{Path.GetExtension(request.File.FileName)}");
         await using (var stream = new FileStream(filePath, FileMode.Create))
         {
             await request.File.CopyToAsync(stream, cancellationToken);

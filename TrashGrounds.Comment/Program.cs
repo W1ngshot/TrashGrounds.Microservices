@@ -1,10 +1,11 @@
+using System.Net;
 using TrashGrounds.Comment.Bootstrap;
 using TrashGrounds.Comment.Infrastructure;
 using TrashGrounds.Comment.Infrastructure.Routing;
 using TrashGrounds.Comment.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
-
+ServicePointManager.ServerCertificateValidationCallback += (_, _, _, _) => true;
 builder.Host.AddCustomLogging();
 
 builder.Services

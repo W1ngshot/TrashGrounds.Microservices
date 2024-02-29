@@ -2,11 +2,11 @@
   "Routes": [
     {
       "DownstreamPathTemplate": "/api/post/{postId}/rate",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "rates-service",
-          "Port": "7072"
+          "Port": "8082"
         }
       ],
       "UpstreamPathTemplate": "/post/{postId}/rate",
@@ -14,11 +14,11 @@
     },
     {
       "DownstreamPathTemplate": "/api/track/{trackId}/rate",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "rates-service",
-          "Port": "7072"
+          "Port": "8082"
         }
       ],
       "UpstreamPathTemplate": "/track/{trackId}/rate",

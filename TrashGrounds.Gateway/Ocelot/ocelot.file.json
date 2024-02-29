@@ -2,11 +2,11 @@
   "Routes": [
     {
       "DownstreamPathTemplate": "/api/file/image/{id}",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "files-service",
-          "Port": "7075"
+          "Port": "8085"
         }
       ],
       "UpstreamPathTemplate": "/image/{id}",
@@ -14,11 +14,11 @@
     },
     {
       "DownstreamPathTemplate": "/api/file/image/upload",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "files-service",
-          "Port": "7075"
+          "Port": "8085"
         }
       ],
       "UpstreamPathTemplate": "/image/upload",
@@ -26,11 +26,11 @@
     },
     {
       "DownstreamPathTemplate": "/api/file/music/{id}",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "files-service",
-          "Port": "7075"
+          "Port": "8085"
         }
       ],
       "UpstreamPathTemplate": "/music/{id}",
@@ -38,11 +38,11 @@
     },
     {
       "DownstreamPathTemplate": "/api/file/music/upload",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "files-service",
-          "Port": "7075"
+          "Port": "8085"
         }
       ],
       "UpstreamPathTemplate": "/music/upload",

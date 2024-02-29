@@ -1,8 +1,10 @@
+using System.Net;
 using Ocelot.Cache.CacheManager;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
+ServicePointManager.ServerCertificateValidationCallback += (_, _, _, _) => true;
 
 builder.Configuration.AddOcelot(
     builder.Environment.IsDevelopment() ? "./OcelotDev" : "./Ocelot", 

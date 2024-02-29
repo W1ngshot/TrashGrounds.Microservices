@@ -1,3 +1,4 @@
+using System.Net;
 using TrashGrounds.User.Bootstrap;
 using TrashGrounds.User.Infrastructure;
 using TrashGrounds.User.Infrastructure.Routing;
@@ -6,6 +7,7 @@ using TrashGrounds.User.Middleware;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Host.AddCustomLogging();
+ServicePointManager.ServerCertificateValidationCallback += (_, _, _, _) => true;
 
 builder.Services
     .AddDatabaseWithIdentity(builder.Configuration);

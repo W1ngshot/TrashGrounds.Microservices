@@ -6,7 +6,7 @@ services:
     image: postgres:latest
     restart: unless-stopped
     ports:
-      - 5439:5432
+      - "5439:5432"
     volumes:
       - ./data/users-db:/var/lib/postgresql/data
     environment:
@@ -27,27 +27,23 @@ services:
       context: ./../../TrashGrounds.User
       dockerfile: Dockerfile
     ports:
-      - 8080:8080
-      - 7070:7070
+      - "8080:8080"
+      - "7070:7070"
     depends_on:
       users-db:
         condition: service_healthy
     environment:
       ASPNETCORE_ENVIRONMENT: Production
       ASPNETCORE_URLS: https://+:8080;http://+:7070
-      ASPNETCORE_Kestrel__Certificates__Default__Password: 123456
-      ASPNETCORE_Kestrel__Certificates__Default__Path: /https/aspnetapp.pfx
       ConnectionStrings__Postgres: "Host=users-db;Port=5432;Username=postgres;Password=password;Database=tg_users"
       Jwt__Key: "gdsgsdhsgjsgggrrsdgbfdshfhdfgfsdrgrshfdshfdsbhfsfbfdsgtrregsdfgsfdgsdfgsfg"
-      Microservices__File: "http://files-service:7075"
-    volumes:
-      - ~/.aspnet/https:/https:ro
+      Microservices__File: "https://files-service:8085"
 
   tracks-db:
     container_name: tracks-db
     image: postgres:latest
     ports:
-      - 5433:5432
+      - "5433:5432"
     volumes:
       - ./data/tracks-db:/var/lib/postgresql/data
     environment:
@@ -67,29 +63,25 @@ services:
       context: ./../../TrashGrounds.Track
       dockerfile: Dockerfile
     ports:
-      - 8081:8081
-      - 7071:7071
+      - "8081:8081"
+      - "7071:7071"
     depends_on:
       tracks-db:
         condition: service_healthy
     environment:
       ASPNETCORE_ENVIRONMENT: Production
       ASPNETCORE_URLS: https://+:8081;http://+:7071
-      ASPNETCORE_Kestrel__Certificates__Default__Password: 123456
-      ASPNETCORE_Kestrel__Certificates__Default__Path: /https/aspnetapp.pfx
       ConnectionStrings__Postgres: "Host=tracks-db;Port=5432;Username=postgres;Password=password;Database=tg_tracks"
       Jwt__Key: "gdsgsdhsgjsgggrrsdgbfdshfhdfgfsdrgrshfdshfdsbhfsfbfdsgtrregsdfgsfdgsdfgsfg"
-      Microservices__User: "http://users-service:7070"
-      Microservices__Rate: "http://rates-service:7072"
-      Microservices__File: "http://files-service:7075"
-    volumes:
-      - ~/.aspnet/https:/https:ro
+      Microservices__User: "https://users-service:8080"
+      Microservices__Rate: "https://rates-service:8082"
+      Microservices__File: "https://files-service:8085"
 
   rates-db:
     container_name: rates-db
     image: postgres:latest
     ports:
-      - 5434:5432
+      - "5434:5432"
     volumes:
       - ./data/rates-db:/var/lib/postgresql/data
     environment:
@@ -109,26 +101,22 @@ services:
       context: ./../../TrashGrounds.Rate
       dockerfile: Dockerfile
     ports:
-      - 8082:8082
-      - 7072:7072
+      - "8082:8082"
+      - "7072:7072"
     depends_on:
       rates-db:
         condition: service_healthy
     environment:
       ASPNETCORE_ENVIRONMENT: Production
       ASPNETCORE_URLS: https://+:8082;http://+:7072
-      ASPNETCORE_Kestrel__Certificates__Default__Password: 123456
-      ASPNETCORE_Kestrel__Certificates__Default__Path: /https/aspnetapp.pfx
       ConnectionStrings__Postgres: "Host=rates-db;Port=5432;Username=postgres;Password=password;Database=tg_rates"
       Jwt__Key: "gdsgsdhsgjsgggrrsdgbfdshfhdfgfsdrgrshfdshfdsbhfsfbfdsgtrregsdfgsfdgsdfgsfg"
-    volumes:
-      - ~/.aspnet/https:/https:ro
 
   posts-db:
     container_name: posts-db
     image: postgres:latest
     ports:
-      - 5435:5432
+      - "5435:5432"
     volumes:
       - ./data/posts-db:/var/lib/postgresql/data
     environment:
@@ -148,28 +136,24 @@ services:
       context: ./../../TrashGrounds.Post
       dockerfile: Dockerfile
     ports:
-      - 8083:8083
-      - 7073:7073
+      - "8083:8083"
+      - "7073:7073"
     depends_on:
       posts-db:
         condition: service_healthy
     environment:
       ASPNETCORE_ENVIRONMENT: Production
       ASPNETCORE_URLS: https://+:8083;http://+:7073
-      ASPNETCORE_Kestrel__Certificates__Default__Password: 123456
-      ASPNETCORE_Kestrel__Certificates__Default__Path: /https/aspnetapp.pfx
       ConnectionStrings__Postgres: "Host=posts-db;Port=5432;Username=postgres;Password=password;Database=tg_posts"
       Jwt__Key: "gdsgsdhsgjsgggrrsdgbfdshfhdfgfsdrgrshfdshfdsbhfsfbfdsgtrregsdfgsfdgsdfgsfg"
-      Microservices__Rate: "http://rates-service:7072"
-      Microservices__File: "http://files-service:7075"
-    volumes:
-      - ~/.aspnet/https:/https:ro
+      Microservices__Rate: "https://rates-service:8082"
+      Microservices__File: "https://files-service:8085"
 
   comments-db:
     container_name: comments-db
     image: postgres:latest
     ports:
-      - 5437:5432
+      - "5437:5432"
     volumes:
       - ./data/comments-db:/var/lib/postgresql/data
     environment:
@@ -189,27 +173,23 @@ services:
       context: ./../../TrashGrounds.Comment
       dockerfile: Dockerfile
     ports:
-      - 8084:8084
-      - 7074:7074
+      - "8084:8084"
+      - "7074:7074"
     depends_on:
       comments-db:
         condition: service_healthy
     environment:
       ASPNETCORE_ENVIRONMENT: Production
       ASPNETCORE_URLS: https://+:8084;http://+:7074
-      ASPNETCORE_Kestrel__Certificates__Default__Password: 123456
-      ASPNETCORE_Kestrel__Certificates__Default__Path: /https/aspnetapp.pfx
       ConnectionStrings__Postgres: "Host=comments-db;Port=5432;Username=postgres;Password=password;Database=tg_comments"
       Jwt__Key: "gdsgsdhsgjsgggrrsdgbfdshfhdfgfsdrgrshfdshfdsbhfsfbfdsgtrregsdfgsfdgsdfgsfg"
-      Microservices__User: "http://users-service:7070"
-    volumes:
-      - ~/.aspnet/https:/https:ro
+      Microservices__User: "https://users-service:8080"
 
   files-db:
     container_name: files-db
     image: postgres:latest
     ports:
-      - 5436:5432
+      - "5436:5432"
     volumes:
       - ./data/files-db:/var/lib/postgresql/data
     environment:
@@ -226,7 +206,7 @@ services:
     container_name: hangfire-db
     image: postgres:latest
     ports:
-      - 5438:5432
+      - "5438:5432"
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=password
@@ -244,8 +224,8 @@ services:
       context: ./../../TrashGrounds.File
       dockerfile: Dockerfile
     ports:
-      - 8085:8085
-      - 7075:7075
+      - "8085:8085"
+      - "7075:7075"
     depends_on:
       files-db:
         condition: service_healthy
@@ -254,18 +234,15 @@ services:
     environment:
       ASPNETCORE_ENVIRONMENT: Production
       ASPNETCORE_URLS: https://+:8085;http://+:7075
-      ASPNETCORE_Kestrel__Certificates__Default__Password: 123456
-      ASPNETCORE_Kestrel__Certificates__Default__Path: /https/aspnetapp.pfx
       ConnectionStrings__Postgres: "Host=files-db;Port=5432;Username=postgres;Password=password;Database=tg_posts"
       ConnectionStrings__Hangfire: "Host=hangfire-db;Port=5432;Username=postgres;Password=password;Database=tg_hangfire"
       Jwt__Key: "gdsgsdhsgjsgggrrsdgbfdshfhdfgfsdrgrshfdshfdsbhfsfbfdsgtrregsdfgsfdgsdfgsfg"
-      UsedFiles__User: "http://users-service:7070"
-      UsedFiles__Post: "http://posts-service:7073"
-      UsedFiles__Track: "http://tracks-service:7071"
+      UsedFiles__User: "https://users-service:8080"
+      UsedFiles__Post: "https://posts-service:8083"
+      UsedFiles__Track: "https://tracks-service:8081"
     volumes:
-      - ~/.aspnet/https:/https:ro
-      - filedata:/app/Files/Image
-      - filedata:/app/Files/Music
+      - images:/app/Files/Images
+      - music:/app/Files/Music
 
   gateway:
     container_name: gateway
@@ -274,19 +251,46 @@ services:
       context: ./../../TrashGrounds.Gateway
       dockerfile: Dockerfile
     ports:
-      - 8000:8000
+      - "8000:8000"
     environment:
       ASPNETCORE_ENVIRONMENT: Production
       ASPNETCORE_URLS: https://+:8000
-      ASPNETCORE_Kestrel__Certificates__Default__Password: 123456
-      ASPNETCORE_Kestrel__Certificates__Default__Path: /https/aspnetapp.pfx
+      
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.10.2
+    container_name: elastic-search
+    environment:
+      - discovery.type=single-node
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    ports:
+      - "9200:9200"
     volumes:
-      - ~/.aspnet/https:/https:ro
+      - ./data/elasticsearch:/usr/share/elasticsearch/data
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.10.2
+    container_name: kibana
+    ports:
+      - "5601:5601"
+    environment:
+      - ELASTICSEARCH_URL=http://elastic-search:9200
+      - ELASTICSEARCH_HOSTS=http://elastic-search:9200
+    depends_on:
+      - elasticsearch
 
 volumes:
-  filedata:
+  images:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /files
+      device: /images
+  music:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /music
