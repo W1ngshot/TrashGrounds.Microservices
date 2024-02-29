@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using TrashGrounds.User.Features.User.ChangePictureLink;
+using TrashGrounds.User.Features.ChangeAvatar;
 using TrashGrounds.User.gRPC.Services;
 using TrashGrounds.User.Infrastructure.Constants;
 

@@ -15,8 +15,6 @@
         <PackageReference Include="Grpc.AspNetCore" Version="2.52.0" />
         <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.4" />
         <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="7.0.4" />
-        <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
-        <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.4" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.3" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.4">
           <PrivateAssets>all</PrivateAssets>
@@ -34,7 +32,6 @@
     <ItemGroup>
         <Protobuf Include="gRPC\Protos\file.proto" GrpcServices="Client" />
         <Protobuf Include="gRPC\Protos\used-files.proto" GrpcServices="Server" />
-        <Protobuf Include="gRPC\Protos\user.proto" GrpcServices="Server" />
     </ItemGroup>
 
     <ItemGroup>

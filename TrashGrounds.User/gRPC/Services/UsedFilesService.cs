@@ -21,7 +21,7 @@ public class UsedFilesService : UsedFilesServer.UsedFilesService.UsedFilesServic
         response.Ids.AddRange(
             await _context.DomainUsers
                 .Where(user => user.AvatarId != null)
-                .Select(post => post.AvatarId.ToString())
+                .Select(user => user.AvatarId.ToString())
                 .ToListAsync());
 
         return response;

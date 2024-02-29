@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using TrashGrounds.User.Database.Postgres.Configurations.Abstractions;
 using TrashGrounds.User.Database.Postgres.Interfaces;
@@ -7,12 +6,11 @@ using TrashGrounds.User.Models.Main;
 
 namespace TrashGrounds.User.Database.Postgres;
 
-public class UserDbContext : IdentityDbContext<AppUser, IdentityRole<Guid>, Guid>, IUserDbContext
+public class UserDbContext : DbContext, IUserDbContext
 {
     private readonly IEnumerable<DependencyInjectedEntityConfiguration> _configurations;
     
-    public DbSet<AppUser> IdentityUsers { get; set; } = null!;
-    public DbSet<DomainUser> DomainUsers { get; set; } = null!;
+    public DbSet<Models.Main.User> DomainUsers { get; set; } = null!;
 
     public UserDbContext(DbContextOptions<UserDbContext> options, 
         IEnumerable<DependencyInjectedEntityConfiguration> configurations) : base(options)

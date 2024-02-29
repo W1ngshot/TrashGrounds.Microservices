@@ -7,6 +7,6 @@ public class UserMappingProfile : Profile
 {
     public UserMappingProfile()
     {
-        CreateMap<DomainUser, UserProfile>();
+        CreateMap<Models.Main.User, UserProfile>();
     }
 }

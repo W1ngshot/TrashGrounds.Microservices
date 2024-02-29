@@ -5,7 +5,7 @@ namespace TrashGrounds.User.Database.Postgres.Interfaces;
 
 public interface IUserDbContext
 {
-    public DbSet<DomainUser> DomainUsers { get; set; }
+    public DbSet<Models.Main.User> DomainUsers { get; set; }
 
     public Task<bool> SaveEntitiesAsync();
 }

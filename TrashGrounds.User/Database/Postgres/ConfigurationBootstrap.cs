@@ -7,8 +7,6 @@ public static class ConfigurationBootstrap
 {
     public static IServiceCollection AddDatabaseConfigurations(this IServiceCollection services)
     {
-        services.AddSingleton<DependencyInjectedEntityConfiguration, AppUserConfiguration>()
-            .AddSingleton<DependencyInjectedEntityConfiguration, DomainUserConfiguration>();
         
         return services;
     }

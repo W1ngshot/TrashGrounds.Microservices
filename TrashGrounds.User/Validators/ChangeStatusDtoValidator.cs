@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using TrashGrounds.User.Features.User.ChangeStatus;
+using TrashGrounds.User.Features.ChangeStatus;
 using TrashGrounds.User.Infrastructure.Constants;
 
 namespace TrashGrounds.User.Validators;

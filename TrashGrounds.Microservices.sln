@@ -3,9 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrashGrounds.User", "TrashGrounds.User\TrashGrounds.User.csproj", "{AB32BB52-50FD-4849-9928-D7039372AC13}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docker", "Docker", "{832456CC-51F2-47D0-ABB2-FB0A730E2EBF}"
-	ProjectSection(SolutionItems) = preProject
-		Docker\docker-compose.yaml = Docker\docker-compose.yaml
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrashGrounds.Track", "TrashGrounds.Track\TrashGrounds.Track.csproj", "{ED169671-2372-42B4-893B-30D1EC4771C0}"
 EndProject
@@ -20,6 +17,18 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrashGrounds.File", "TrashGrounds.File\TrashGrounds.File.csproj", "{8867EB81-F6E9-4904-B39B-4074C0CDFFE3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrashGrounds.Gateway", "TrashGrounds.Gateway\TrashGrounds.Gateway.csproj", "{4C2D91F7-FFEF-4C7A-B13E-DACDA3238593}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrashGrounds.Auth", "TrashGrounds.Auth\TrashGrounds.Auth.csproj", "{B68225A0-387D-4529-96E8-F88E28C39529}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tg_build", "tg_build", "{E9458E4E-8B42-48A3-A6E0-41B3EB934143}"
+	ProjectSection(SolutionItems) = preProject
+		Docker\tg_build\docker-compose.yaml = Docker\tg_build\docker-compose.yaml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tg_dev", "tg_dev", "{4C638F35-B3B5-4E1C-AD84-3437DAE30F11}"
+	ProjectSection(SolutionItems) = preProject
+		Docker\tg_dev\docker-compose.yaml = Docker\tg_dev\docker-compose.yaml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,5 +72,13 @@ Global
 		{4C2D91F7-FFEF-4C7A-B13E-DACDA3238593}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C2D91F7-FFEF-4C7A-B13E-DACDA3238593}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4C2D91F7-FFEF-4C7A-B13E-DACDA3238593}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B68225A0-387D-4529-96E8-F88E28C39529}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B68225A0-387D-4529-96E8-F88E28C39529}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B68225A0-387D-4529-96E8-F88E28C39529}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B68225A0-387D-4529-96E8-F88E28C39529}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E9458E4E-8B42-48A3-A6E0-41B3EB934143} = {832456CC-51F2-47D0-ABB2-FB0A730E2EBF}
+		{4C638F35-B3B5-4E1C-AD84-3437DAE30F11} = {832456CC-51F2-47D0-ABB2-FB0A730E2EBF}
 	EndGlobalSection
 EndGlobal

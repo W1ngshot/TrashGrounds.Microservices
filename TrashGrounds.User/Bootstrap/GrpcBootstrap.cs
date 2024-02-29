@@ -26,7 +26,6 @@ public static class GrpcBootstrap
 
     public static void MapGrpcServices(this IEndpointRouteBuilder app)
     {
-        app.MapGrpcService<UserInfoGrpcService>();
         app.MapGrpcService<UsedFilesService>();
     }
 }
