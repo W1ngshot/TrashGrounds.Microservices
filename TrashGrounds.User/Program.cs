@@ -38,7 +38,6 @@ var app = builder.Build();
 await app.TryMigrateDatabaseAsync();
 
 app.UseMiddleware<ExceptionHandlingMiddleware>();
-app.UseHttpsRedirection();
 app.UseCors();
 
 if (app.Environment.IsDevelopment() || app.Environment.EnvironmentName == "Local")

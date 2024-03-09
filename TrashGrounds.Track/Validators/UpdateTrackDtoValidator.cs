@@ -35,9 +35,6 @@ public class UpdateTrackDtoValidator : AbstractValidator<UpdateTrackEndpoint.Upd
             .NotEmpty()
             .WithMessage(ValidationFailedMessages.EmptyField);
 
-        RuleFor(dto => dto.TrackId)
-            .NotEmpty();
-
         RuleFor(dto => dto.NewMusicId)
             .NotEmpty()
             .WithMessage(ValidationFailedMessages.EmptyField)

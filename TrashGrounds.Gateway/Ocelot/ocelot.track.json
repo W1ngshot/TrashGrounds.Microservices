@@ -2,103 +2,115 @@
   "Routes": [
     {
       "DownstreamPathTemplate": "/api/genre/all",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "tracks-service",
-          "Port": "8081"
+          "Port": "5051"
         }
       ],
       "UpstreamPathTemplate": "/genres/all",
-      "UpstreamHttpMethod": [ "GET" ],
-      "FileCacheOptions": { "TtlSeconds": 30 }
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "FileCacheOptions": {
+        "TtlSeconds": 30
+      }
     },
     {
       "DownstreamPathTemplate": "/api/track/{trackId}/add-listen",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "tracks-service",
-          "Port": "8081"
+          "Port": "5051"
         }
       ],
       "UpstreamPathTemplate": "/track/{trackId}/add-listen",
-      "UpstreamHttpMethod": [ "POST" ]
+      "UpstreamHttpMethod": [
+        "POST"
+      ]
     },
     {
       "DownstreamPathTemplate": "/api/track/add",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "tracks-service",
-          "Port": "8081"
+          "Port": "5051"
         }
       ],
       "UpstreamPathTemplate": "/track/add",
-      "UpstreamHttpMethod": [ "POST" ]
+      "UpstreamHttpMethod": [
+        "POST"
+      ]
     },
     {
       "DownstreamPathTemplate": "/api/track/{trackId}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "tracks-service",
-          "Port": "8081"
+          "Port": "5051"
         }
       ],
       "UpstreamPathTemplate": "/track/{trackId}",
-      "UpstreamHttpMethod": [ "GET", "DELETE" ],
-      "FileCacheOptions": { "TtlSeconds": 30 }
+      "UpstreamHttpMethod": [
+        "GET",
+        "PUT",
+        "DELETE"
+      ],
+      "FileCacheOptions": {
+        "TtlSeconds": 30
+      }
     },
     {
       "DownstreamPathTemplate": "/api/track/{category}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "tracks-service",
-          "Port": "8081"
+          "Port": "5051"
         }
       ],
       "UpstreamPathTemplate": "/track/{category}",
-      "UpstreamHttpMethod": [ "GET" ],
-      "FileCacheOptions": { "TtlSeconds": 60 }
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "FileCacheOptions": {
+        "TtlSeconds": 60
+      }
     },
     {
       "DownstreamPathTemplate": "/api/track/from-user/{id}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "tracks-service",
-          "Port": "8081"
+          "Port": "5051"
         }
       ],
       "UpstreamPathTemplate": "/track/from-user/{id}",
-      "UpstreamHttpMethod": [ "GET" ],
-      "FileCacheOptions": { "TtlSeconds": 30 }
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "FileCacheOptions": {
+        "TtlSeconds": 30
+      }
     },
     {
       "DownstreamPathTemplate": "/api/track/search",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "tracks-service",
-          "Port": "8081"
+          "Port": "5051"
         }
       ],
-      "UpstreamPathTemplate": "/track/from-user/search",
-      "UpstreamHttpMethod": [ "GET" ]
-    },
-    {
-      "DownstreamPathTemplate": "/api/track/update",
-      "DownstreamScheme": "https",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "tracks-service",
-          "Port": "8081"
-        }
-      ],
-      "UpstreamPathTemplate": "/track/from-user/update",
-      "UpstreamHttpMethod": [ "PUT" ]
+      "UpstreamPathTemplate": "/track/search",
+      "UpstreamHttpMethod": [
+        "GET"
+      ]
     }
   ]
 }

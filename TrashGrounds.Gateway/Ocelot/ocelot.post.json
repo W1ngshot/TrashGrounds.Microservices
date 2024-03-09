@@ -2,11 +2,11 @@
   "Routes": [
     {
       "DownstreamPathTemplate": "/api/posts/add",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "posts-service",
-          "Port": "8083"
+          "Port": "5053"
         }
       ],
       "UpstreamPathTemplate": "/posts/add",
@@ -14,11 +14,11 @@
     },
     {
       "DownstreamPathTemplate": "/api/posts/{postId}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "posts-service",
-          "Port": "8083"
+          "Port": "5053"
         }
       ],
       "UpstreamPathTemplate": "/posts/{postId}",
@@ -26,11 +26,11 @@
     },
     {
       "DownstreamPathTemplate": "/api/posts/from-user/{userId}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "posts-service",
-          "Port": "8083"
+          "Port": "5053"
         }
       ],
       "UpstreamPathTemplate": "/posts/from-user/{userId}",
@@ -39,11 +39,11 @@
     },
     {
       "DownstreamPathTemplate": "/api/posts/my",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "posts-service",
-          "Port": "8083"
+          "Port": "5053"
         }
       ],
       "UpstreamPathTemplate": "/posts/my",
