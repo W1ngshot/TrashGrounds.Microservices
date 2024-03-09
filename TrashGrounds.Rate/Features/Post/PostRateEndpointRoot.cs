@@ -15,5 +15,9 @@ public class PostRateEndpointRoot : IEndpointRoot
             .AddEndpoint<GetPostUserRateEndpoint>()
             .AddEndpoint<ChangePostRateEndpoint>()
             .AddEndpoint<DeletePostRateEndpoint>();
+
+        endpoints.MapGroup("/api/rate")
+            .WithTags("Оценки постов")
+            .AddEndpoint<GetPostsUserRatesEndpoint>();
     }
 }

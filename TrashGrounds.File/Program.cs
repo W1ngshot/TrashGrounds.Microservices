@@ -1,3 +1,4 @@
+using System.Net;
 using Hangfire;
 using Microsoft.AspNetCore.Http.Features;
 using TrashGrounds.File.Bootstrap;
@@ -6,7 +7,7 @@ using TrashGrounds.File.Infrastructure.Routing;
 using TrashGrounds.File.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
-
+ServicePointManager.ServerCertificateValidationCallback += (_, _, _, _) => true;
 builder.Host.AddCustomLogging();
 
 builder.Services.Configure<FormOptions>(options =>
@@ -45,8 +46,6 @@ if (app.Environment.IsDevelopment() || app.Environment.EnvironmentName == "Local
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-app.UseHttpsRedirection();
 
 app.UseRouting();
 

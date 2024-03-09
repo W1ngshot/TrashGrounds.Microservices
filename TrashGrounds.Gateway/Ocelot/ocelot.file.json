@@ -6,7 +6,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "files-service",
-          "Port": "7075"
+          "Port": "5055"
         }
       ],
       "UpstreamPathTemplate": "/image/{id}",
@@ -18,7 +18,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "files-service",
-          "Port": "7075"
+          "Port": "5055"
         }
       ],
       "UpstreamPathTemplate": "/image/upload",
@@ -30,7 +30,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "files-service",
-          "Port": "7075"
+          "Port": "5055"
         }
       ],
       "UpstreamPathTemplate": "/music/{id}",
@@ -42,7 +42,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "files-service",
-          "Port": "7075"
+          "Port": "5055"
         }
       ],
       "UpstreamPathTemplate": "/music/upload",

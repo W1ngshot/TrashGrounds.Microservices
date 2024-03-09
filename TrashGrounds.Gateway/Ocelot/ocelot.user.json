@@ -6,7 +6,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "users-service", 
-          "Port": "7070"
+          "Port": "5050"
         }
       ], 
       "UpstreamPathTemplate": "/auth/current-id", 
@@ -18,7 +18,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "users-service",
-          "Port": "7070"
+          "Port": "5050"
         }
       ],
       "UpstreamPathTemplate": "/auth/login",
@@ -30,7 +30,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "users-service",
-          "Port": "7070"
+          "Port": "5050"
         }
       ],
       "UpstreamPathTemplate": "/auth/refresh",
@@ -42,7 +42,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "users-service",
-          "Port": "7070"
+          "Port": "5050"
         }
       ],
       "UpstreamPathTemplate": "/auth/register",
@@ -54,7 +54,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "users-service",
-          "Port": "7070"
+          "Port": "5050"
         }
       ],
       "UpstreamPathTemplate": "/auth/change-password",
@@ -67,7 +67,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "users-service",
-          "Port": "7070"
+          "Port": "5050"
         }
       ],
       "UpstreamPathTemplate": "/user/avatar",
@@ -79,7 +79,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "users-service",
-          "Port": "7070"
+          "Port": "5050"
         }
       ],
       "UpstreamPathTemplate": "/user/status",
@@ -91,7 +91,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "users-service",
-          "Port": "7070"
+          "Port": "5050"
         }
       ],
       "UpstreamPathTemplate": "/user/profile/my",
@@ -103,7 +103,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "users-service",
-          "Port": "7070"
+          "Port": "5050"
         }
       ],
       "UpstreamPathTemplate": "/user/profile/{id}",

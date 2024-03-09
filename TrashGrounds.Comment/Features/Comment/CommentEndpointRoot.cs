@@ -10,7 +10,7 @@ public class CommentEndpointRoot : IEndpointRoot
 {
     public void MapEndpoints(IEndpointRouteBuilder endpoints)
     {
-        endpoints.MapGroup("/api/comments/{trackId:guid}")
+        endpoints.MapGroup("/api/track/{trackId:guid}/comments")
             .AddEndpoint<GetTrackCommentsEndpoint>()
             .AddEndpoint<AddCommentEndpoint>()
             .AddEndpoint<EditCommentEndpoint>()

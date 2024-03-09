@@ -76,3 +76,5 @@ testem.log
 **/appsettings.Local.json
 ocelot.json
 **/Docker/**/data
+**/Docker/**/images
+**/Docker/**/music

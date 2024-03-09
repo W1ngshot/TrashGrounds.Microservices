@@ -6,7 +6,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "posts-service",
-          "Port": "7073"
+          "Port": "5053"
         }
       ],
       "UpstreamPathTemplate": "/posts/add",
@@ -18,7 +18,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "posts-service",
-          "Port": "7073"
+          "Port": "5053"
         }
       ],
       "UpstreamPathTemplate": "/posts/{postId}",
@@ -30,7 +30,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "posts-service",
-          "Port": "7073"
+          "Port": "5053"
         }
       ],
       "UpstreamPathTemplate": "/posts/from-user/{userId}",
@@ -43,7 +43,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "posts-service",
-          "Port": "7073"
+          "Port": "5053"
         }
       ],
       "UpstreamPathTemplate": "/posts/my",
