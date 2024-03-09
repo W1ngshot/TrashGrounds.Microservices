@@ -16,12 +16,12 @@
 - MediatR
 - gRPC for microservice communication
 - Logging via Serilog with Elastic Search & Kibana
-- Hangfire for background works
+- Hangfire for background jobs
 - Ocelot gateway
 - Docker
 
 ## Quick overview
 
 - 6 ASP .NET microservices
-- ASP ,NET Gateway app
+- ASP .NET Gateway app
 - 8 PostgreSQL databases
