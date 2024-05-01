@@ -9,7 +9,7 @@
           "Port": "5054"
         }
       ],
-      "UpstreamPathTemplate": "/track/{trackId}/comments",
+      "UpstreamPathTemplate": "/comments/track/{trackId}",
       "UpstreamHttpMethod": [ "GET" ]
     },
     {
@@ -21,7 +21,7 @@
           "Port": "5054"
         }
       ],
-      "UpstreamPathTemplate": "/track/{trackId}/comments/{commentId}",
+      "UpstreamPathTemplate": "/comments/{commentId}/track/{trackId}",
       "UpstreamHttpMethod": [ "PUT", "DELETE" ]
     },
     {
@@ -33,7 +33,7 @@
           "Port": "5054"
         }
       ],
-      "UpstreamPathTemplate": "/track/{trackId}/comments/add",
+      "UpstreamPathTemplate": "/comments/add/track/{trackId}",
       "UpstreamHttpMethod": [ "POST" ]
     }
   ]
