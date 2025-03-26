@@ -5,7 +5,7 @@ services:
     ports:
       - "5435:5432"
     volumes:
-      - ./data/users-db:/var/lib/postgresql/data
+      - ./data/tg-db:/var/lib/postgresql/data
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=password
