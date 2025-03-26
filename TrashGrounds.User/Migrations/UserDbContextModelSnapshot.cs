@@ -17,6 +17,7 @@ namespace TrashGrounds.User.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasDefaultSchema("users")
                 .HasAnnotation("ProductVersion", "7.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
@@ -46,24 +47,24 @@ namespace TrashGrounds.User.Migrations
                         .IsUnique()
                         .HasDatabaseName("RoleNameIndex");
 
-                    b.ToTable("AspNetRoles", (string)null);
+                    b.ToTable("AspNetRoles", "users");
 
                     b.HasData(
                         new
                         {
-                            Id = new Guid("6fe9e721-4910-4b2c-b626-23949805fa61"),
+                            Id = new Guid("e73aafb0-5637-4e5c-8497-ec20791dcd93"),
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = new Guid("c5d94634-95d8-424c-98b1-214dbeafbade"),
+                            Id = new Guid("a1942a56-edb8-400c-a8b2-b6e114564b06"),
                             Name = "Moderator",
                             NormalizedName = "MODERATOR"
                         },
                         new
                         {
-                            Id = new Guid("59174f05-e8b2-444c-8e4e-bfc13e25aba6"),
+                            Id = new Guid("941f7059-873f-40e0-b7b7-871bf0297a88"),
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -90,7 +91,7 @@ namespace TrashGrounds.User.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetRoleClaims", (string)null);
+                    b.ToTable("AspNetRoleClaims", "users");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
@@ -114,7 +115,7 @@ namespace TrashGrounds.User.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserClaims", (string)null);
+                    b.ToTable("AspNetUserClaims", "users");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
@@ -135,7 +136,7 @@ namespace TrashGrounds.User.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserLogins", (string)null);
+                    b.ToTable("AspNetUserLogins", "users");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
@@ -150,7 +151,7 @@ namespace TrashGrounds.User.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetUserRoles", (string)null);
+                    b.ToTable("AspNetUserRoles", "users");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
@@ -169,7 +170,7 @@ namespace TrashGrounds.User.Migrations
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
-                    b.ToTable("AspNetUserTokens", (string)null);
+                    b.ToTable("AspNetUserTokens", "users");
                 });
 
             modelBuilder.Entity("TrashGrounds.User.Models.Main.AppUser", b =>
@@ -238,7 +239,7 @@ namespace TrashGrounds.User.Migrations
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex");
 
-                    b.ToTable("AspNetUsers", (string)null);
+                    b.ToTable("AspNetUsers", "users");
                 });
 
             modelBuilder.Entity("TrashGrounds.User.Models.Main.DomainUser", b =>
@@ -268,7 +269,7 @@ namespace TrashGrounds.User.Migrations
 
                     b.HasIndex("IdentityUserId");
 
-                    b.ToTable("DomainUsers");
+                    b.ToTable("DomainUsers", "users");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>

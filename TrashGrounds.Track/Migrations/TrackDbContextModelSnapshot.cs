@@ -17,6 +17,7 @@ namespace TrashGrounds.Track.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasDefaultSchema("tracks")
                 .HasAnnotation("ProductVersion", "7.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
@@ -34,7 +35,7 @@ namespace TrashGrounds.Track.Migrations
 
                     b.HasIndex("TracksId");
 
-                    b.ToTable("GenreMusicTrack");
+                    b.ToTable("GenreMusicTrack", "tracks");
                 });
 
             modelBuilder.Entity("TrashGrounds.Track.Models.Main.Genre", b =>
@@ -49,22 +50,22 @@ namespace TrashGrounds.Track.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Genres");
+                    b.ToTable("Genres", "tracks");
 
                     b.HasData(
                         new
                         {
-                            Id = new Guid("d4b7bc34-3b01-4247-a9bc-02d4c5185e08"),
+                            Id = new Guid("21395468-d9de-4954-a1d9-8f8d4111f024"),
                             Name = "Русский рэп"
                         },
                         new
                         {
-                            Id = new Guid("251ceebe-752a-4ea4-810e-03b8eaee7e5f"),
+                            Id = new Guid("26f5682b-d20d-43e0-81fc-3c0a4bdc4fc3"),
                             Name = "Что-то странное"
                         },
                         new
                         {
-                            Id = new Guid("50e3aa21-ada0-42d3-a143-cf45922b97a5"),
+                            Id = new Guid("c24b1a5a-431b-40a8-a3f9-b79573dd4e4f"),
                             Name = "Мэшап"
                         });
                 });
@@ -106,7 +107,7 @@ namespace TrashGrounds.Track.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("MusicTracks");
+                    b.ToTable("MusicTracks", "tracks");
                 });
 
             modelBuilder.Entity("GenreMusicTrack", b =>

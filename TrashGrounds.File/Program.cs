@@ -1,4 +1,3 @@
-using System.Net;
 using Hangfire;
 using Microsoft.AspNetCore.Http.Features;
 using TrashGrounds.File.Bootstrap;
@@ -7,7 +6,6 @@ using TrashGrounds.File.Infrastructure.Routing;
 using TrashGrounds.File.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
-ServicePointManager.ServerCertificateValidationCallback += (_, _, _, _) => true;
 builder.Host.AddCustomLogging();
 
 builder.Services.Configure<FormOptions>(options =>
@@ -22,7 +20,8 @@ builder.Services
     .AddEndpointsApiExplorer()
     .AddJwtAuthentication(builder.Configuration)
     .AddCustomSwagger(builder.Configuration)
-    .AddAuthorizationWithPolicy();
+    .AddAuthorizationWithPolicy()
+    .AddCors();
 
 builder.Services
     .AddHelperServices()
@@ -37,9 +36,17 @@ builder.Services
 var app = builder.Build();
 await app.TryMigrateDatabaseAsync();
 
-app.UseHangfireDashboard();
-
 app.UseMiddleware<ExceptionHandlingMiddleware>();
+
+app.UseCors(option =>
+{
+    option.AllowAnyHeader();
+    option.AllowAnyMethod();
+    option.AllowCredentials();
+    option.SetIsOriginAllowed(_ => true);
+});
+
+app.UseHangfireDashboard();
 
 if (app.Environment.IsDevelopment() || app.Environment.EnvironmentName == "Local")
 {
@@ -48,7 +55,9 @@ if (app.Environment.IsDevelopment() || app.Environment.EnvironmentName == "Local
 }
 
 app.UseRouting();
+app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseCustomEndpoints();

@@ -1,16 +1,19 @@
 ﻿{
   "Routes": [
     {
-      "DownstreamPathTemplate": "/api/auth/current-id", 
-      "DownstreamScheme": "http", 
+      "DownstreamPathTemplate": "/api/auth/current-id",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "users-service", 
+          "Host": "users-service",
           "Port": "5050"
         }
-      ], 
-      "UpstreamPathTemplate": "/auth/current-id", 
-      "UpstreamHttpMethod": [ "GET" ]
+      ],
+      "UpstreamPathTemplate": "/auth/current-id",
+      "UpstreamHttpMethod": [
+        "GET",
+        "OPTIONS"
+      ]
     },
     {
       "DownstreamPathTemplate": "/api/auth/login",
@@ -22,7 +25,10 @@
         }
       ],
       "UpstreamPathTemplate": "/auth/login",
-      "UpstreamHttpMethod": [ "POST" ]
+      "UpstreamHttpMethod": [
+        "POST",
+        "OPTIONS"
+      ]
     },
     {
       "DownstreamPathTemplate": "/api/auth/refresh-tokens",
@@ -34,7 +40,10 @@
         }
       ],
       "UpstreamPathTemplate": "/auth/refresh",
-      "UpstreamHttpMethod": [ "POST" ]
+      "UpstreamHttpMethod": [
+        "POST",
+        "OPTIONS"
+      ]
     },
     {
       "DownstreamPathTemplate": "/api/auth/register",
@@ -46,7 +55,10 @@
         }
       ],
       "UpstreamPathTemplate": "/auth/register",
-      "UpstreamHttpMethod": [ "POST" ]
+      "UpstreamHttpMethod": [
+        "POST",
+        "OPTIONS"
+      ]
     },
     {
       "DownstreamPathTemplate": "/api/auth/change-password",
@@ -58,9 +70,11 @@
         }
       ],
       "UpstreamPathTemplate": "/auth/change-password",
-      "UpstreamHttpMethod": [ "PATCH" ]
+      "UpstreamHttpMethod": [
+        "PATCH",
+        "OPTIONS"
+      ]
     },
-    
     {
       "DownstreamPathTemplate": "/api/user/change-avatar",
       "DownstreamScheme": "http",
@@ -71,7 +85,10 @@
         }
       ],
       "UpstreamPathTemplate": "/user/avatar",
-      "UpstreamHttpMethod": [ "PATCH" ]
+      "UpstreamHttpMethod": [
+        "PATCH",
+        "OPTIONS"
+      ]
     },
     {
       "DownstreamPathTemplate": "/api/user/change-status",
@@ -83,7 +100,10 @@
         }
       ],
       "UpstreamPathTemplate": "/user/status",
-      "UpstreamHttpMethod": [ "PATCH" ]
+      "UpstreamHttpMethod": [
+        "PATCH",
+        "OPTIONS"
+      ]
     },
     {
       "DownstreamPathTemplate": "/api/user/me",
@@ -95,7 +115,10 @@
         }
       ],
       "UpstreamPathTemplate": "/user/profile/my",
-      "UpstreamHttpMethod": [ "GET" ]
+      "UpstreamHttpMethod": [
+        "GET",
+        "OPTIONS"
+      ]
     },
     {
       "DownstreamPathTemplate": "/api/user/{id}",
@@ -107,7 +130,10 @@
         }
       ],
       "UpstreamPathTemplate": "/user/profile/{id}",
-      "UpstreamHttpMethod": [ "GET" ]
+      "UpstreamHttpMethod": [
+        "GET",
+        "OPTIONS"
+      ]
     }
   ]
 }
