@@ -11,8 +11,7 @@
       ],
       "UpstreamPathTemplate": "/image/{id}",
       "UpstreamHttpMethod": [
-        "GET",
-        "OPTIONS"
+        "GET"
       ]
     },
     {
@@ -26,8 +25,7 @@
       ],
       "UpstreamPathTemplate": "/image/upload",
       "UpstreamHttpMethod": [
-        "POST",
-        "OPTIONS"
+        "POST"
       ]
     },
     {
@@ -41,8 +39,7 @@
       ],
       "UpstreamPathTemplate": "/music/{id}",
       "UpstreamHttpMethod": [
-        "GET",
-        "OPTIONS"
+        "GET"
       ]
     },
     {
@@ -56,8 +53,7 @@
       ],
       "UpstreamPathTemplate": "/music/upload",
       "UpstreamHttpMethod": [
-        "POST",
-        "OPTIONS"
+        "POST"
       ]
     }
   ]

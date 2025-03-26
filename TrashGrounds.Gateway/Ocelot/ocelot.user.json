@@ -11,8 +11,7 @@
       ],
       "UpstreamPathTemplate": "/auth/current-id",
       "UpstreamHttpMethod": [
-        "GET",
-        "OPTIONS"
+        "GET"
       ]
     },
     {
@@ -26,8 +25,7 @@
       ],
       "UpstreamPathTemplate": "/auth/login",
       "UpstreamHttpMethod": [
-        "POST",
-        "OPTIONS"
+        "POST"
       ]
     },
     {
@@ -41,8 +39,7 @@
       ],
       "UpstreamPathTemplate": "/auth/refresh",
       "UpstreamHttpMethod": [
-        "POST",
-        "OPTIONS"
+        "POST"
       ]
     },
     {
@@ -56,8 +53,7 @@
       ],
       "UpstreamPathTemplate": "/auth/register",
       "UpstreamHttpMethod": [
-        "POST",
-        "OPTIONS"
+        "POST"
       ]
     },
     {
@@ -71,8 +67,7 @@
       ],
       "UpstreamPathTemplate": "/auth/change-password",
       "UpstreamHttpMethod": [
-        "PATCH",
-        "OPTIONS"
+        "PATCH"
       ]
     },
     {
@@ -86,8 +81,7 @@
       ],
       "UpstreamPathTemplate": "/user/avatar",
       "UpstreamHttpMethod": [
-        "PATCH",
-        "OPTIONS"
+        "PATCH"
       ]
     },
     {
@@ -101,8 +95,7 @@
       ],
       "UpstreamPathTemplate": "/user/status",
       "UpstreamHttpMethod": [
-        "PATCH",
-        "OPTIONS"
+        "PATCH"
       ]
     },
     {
@@ -116,8 +109,7 @@
       ],
       "UpstreamPathTemplate": "/user/profile/my",
       "UpstreamHttpMethod": [
-        "GET",
-        "OPTIONS"
+        "GET"
       ]
     },
     {
@@ -131,8 +123,7 @@
       ],
       "UpstreamPathTemplate": "/user/profile/{id}",
       "UpstreamHttpMethod": [
-        "GET",
-        "OPTIONS"
+        "GET"
       ]
     }
   ]
