@@ -1,4 +1,3 @@
-using System.Net;
 using TrashGrounds.Rate.Bootstrap;
 using TrashGrounds.Rate.gRPC.Services;
 using TrashGrounds.Rate.Infrastructure;
@@ -6,7 +5,6 @@ using TrashGrounds.Rate.Infrastructure.Routing;
 using TrashGrounds.Rate.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
-ServicePointManager.ServerCertificateValidationCallback += (_, _, _, _) => true;
 builder.Host.AddCustomLogging();
 
 builder.Services
@@ -17,7 +15,8 @@ builder.Services
     .AddEndpointsApiExplorer()
     .AddJwtAuthentication(builder.Configuration)
     .AddCustomSwagger(builder.Configuration)
-    .AddAuthorizationWithPolicy();
+    .AddAuthorizationWithPolicy()
+    .AddCors();
 
 builder.Services
     .AddHelperServices()
@@ -29,6 +28,14 @@ await app.TryMigrateDatabaseAsync();
 
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 
+app.UseCors(option =>
+{
+    option.AllowAnyHeader();
+    option.AllowAnyMethod();
+    option.AllowCredentials();
+    option.SetIsOriginAllowed(_ => true);
+});
+
 if (app.Environment.IsDevelopment() || app.Environment.EnvironmentName == "Local")
 {
     app.UseSwagger();
@@ -36,9 +43,9 @@ if (app.Environment.IsDevelopment() || app.Environment.EnvironmentName == "Local
 }
 
 app.UseHttpsRedirection();
-
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseCustomEndpoints();

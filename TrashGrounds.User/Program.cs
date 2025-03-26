@@ -1,4 +1,3 @@
-using System.Net;
 using TrashGrounds.User.Bootstrap;
 using TrashGrounds.User.Infrastructure;
 using TrashGrounds.User.Infrastructure.Routing;
@@ -7,17 +6,11 @@ using TrashGrounds.User.Middleware;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Host.AddCustomLogging();
-ServicePointManager.ServerCertificateValidationCallback += (_, _, _, _) => true;
 
 builder.Services
     .AddDatabaseWithIdentity(builder.Configuration);
-    //.AddRedis(builder.Configuration);
 
-builder.Services.AddCors(opt =>
-    opt.AddDefaultPolicy(policy =>
-        policy.AllowAnyOrigin()
-            .AllowAnyMethod()
-            .AllowAnyHeader()));
+builder.Services.AddCors();
 
 builder.Services
     .AddEndpointsApiExplorer()
@@ -38,7 +31,14 @@ var app = builder.Build();
 await app.TryMigrateDatabaseAsync();
 
 app.UseMiddleware<ExceptionHandlingMiddleware>();
-app.UseCors();
+
+app.UseCors(option =>
+{
+    option.AllowAnyHeader();
+    option.AllowAnyMethod();
+    option.AllowCredentials();
+    option.SetIsOriginAllowed(_ => true);
+});
 
 if (app.Environment.IsDevelopment() || app.Environment.EnvironmentName == "Local")
 {

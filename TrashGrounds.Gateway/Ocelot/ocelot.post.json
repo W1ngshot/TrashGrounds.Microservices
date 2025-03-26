@@ -10,7 +10,10 @@
         }
       ],
       "UpstreamPathTemplate": "/posts/add",
-      "UpstreamHttpMethod": [ "POST" ]
+      "UpstreamHttpMethod": [
+        "POST",
+        "OPTIONS"
+      ]
     },
     {
       "DownstreamPathTemplate": "/api/posts/{postId}",
@@ -22,7 +25,11 @@
         }
       ],
       "UpstreamPathTemplate": "/posts/{postId}",
-      "UpstreamHttpMethod": [ "PUT", "DELETE" ]
+      "UpstreamHttpMethod": [
+        "PUT",
+        "DELETE",
+        "OPTIONS"
+      ]
     },
     {
       "DownstreamPathTemplate": "/api/posts/from-user/{userId}",
@@ -34,8 +41,13 @@
         }
       ],
       "UpstreamPathTemplate": "/posts/from-user/{userId}",
-      "UpstreamHttpMethod": [ "GET" ],
-      "FileCacheOptions": { "TtlSeconds": 60 }
+      "UpstreamHttpMethod": [
+        "GET",
+        "OPTIONS"
+      ],
+      "FileCacheOptions": {
+        "TtlSeconds": 60
+      }
     },
     {
       "DownstreamPathTemplate": "/api/posts/my",
@@ -47,8 +59,13 @@
         }
       ],
       "UpstreamPathTemplate": "/posts/my",
-      "UpstreamHttpMethod": [ "GET" ],
-      "FileCacheOptions": { "TtlSeconds": 30 }
+      "UpstreamHttpMethod": [
+        "GET",
+        "OPTIONS"
+      ],
+      "FileCacheOptions": {
+        "TtlSeconds": 30
+      }
     }
   ]
 }

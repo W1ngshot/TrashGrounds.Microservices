@@ -10,7 +10,12 @@
         }
       ],
       "UpstreamPathTemplate": "/post/{postId}/rate",
-      "UpstreamHttpMethod": [ "GET", "POST", "DELETE" ]
+      "UpstreamHttpMethod": [
+        "GET",
+        "POST",
+        "DELETE",
+        "OPTIONS"
+      ]
     },
     {
       "DownstreamPathTemplate": "/api/rate/from-posts",
@@ -22,7 +27,10 @@
         }
       ],
       "UpstreamPathTemplate": "/rate/from-posts",
-      "UpstreamHttpMethod": [ "GET" ]
+      "UpstreamHttpMethod": [
+        "GET",
+        "OPTIONS"
+      ]
     },
     {
       "DownstreamPathTemplate": "/api/track/{trackId}/rate",
@@ -34,7 +42,12 @@
         }
       ],
       "UpstreamPathTemplate": "/track/{trackId}/rate",
-      "UpstreamHttpMethod": [ "GET", "POST", "DELETE" ]
+      "UpstreamHttpMethod": [
+        "GET",
+        "POST",
+        "DELETE",
+        "OPTIONS"
+      ]
     }
   ]
 }

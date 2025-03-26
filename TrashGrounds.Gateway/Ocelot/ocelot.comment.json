@@ -10,7 +10,10 @@
         }
       ],
       "UpstreamPathTemplate": "/comments/track/{trackId}",
-      "UpstreamHttpMethod": [ "GET" ]
+      "UpstreamHttpMethod": [
+        "GET",
+        "OPTIONS"
+      ]
     },
     {
       "DownstreamPathTemplate": "/api/track/{trackId}/comments/{commentId}",
@@ -22,7 +25,11 @@
         }
       ],
       "UpstreamPathTemplate": "/comments/{commentId}/track/{trackId}",
-      "UpstreamHttpMethod": [ "PUT", "DELETE" ]
+      "UpstreamHttpMethod": [
+        "PUT",
+        "DELETE",
+        "OPTIONS"
+      ]
     },
     {
       "DownstreamPathTemplate": "/api/track/{trackId}/comments/add",
@@ -34,7 +41,10 @@
         }
       ],
       "UpstreamPathTemplate": "/comments/add/track/{trackId}",
-      "UpstreamHttpMethod": [ "POST" ]
+      "UpstreamHttpMethod": [
+        "POST",
+        "OPTIONS"
+      ]
     }
   ]
 }

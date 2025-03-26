@@ -17,6 +17,7 @@ namespace TrashGrounds.Comment.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasDefaultSchema("comments")
                 .HasAnnotation("ProductVersion", "7.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
@@ -53,7 +54,7 @@ namespace TrashGrounds.Comment.Migrations
 
                     b.HasIndex("TrackId");
 
-                    b.ToTable("Comments");
+                    b.ToTable("Comments", "comments");
                 });
 #pragma warning restore 612, 618
         }

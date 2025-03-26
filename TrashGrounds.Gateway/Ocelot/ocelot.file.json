@@ -10,7 +10,10 @@
         }
       ],
       "UpstreamPathTemplate": "/image/{id}",
-      "UpstreamHttpMethod": [ "GET" ]
+      "UpstreamHttpMethod": [
+        "GET",
+        "OPTIONS"
+      ]
     },
     {
       "DownstreamPathTemplate": "/api/file/image/upload",
@@ -22,7 +25,10 @@
         }
       ],
       "UpstreamPathTemplate": "/image/upload",
-      "UpstreamHttpMethod": [ "POST" ]
+      "UpstreamHttpMethod": [
+        "POST",
+        "OPTIONS"
+      ]
     },
     {
       "DownstreamPathTemplate": "/api/file/music/{id}",
@@ -34,7 +40,10 @@
         }
       ],
       "UpstreamPathTemplate": "/music/{id}",
-      "UpstreamHttpMethod": [ "GET" ]
+      "UpstreamHttpMethod": [
+        "GET",
+        "OPTIONS"
+      ]
     },
     {
       "DownstreamPathTemplate": "/api/file/music/upload",
@@ -46,7 +55,10 @@
         }
       ],
       "UpstreamPathTemplate": "/music/upload",
-      "UpstreamHttpMethod": [ "POST" ]
+      "UpstreamHttpMethod": [
+        "POST",
+        "OPTIONS"
+      ]
     }
   ]
 }
