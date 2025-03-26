@@ -41,13 +41,13 @@ jobs:
           for service in "TrashGrounds.User" "TrashGrounds.Track" "TrashGrounds.Rate" "TrashGrounds.Post" "TrashGrounds.File" "TrashGrounds.Gateway" "TrashGrounds.Comment"; do
             IMAGE_NAME=$(echo $service | tr '[:upper:]' '[:lower:]' | tr '.' '-')
 
-            docker build -t ghcr.io/${{ github.repository_owner }}/$IMAGE_NAME:$VERSION $service
+            docker build -t ghcr.io/${{ vars.REPOSITORY_OWNER }/$IMAGE_NAME:$VERSION $service
 
-            docker push ghcr.io/${{ github.repository_owner }}/$IMAGE_NAME:$VERSION
+            docker push ghcr.io/${{ vars.REPOSITORY_OWNER }}/$IMAGE_NAME:$VERSION
 
             if [[ "$VERSION" != "latest" ]]; then
-              docker tag ghcr.io/${{ github.repository_owner }}/$IMAGE_NAME:$VERSION \
-                         ghcr.io/${{ github.repository_owner }}/$IMAGE_NAME:latest
-              docker push ghcr.io/${{ github.repository_owner }}/$IMAGE_NAME:latest
+              docker tag ghcr.io/${{ vars.REPOSITORY_OWNER }}/$IMAGE_NAME:$VERSION \
+                         ghcr.io/${{ vars.REPOSITORY_OWNER }}/$IMAGE_NAME:latest
+              docker push ghcr.io/${{ vars.REPOSITORY_OWNER }}/$IMAGE_NAME:latest
             fi
           done
