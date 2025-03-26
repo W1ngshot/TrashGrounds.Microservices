@@ -13,8 +13,7 @@
       "UpstreamHttpMethod": [
         "GET",
         "POST",
-        "DELETE",
-        "OPTIONS"
+        "DELETE"
       ]
     },
     {
@@ -28,8 +27,7 @@
       ],
       "UpstreamPathTemplate": "/rate/from-posts",
       "UpstreamHttpMethod": [
-        "GET",
-        "OPTIONS"
+        "GET"
       ]
     },
     {
@@ -45,8 +43,7 @@
       "UpstreamHttpMethod": [
         "GET",
         "POST",
-        "DELETE",
-        "OPTIONS"
+        "DELETE"
       ]
     }
   ]

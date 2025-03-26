@@ -11,8 +11,7 @@
       ],
       "UpstreamPathTemplate": "/comments/track/{trackId}",
       "UpstreamHttpMethod": [
-        "GET",
-        "OPTIONS"
+        "GET"
       ]
     },
     {
@@ -27,8 +26,7 @@
       "UpstreamPathTemplate": "/comments/{commentId}/track/{trackId}",
       "UpstreamHttpMethod": [
         "PUT",
-        "DELETE",
-        "OPTIONS"
+        "DELETE"
       ]
     },
     {
@@ -42,8 +40,7 @@
       ],
       "UpstreamPathTemplate": "/comments/add/track/{trackId}",
       "UpstreamHttpMethod": [
-        "POST",
-        "OPTIONS"
+        "POST"
       ]
     }
   ]
