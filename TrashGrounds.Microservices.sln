@@ -29,6 +29,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tg_build", "tg_build", "{A9
 		Docker\tg_build\.env = Docker\tg_build\.env
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{A1362F3B-0682-4A3D-91ED-07E547F70039}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{2E8E8F86-3B8E-4E82-B209-1D1239AD653A}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\ghcr.yml = .github\workflows\ghcr.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,5 +82,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{5B5AD871-483E-4AB0-BE55-7629E6638210} = {832456CC-51F2-47D0-ABB2-FB0A730E2EBF}
 		{A94677CE-8CCD-4959-975F-ABBE8C82C3BD} = {832456CC-51F2-47D0-ABB2-FB0A730E2EBF}
+		{2E8E8F86-3B8E-4E82-B209-1D1239AD653A} = {A1362F3B-0682-4A3D-91ED-07E547F70039}
 	EndGlobalSection
 EndGlobal

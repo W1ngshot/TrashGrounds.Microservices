@@ -1,0 +1,53 @@
+﻿name: Publish Docker Images to GHCR
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version tag (e.g., 1.2.3). Leave empty for 'latest'."
+        required: false
+        default: "latest"
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    permissions:
+      packages: write
+      contents: read
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Get version
+        run: |
+          if [[ "${{ github.event.inputs.version }}" == "latest" ]]; then
+            VERSION="latest"
+          else
+            VERSION=${{ github.event.inputs.version }}
+          fi
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and publish Docker images
+        run: |
+          for service in "TrashGrounds.User" "TrashGrounds.Track" "TrashGrounds.Rate" "TrashGrounds.Post" "TrashGrounds.File" "TrashGrounds.Gateway" "TrashGrounds.Comment"; do
+            IMAGE_NAME=$(echo $service | tr '[:upper:]' '[:lower:]' | tr '.' '-')
+
+            docker build -t ghcr.io/${{ github.repository_owner }}/$IMAGE_NAME:$VERSION $service
+
+            docker push ghcr.io/${{ github.repository_owner }}/$IMAGE_NAME:$VERSION
+
+            if [[ "$VERSION" != "latest" ]]; then
+              docker tag ghcr.io/${{ github.repository_owner }}/$IMAGE_NAME:$VERSION \
+                         ghcr.io/${{ github.repository_owner }}/$IMAGE_NAME:latest
+              docker push ghcr.io/${{ github.repository_owner }}/$IMAGE_NAME:latest
+            fi
+          done
