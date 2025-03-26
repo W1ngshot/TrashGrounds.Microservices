@@ -41,7 +41,7 @@ jobs:
           for service in "TrashGrounds.User" "TrashGrounds.Track" "TrashGrounds.Rate" "TrashGrounds.Post" "TrashGrounds.File" "TrashGrounds.Gateway" "TrashGrounds.Comment"; do
             IMAGE_NAME=$(echo $service | tr '[:upper:]' '[:lower:]' | tr '.' '-')
 
-            docker build -t ghcr.io/${{ vars.REPOSITORY_OWNER }/$IMAGE_NAME:$VERSION $service
+            docker build -t ghcr.io/${{ vars.REPOSITORY_OWNER }}/$IMAGE_NAME:$VERSION $service
 
             docker push ghcr.io/${{ vars.REPOSITORY_OWNER }}/$IMAGE_NAME:$VERSION
 
