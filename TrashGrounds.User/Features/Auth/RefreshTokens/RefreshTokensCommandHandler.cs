@@ -11,7 +11,7 @@ using TrashGrounds.User.Services.Interfaces;
 
 namespace TrashGrounds.User.Features.Auth.RefreshTokens;
 
-public class RefreshTokensCommandHandler : ICommandHandler<RefreshTokensCommand, RefreshTokenResponse>
+public class RefreshTokensCommandHandler : ICommandHandler<RefreshTokensCommand, AuthorizationResponse>
 {
     private readonly UserManager<AppUser> _userManager;
     private readonly UserDbContext _context;
@@ -26,7 +26,7 @@ public class RefreshTokensCommandHandler : ICommandHandler<RefreshTokensCommand,
         _authService = authService;
     }
     
-    public async Task<RefreshTokenResponse> Handle(RefreshTokensCommand request, CancellationToken cancellationToken)
+    public async Task<AuthorizationResponse> Handle(RefreshTokensCommand request, CancellationToken cancellationToken)
     {
         var validationParamsIgnoringTime = _jwtTokenGenerator.CloneParameters();
         validationParamsIgnoringTime.ValidateLifetime = false;
@@ -54,6 +54,6 @@ public class RefreshTokensCommandHandler : ICommandHandler<RefreshTokensCommand,
 
         await _context.SaveEntitiesAsync();
         
-        return new RefreshTokenResponse(result.Token, result.RefreshToken.Token);
+        return AuthorizationResponse.FromAuthenticationResult(result);
     }
 }

@@ -3,4 +3,4 @@ using TrashGrounds.User.Models.Responses;
 
 namespace TrashGrounds.User.Features.Auth.RefreshTokens;
 
-public record RefreshTokensCommand(string Token, string RefreshToken) : ICommand<RefreshTokenResponse>;
+public record RefreshTokensCommand(string Token, string RefreshToken) : ICommand<AuthorizationResponse>;

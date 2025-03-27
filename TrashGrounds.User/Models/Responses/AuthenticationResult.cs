@@ -2,4 +2,4 @@
 
 namespace TrashGrounds.User.Models.Responses;
 
-public record AuthenticationResult(string Token, RefreshToken RefreshToken);
+public record AuthenticationResult(string Token, RefreshToken RefreshToken, Guid UserId);

@@ -39,7 +39,7 @@ public class AuthenticationService
 
         identityUser.AddRefreshToken(refreshToken);
 
-        return new AuthenticationResult(token, refreshToken);
+        return new AuthenticationResult(token, refreshToken, domainUser.Id);
     }
     
     public async Task<AuthenticationResult> ProcessPasswordLogin(string email, string password)
