@@ -9,7 +9,7 @@
           "Port": "5052"
         }
       ],
-      "UpstreamPathTemplate": "/post/{postId}/rate",
+      "UpstreamPathTemplate": "/rate/post/{postId}",
       "UpstreamHttpMethod": [
         "GET",
         "POST",
@@ -39,7 +39,7 @@
           "Port": "5052"
         }
       ],
-      "UpstreamPathTemplate": "/track/{trackId}/rate",
+      "UpstreamPathTemplate": "/rate/track/{trackId}",
       "UpstreamHttpMethod": [
         "GET",
         "POST",
