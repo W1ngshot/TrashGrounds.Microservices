@@ -9,8 +9,6 @@ public class GrpcMappingProfile : Profile
     public GrpcMappingProfile()
     {
         CreateMap<TrackRate, Rate>()
-            .ForMember(dest => dest.TrackId,
-                opt =>
-                    opt.MapFrom(src => Guid.Parse(src.Id)));
+            .ConstructUsing(src => new Rate(Guid.Parse(src.Id), src.Rating));
     }
 }
