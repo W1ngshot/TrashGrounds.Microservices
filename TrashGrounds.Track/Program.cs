@@ -38,11 +38,11 @@ app.UseCors(option =>
     option.SetIsOriginAllowed(_ => true);
 });
 
-if (app.Environment.IsDevelopment() || app.Environment.EnvironmentName == "Local")
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+//if (app.Environment.IsDevelopment() || app.Environment.EnvironmentName == "Local")
+//
+app.UseSwagger();
+app.UseSwaggerUI();
+//}
 
 app.UseHttpsRedirection();
 app.UseRouting();

@@ -25,6 +25,8 @@ app.UseCors(option =>
     option.SetIsOriginAllowed(_ => true);
 });
 
+app.MapGet("/test", () => "Hello world from Ocelot Gateway");
+
 await app.UseOcelot();
 
 app.Run();

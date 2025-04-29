@@ -48,11 +48,11 @@ app.UseCors(option =>
 
 app.UseHangfireDashboard();
 
-if (app.Environment.IsDevelopment() || app.Environment.EnvironmentName == "Local")
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+//if (app.Environment.IsDevelopment() || app.Environment.EnvironmentName == "Local")
+//{
+app.UseSwagger();
+app.UseSwaggerUI();
+//}
 
 app.UseRouting();
 app.UseHttpsRedirection();
