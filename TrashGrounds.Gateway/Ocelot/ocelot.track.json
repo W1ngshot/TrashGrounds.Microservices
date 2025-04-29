@@ -12,10 +12,7 @@
       "UpstreamPathTemplate": "/genres/all",
       "UpstreamHttpMethod": [
         "GET"
-      ],
-      "FileCacheOptions": {
-        "TtlSeconds": 30
-      }
+      ]
     },
     {
       "DownstreamPathTemplate": "/api/track/{trackId}/add-listen",
@@ -59,10 +56,7 @@
         "GET",
         "PUT",
         "DELETE"
-      ],
-      "FileCacheOptions": {
-        "TtlSeconds": 30
-      }
+      ]
     },
     {
       "DownstreamPathTemplate": "/api/track/{category}",
@@ -76,10 +70,7 @@
       "UpstreamPathTemplate": "/track/{category}",
       "UpstreamHttpMethod": [
         "GET"
-      ],
-      "FileCacheOptions": {
-        "TtlSeconds": 60
-      }
+      ]
     },
     {
       "DownstreamPathTemplate": "/api/track/from-user/{id}",
@@ -93,10 +84,7 @@
       "UpstreamPathTemplate": "/track/from-user/{id}",
       "UpstreamHttpMethod": [
         "GET"
-      ],
-      "FileCacheOptions": {
-        "TtlSeconds": 30
-      }
+      ]
     },
     {
       "DownstreamPathTemplate": "/api/track/search",
